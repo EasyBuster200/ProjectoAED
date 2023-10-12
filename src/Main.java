@@ -177,4 +177,8 @@ public class Main {
             System.out.println(e.getMessage());
         }
     }
+
+    private static void something() {
+        
+    }
 }
