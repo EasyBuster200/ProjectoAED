@@ -116,23 +116,26 @@ public interface AuctionHouse extends Serializable {
 	        throws valueUnderMinimumException, auctionIdNotRegisteredException, loginNotRegisteredException, workIdNotRegisteredException;
 
 	    /**
-	     * @param auctionId
-	     * @return
-	     * @throws auctionIdNotRegisteredException
+		 * Closes an open auction, and returns an Iterator with the art works in the now closed auction
+	     * @param auctionId the auction id
+	     * @return iterator with art works, in the closed auction
+	     * @throws auctionIdNotRegisteredException when the id of the auction is not registered 
 	     */
 	    Iterator<ArtWork> closeAuction(String auctionId)
 	        throws auctionIdNotRegisteredException;
 
 	    /**
-	     * @param auctionId
-	     * @return
-	     * @throws auctionIdNotRegisteredException
-	     * @throws noWorksAuctionException
+		 * Return an iterator with the art works in the given auction
+	     * @param auctionId the auction id
+	     * @return Iterator with the art works in the auction
+	     * @throws auctionIdNotRegisteredException if the given auction id is not registered
+	     * @throws noWorksAuctionException if the given auction id exists but has no works added
 	     */
 	    Iterator<ArtWork> listAuctionWorks(String auctionId)
 	        throws auctionIdNotRegisteredException, noWorksAuctionException;
 
 	    /**
+		 * 
 	     * @param login
 	     * @return
 	     * @throws loginNotRegisteredException

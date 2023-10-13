@@ -3,6 +3,7 @@ package ArtAuctions;
 public class AuctionClass implements Auction {
 
 	protected String auctionId;
+	//TODO? Maybe have an array with the art works in the auction, easier to access each art work individually, and easier to get the iterators 
 	
 	/**
 	 * 

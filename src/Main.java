@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import ArtAuctions.AuctionHouse;
+import ArtAuctions.Bid;
 import ArtAuctions.ArtWork;
 import ArtAuctions.Collector;
 import ArtAuctions.Artist;
@@ -193,7 +194,7 @@ public class Main {
             while(it.hasNext()) {
                 ArtWork a = it.next();
 
-                System.out.println(LIST_AUCTION_WORKS_BODY, a.workId(), a.name(), a.year(), a.highestSoldValue(), a.authorLogin(), a.authorName());
+                System.out.printf(LIST_AUCTION_WORKS_BODY, a.workId(), a.name(), a.year(), a.highestSoldValue(), a.authorLogin(), a.authorName());
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -209,10 +210,26 @@ public class Main {
             while (it.hasNext()) {
                 ArtWork a = it.next();
 
-                System.out.println(LIST_ARTIST_WORKS_BODY, a.workId(), a.name(), a.year(), a.highestSoldValue());
+                System.out.printf(LIST_ARTIST_WORKS_BODY, a.workId(), a.name(), a.year(), a.highestSoldValue());
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
+
+   private static void listBidsWork(Scanner in, AuctionHouse sys) {
+        try {
+            String auctionId = in.next().strip();
+            String workId = in.nextLine();
+            Iterator<Bid> it = sys.listBidsWork(auctionId, workId);
+
+            while (it.hasNext()) {
+                Bid b = it.next();
+                System.out.printf(LIST_BIDS_BODY, b.biddersLogin(), b.biddersName(), b.bidValue());
+            }
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+   }
 }

@@ -70,4 +70,9 @@ public interface ArtWork  extends Serializable {
 	 */
 	String buyerName();
 	
+	/**
+	 * Return an integer with the highest value the piece has been sold for
+	 * @return highest value the piece was sold for 
+	 */
+	int highestSoldValue();
 }
