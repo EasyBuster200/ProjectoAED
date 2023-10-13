@@ -179,6 +179,6 @@ public class Main {
     }
 
     private static void something() {
-        
+        String test;
     }
 }
