@@ -27,6 +27,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         System.out.println("Hello, World!");
+        System.out.println("acrescentei  aqui!");
     }
 
     private static void newUser(Scanner in, AuctionHouse sys) {
