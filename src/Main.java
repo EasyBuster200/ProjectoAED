@@ -1,8 +1,8 @@
 import java.util.Scanner;
-
-import ArtAuctions.ArtWork;
 import ArtAuctions.AuctionHouse;
+import ArtAuctions.ArtWork;
 import ArtAuctions.Collector;
+import ArtAuctions.Artist;
 import dataStructures.Iterator;
 
 public class Main {
@@ -10,19 +10,19 @@ public class Main {
     private static final String ARTIST_REGISTERED = "Registo de artista executado.";
     private static final String USER_REMOVED = "Remocao de utilizador executada";
     private static final String WORK_REGISTERED = "Registo de obra executado.";
-    private static final String INFO_USER_BODY = "%s %s %d %s";
-    private static final String INFO_ARTIST_BODY = "%s %s %s %d %s";
-    private static final String INFO_WORK_BODY = "%s %s %d %d %s %s";
+    private static final String INFO_USER_BODY = "%s %s %d %s\n";
+    private static final String INFO_ARTIST_BODY = "%s %s %s %d %s\n";
+    private static final String INFO_WORK_BODY = "%s %s %d %d %s %s\n";
     private static final String AUCTION_REGISTERED = "Registo de leilao executado";
     private static final String WORK_ADDED_AUCTION = "Obra adicionada leilao.";
     private static final String BID_PLACED = "Proposta aceite.";
     private static final String AUCTION_CLOSED = "Leilao encerrado.";
-    private static final String AUCTION_CLOSED_BODY_SOLD = "%s %s %s %s %d";
+    private static final String AUCTION_CLOSED_BODY_SOLD = "%s %s %s %s %d\n";
     private static final String AUCTION_CLOSE_BODY_NOT_SOLD = "%s %s sem propostas de venda.";
-    private static final String LIST_AUCTION_WORKS_BODY = "%s %s %d %d %s %s";
-    private static final String LIST_ARTIST_WORKS_BODY = "%s %s %d %d";
-    private static final String LIST_BIDS_BODY = "%s %s %d";
-    private static final String LIST_WORKS_VALUE_BODY = "%s %s %d %d %s %s";
+    private static final String LIST_AUCTION_WORKS_BODY = "%s %s %d %d %s %s\n";
+    private static final String LIST_ARTIST_WORKS_BODY = "%s %s %d %d\n";
+    private static final String LIST_BIDS_BODY = "%s %s %d\n";
+    private static final String LIST_WORKS_VALUE_BODY = "%s %s %d %d %s %s\n";
     private static final String EXIT_MSG = "Obrigado. Ate a proxima.";
 
     public static void main(String[] args) throws Exception {
@@ -63,8 +63,9 @@ public class Main {
     private static void removeUser(Scanner in, AuctionHouse sys) {
         try {
             String login = in.next().strip();
-
+            
             sys.removeUser(login);
+            System.out.println(USER_REMOVED);
         } catch (Exception e) {
            System.out.println(e.getMessage());
         }
@@ -90,7 +91,7 @@ public class Main {
             String login = in.next().strip();
 
             Collector c = sys.infoUser(login);
-            System.out.printf(INFO_USER_BODY, ); //TODO: add missing arguments
+            System.out.printf(INFO_USER_BODY, c.login(), c.name(), c.age(), c.email());
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -102,7 +103,7 @@ public class Main {
             String login = in.next().strip();
 
             Artist a = sys.infoArtist(login);
-            System.out.printf(INFO_ARTIST_BODY, ); //TODO: add missing arguments
+            System.out.printf(INFO_ARTIST_BODY, a.login(), a.name(), a.artisticName(), a.age(), a.email());
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -114,7 +115,7 @@ public class Main {
             String workId = in.next().strip();
 
             ArtWork w =  sys.infoWork(workId);
-            System.out.println(INFO_WORK_BODY, ); //TODO: add missing arguments
+            System.out.printf(INFO_WORK_BODY, w.workId(), w.name(), w.year(), w.lastAuctionPrice(), w.authorLogin(), w.authorName());
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -166,11 +167,16 @@ public class Main {
             String auctionId = in.nextLine().strip();
 
             Iterator<ArtWork> it = sys.closeAuction(auctionId);
+            System.out.println(AUCTION_CLOSED);
 
             while (it.hasNext()) {
                 ArtWork a = it.next();
 
-                //TODO: check if sold or not and then print the correct message
+                if (a.beenSold())
+                    System.out.printf(AUCTION_CLOSED_BODY_SOLD, a.workId(), a.name(), a.buyerLogin(), a.buyerName(), a.lastAuctionPrice()); //TODO: Depends if the last auction price was the one it sold for
+
+                else    
+                    System.out.printf(AUCTION_CLOSE_BODY_NOT_SOLD, a.workId(), a.name());
             }
 
         } catch (Exception e) {
@@ -178,7 +184,35 @@ public class Main {
         }
     }
 
-    private static void something() {
-        String test;
+    private static void listAuctionWorks(Scanner in, AuctionHouse sys) {
+        try {
+            String auctionId = in.nextLine().strip();
+
+            Iterator<ArtWork> it = sys.listAuctionWorks(auctionId);
+
+            while(it.hasNext()) {
+                ArtWork a = it.next();
+
+                System.out.println(LIST_AUCTION_WORKS_BODY, a.workId(), a.name(), a.year(), a.highestSoldValue(), a.authorLogin(), a.authorName());
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void listArtistWorks(Scanner in, AuctionHouse sys) {
+        try {
+            String login = in.nextLine().strip();
+
+            Iterator<ArtWork> it = sys.listArtistWorks(login);
+
+            while (it.hasNext()) {
+                ArtWork a = it.next();
+
+                System.out.println(LIST_ARTIST_WORKS_BODY, a.workId(), a.name(), a.year(), a.highestSoldValue());
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
