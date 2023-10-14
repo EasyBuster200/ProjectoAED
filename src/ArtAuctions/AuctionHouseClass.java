@@ -79,7 +79,7 @@ public class AuctionHouseClass implements AuctionHouse {
 			ArtWork work = new ArtWorkClass(workId, name, year, artist);
 
 			artWorks.addLast(work);
-			artist.
+			//TODO: unfinished
 			
 	}
 
