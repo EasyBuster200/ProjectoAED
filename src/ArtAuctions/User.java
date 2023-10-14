@@ -27,5 +27,11 @@ public interface User extends Serializable {
 	 * @return email.
 	 */
 	String email();
+
+	/**
+	 * Adds the given art work to the users collection of bought artWorks
+	 * @param work - work to be added
+	 */
+	void addBoughtWork(ArtWork work);
 	
 }

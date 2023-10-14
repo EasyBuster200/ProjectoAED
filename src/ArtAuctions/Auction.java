@@ -10,8 +10,6 @@ public interface Auction extends Serializable {
 	 */
 	String auctionId();
 	
-	
-	
 	/**
 	 * Adds a new work to the auction
 	 * @param artwork - the art work to be added.

@@ -232,7 +232,7 @@ public class DoubleList<E> implements List<E>
         if ( position < 0 || position >= currentSize )
             throw new InvalidPositionException();
         E element = head.getElement();
-        //TODO: Left as an exercise.
+        
         if(position==0) {
         	element = this.getFirst();
         }else if(position==(this.size()-1)){
@@ -298,10 +298,10 @@ public class DoubleList<E> implements List<E>
         DoubleListNode<E> prevNode = this.getNode(position - 1);
         DoubleListNode<E> nextNode = prevNode.getNext();
         DoubleListNode<E> newNode = new DoubleListNode<E>(element, prevNode, nextNode);
-        //TODO: Left as an exercise.
-       prevNode.setNext(newNode);
-       nextNode.setPrevious(newNode);
-       currentSize++;
+        
+        prevNode.setNext(newNode);
+        nextNode.setPrevious(newNode);
+        currentSize++;
        
     }
 

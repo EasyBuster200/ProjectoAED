@@ -1,20 +1,8 @@
 package ArtAuctions;
 
-import Exceptions.auctionIdAlreadyRegisteredException;
-import Exceptions.auctionIdNotRegisteredException;
-import Exceptions.hasNoWorksException;
-import Exceptions.loginAlredyRegisteredException;
-import Exceptions.loginNotRegisteredException;
-import Exceptions.noSoldWorkdsException;
-import Exceptions.noWorksAuctionException;
-import Exceptions.notAnArtistException;
-import Exceptions.userUnderAgeException;
-import Exceptions.valueUnderMinimumException;
-import Exceptions.workHasNoBidsException;
-import Exceptions.workIdAlreadyRegisteredException;
-import Exceptions.workIdNotRegisteredException;
-import Exceptions.workNotInAuctionException;
+import Exceptions.*;
 import dataStructures.Iterator;
+import dataStructures.DoubleList;
 
 public class AuctionHouseClass implements AuctionHouse {
 
@@ -23,35 +11,76 @@ public class AuctionHouseClass implements AuctionHouse {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private static DoubleList<User> users;
+	private static DoubleList<ArtWork> artWorks;
+
+	private static final int LEGAL_AGE = 18;
+
 	public AuctionHouseClass() {
-		// TODO Auto-generated constructor stub
+		users = new DoubleList<>();
+		artWorks = new DoubleList<>();
 	}
 
 	@Override
 	public void addUser(String login, String name, int age, String email)
 			throws userUnderAgeException, loginAlredyRegisteredException {
-		// TODO Auto-generated method stub
 		
+			if (age < LEGAL_AGE)
+				throw new userUnderAgeException();
+
+			else if (getUser(login) != null)
+				throw new loginAlredyRegisteredException();
+
+			else
+				users.addLast(new Collector(login, name, age, email));
 	}
 
 	@Override
 	public void addArtist(String login, String name, String artisticName, int age, String email)
 			throws userUnderAgeException, loginAlredyRegisteredException {
-		// TODO Auto-generated method stub
 		
+			if (age < LEGAL_AGE)
+				throw new userUnderAgeException();
+
+			else if (getUser(login) != null)
+				throw new loginAlredyRegisteredException();
+
+			else
+				users.addLast(new ArtistClass(login, name, age, email, artisticName));
 	}
 
 	@Override
 	public void removeUser(String login) throws loginNotRegisteredException {
-		// TODO Auto-generated method stub
-		
+		User user = getUser(login);
+
+		if(user == null)
+			throw new loginNotRegisteredException();
+
+		else
+			users.remove(user);
 	}
 
 	@Override
 	public void addWork(String workId, String authorLogin, int year, String name)
 			throws workIdAlreadyRegisteredException, loginNotRegisteredException, notAnArtistException {
-		// TODO Auto-generated method stub
 		
+			if (getWork(workId) != null)
+				throw new workIdAlreadyRegisteredException();
+
+			User user = getUser(authorLogin);
+
+			if(user == null)
+				throw new loginNotRegisteredException();
+
+			if (!(user instanceof Artist))
+				throw new notAnArtistException();
+
+			Artist artist = (Artist) user;
+			ArtWork work = new ArtWorkClass(workId, name, year, artist);
+
+			artWorks.addLast(work);
+			artist.
+			
 	}
 
 	@Override
@@ -122,6 +151,32 @@ public class AuctionHouseClass implements AuctionHouse {
 	@Override
 	public Iterator<ArtWork> listWorksByValue() throws noSoldWorkdsException {
 		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private User getUser(String login) {
+		Iterator<User> it = users.iterator();
+
+		while(it.hasNext()) {
+			User current = it.next();
+
+			if(current.login().equalsIgnoreCase(login))
+				return current;
+		}
+
+		return null;
+	}
+
+	private ArtWork getWork(String workId) {
+		Iterator<ArtWork> it = artWorks.iterator();
+
+		while(it.hasNext()) {
+			ArtWork current = it.next();
+
+			if(current.workId().equalsIgnoreCase(workId))
+				return current;
+		}
+
 		return null;
 	}
 

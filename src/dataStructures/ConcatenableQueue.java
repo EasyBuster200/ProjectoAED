@@ -5,7 +5,7 @@ package dataStructures;
  * @author lipyc
  * @param <E>
  */
-public interface ConcatenableQueue<E> extends Queue {
+public interface ConcatenableQueue<E> extends Queue<E> {
 	
 	/**
 	 *Removes all the elements of the specified que and

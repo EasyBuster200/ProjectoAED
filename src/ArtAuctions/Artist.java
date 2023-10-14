@@ -8,5 +8,5 @@ public interface Artist extends User {
 	 */
 	String artisticName();
 	
-	
+	void addNewArtWork();
 }
