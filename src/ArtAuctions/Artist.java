@@ -8,5 +8,9 @@ public interface Artist extends User {
 	 */
 	String artisticName();
 	
-	void addNewArtWork();
+	/**
+	 * Adds a new art work created by the artist
+	 * @param work - new art work created
+	 */
+	void addNewArtWork(ArtWork work);
 }

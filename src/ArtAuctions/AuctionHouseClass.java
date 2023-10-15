@@ -13,12 +13,14 @@ public class AuctionHouseClass implements AuctionHouse {
 
 	private static DoubleList<User> users;
 	private static DoubleList<ArtWork> artWorks;
+	private static DoubleList<Auction> auctions;
 
 	private static final int LEGAL_AGE = 18;
 
 	public AuctionHouseClass() {
 		users = new DoubleList<>();
 		artWorks = new DoubleList<>();
+		auctions = new DoubleList<>();
 	}
 
 	@Override
@@ -79,32 +81,49 @@ public class AuctionHouseClass implements AuctionHouse {
 			ArtWork work = new ArtWorkClass(workId, name, year, artist);
 
 			artWorks.addLast(work);
-			//TODO: unfinished
+			artist.addNewArtWork(work);
 			
 	}
 
 	@Override
 	public Collector infoUser(String login) throws loginNotRegisteredException {
-		// TODO Auto-generated method stub
-		return null;
+		User user = getUser(login);
+
+		if (user == null)
+			throw new loginNotRegisteredException();
+
+		return (Collector) user; //TODO? Idk if this is a good way to do this
 	}
 
 	@Override
 	public Artist infoArtist(String login) throws loginNotRegisteredException, notAnArtistException {
-		// TODO Auto-generated method stub
-		return null;
+		User user = getUser(login);
+
+		if(user == null)
+			throw new loginNotRegisteredException();
+
+		else if (!(user instanceof Artist))
+			throw new notAnArtistException();
+
+		return (Artist) user;
 	}
 
 	@Override
 	public ArtWork infoWork(String workId) throws workIdNotRegisteredException {
-		// TODO Auto-generated method stub
-		return null;
+		ArtWork work = getWork(workId);
+
+		if(work == null)
+			throw new workIdNotRegisteredException();
+
+		return work;
 	}
 
 	@Override
 	public void createAuction(String auctionId) throws auctionIdAlreadyRegisteredException {
-		// TODO Auto-generated method stub
+		if (getAuction(auctionId) != null)
+			throw new auctionIdAlreadyRegisteredException();
 		
+		auctions.addLast(new AuctionClass(auctionId));
 	}
 
 	@Override
@@ -174,6 +193,18 @@ public class AuctionHouseClass implements AuctionHouse {
 			ArtWork current = it.next();
 
 			if(current.workId().equalsIgnoreCase(workId))
+				return current;
+		}
+
+		return null;
+	}
+
+	private Auction getAuction(String auctionId) {
+		Iterator<Auction> it = auctions.iterator();
+
+		while(it.hasNext()) {
+			Auction current = it.next();
+			if (current.auctionId().equalsIgnoreCase(auctionId))
 				return current;
 		}
 
