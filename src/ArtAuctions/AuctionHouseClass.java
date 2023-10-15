@@ -129,21 +129,40 @@ public class AuctionHouseClass implements AuctionHouse {
 	@Override
 	public void addWorkAuction(String auctionId, String workId, int minSellValue)
 			throws auctionIdNotRegisteredException, workIdNotRegisteredException {
-		// TODO Auto-generated method stub
+				
+			Auction auction = getAuction(auctionId);
+
+			if(auction == null)
+				throw new auctionIdNotRegisteredException();
+
+			ArtWork artWork = getWork(workId);
+
+			if (artWork == null)
+				throw new workIdNotRegisteredException();
+
+			auction.addWorkAuction(artWork); //TODO? Maybe have a var on the artwork that is the minimum value it can sell for, whenever a new value is set we just update it 	
 		
 	}
 
 	@Override
-	public void bid(String auctionId, String workId, String login, int value) throws valueUnderMinimumException,
-			auctionIdNotRegisteredException, loginNotRegisteredException, workIdNotRegisteredException {
-		// TODO Auto-generated method stub
+	public void bid(String auctionId, String workId, String login, int value) 
+		throws valueUnderMinimumException, auctionIdNotRegisteredException, loginNotRegisteredException, workIdNotRegisteredException {
+		
+		
 		
 	}
 
 	@Override
 	public Iterator<ArtWork> closeAuction(String auctionId) throws auctionIdNotRegisteredException {
-		// TODO Auto-generated method stub
-		return null;
+		Auction auction = getAuction(auctionId);
+
+		if(auction == null)
+			throw new auctionIdNotRegisteredException();
+
+		Iterator<ArtWork> it = auction.worksIterator();
+		auctions.remove(auction);
+
+		return it;
 	}
 
 	@Override

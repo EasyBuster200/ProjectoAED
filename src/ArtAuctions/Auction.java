@@ -2,6 +2,8 @@ package ArtAuctions;
 
 import java.io.Serializable;
 
+import dataStructures.Iterator;
+
 public interface Auction extends Serializable {
 
 	/**
@@ -22,6 +24,11 @@ public interface Auction extends Serializable {
 	 * @param artWork - the art work that will the bid.
 	 */
 	void addBid(Bid bid,ArtWork artWork);
+
+    /**
+     * @return
+     */
+    Iterator<ArtWork> worksIterator();
 	
 	
 	
