@@ -1,5 +1,11 @@
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Scanner;
 import ArtAuctions.AuctionHouse;
+import ArtAuctions.AuctionHouseClass;
 import ArtAuctions.Bid;
 import ArtAuctions.ArtWork;
 import ArtAuctions.Collector;
@@ -24,13 +30,62 @@ public class Main {
     private static final String LIST_ARTIST_WORKS_BODY = "%s %s %d %d\n";
     private static final String LIST_BIDS_BODY = "%s %s %d\n";
     private static final String LIST_WORKS_VALUE_BODY = "%s %s %d %d %s %s\n";
-    private static final String EXIT_MSG = "Obrigado. Ate a proxima.";
+    private static final String QUIT_MSG = "Obrigado. Ate a proxima.";
+    
+  
+    private static final String ADD_USER = "addUser";
+    private static final String ADD_ARTIST = "addArtist";
+    private static final String REMOVE_USER = "removeUser";
+    private static final String ADD_WORK = "addWork";
+    private static final String INFO_USER = "infoUser";
+    private static final String INFO_ARTIST = "infoArtist";
+    private static final String INFO_WORK = "infoWork";
+    private static final String CREATE_AUCTION = "createAuction";
+    private static final String ADD_WORK_AUCTION = "addWorkAuction";
+    private static final String BID = "bid";
+    private static final String CLOSE_AUCTION = "closeAuction";
+    private static final String LIST_AUCTION_WORKS = "listAuctionWorks";
+    private static final String LIST_ARTIST_WORK = "listArtistWorks";
+    private static final String LIST_BIDS_WORK = "listBidsWork";
+    private static final String LIST_WORKS_BY_VALUE = "listWorksByValue";
+    private static final String QUIT = "quit";
+    
 
+    private static final String DATA_FILE = "storedAuctionHouse.dat";
+    
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+    	
+    	Scanner in = new Scanner(System.in);
+    	AuctionHouse aH = load();
+    	String cmd = in.next().toUpperCase();
+    	while(cmd.equalsIgnoreCase(QUIT)) {
+    		switch(cmd) {
+    		case QUIT -> quit();
+    		case ADD_USER -> addUser(in,aH);
+    		case ADD_ARTIST -> addArtist(in,aH);
+    		case REMOVE_USER -> removeUser(in,aH);
+    		case ADD_WORK -> addWork(in,aH);
+    		case INFO_USER -> infoUser(in,aH);
+    		case INFO_ARTIST -> infoArtist(in,aH);
+    		case INFO_WORK -> infoWork(in,aH);
+    		case CREATE_AUCTION -> createAuction(in,aH);
+    		case ADD_WORK_AUCTION -> addWorkToAuction(in,aH);
+    		case BID -> bid(in,aH);
+    		case CLOSE_AUCTION -> closeAuction(in,aH);
+    		case LIST_AUCTION_WORKS -> listAuctionWorks(in,aH);
+    		case LIST_BIDS_WORK -> listBidsWork(in,aH);
+    		case LIST_WORKS_BY_VALUE -> listWorksByValue(in,aH);
+    		
+    		
+    		}
+    		System.out.println();
+    		cmd = in.next().toUpperCase();
+    	}
+    	save(aH);
     }
 
-    private static void newUser(Scanner in, AuctionHouse sys) {
+
+	private static void addUser(Scanner in, AuctionHouse sys) {
         try {
              String login = in.next().strip();
              String name = in.nextLine().strip();
@@ -45,7 +100,7 @@ public class Main {
         }
     }
 
-    private static void newArtist(Scanner in, AuctionHouse sys) {
+    private static void addArtist(Scanner in, AuctionHouse sys) {
         try {
             String login = in.next().strip();
             String name = in.nextLine().strip();
@@ -232,6 +287,47 @@ public class Main {
             System.out.println(e.getMessage());
         }
    }
+   
+   private static void quit() {
+	   System.out.println(QUIT_MSG);
+   }
+   
+   private static AuctionHouse load() {
+		// TODO Auto-generated method stub
+   		AuctionHouse auctionHouse = new AuctionHouseClass();
+		
+   		try {
+			ObjectInputStream file = new ObjectInputStream(new FileInputStream(DATA_FILE));
+			auctionHouse = (AuctionHouse) file.readObject();
+			return auctionHouse;
+   		}catch(IOException e) {
+   			System.out.println("input out put exception");
+   		}catch(ClassNotFoundException e) {
+   			System.out.println("class not found Exception");
+   		}
+   		
+   		return auctionHouse;
+	}
+   
+   private static void save(AuctionHouse aH) {
+		// TODO Auto-generated method stub
+		try {
+			ObjectOutputStream file = new ObjectOutputStream(new FileOutputStream(DATA_FILE));
+			file.writeObject(aH);
+			file.flush();
+			file.close();
+		}catch(IOException e) {
+			System.out.println("input output exception");
+		}
+	}
+   
+   private static Object listWorksByValue(Scanner in, AuctionHouse aH) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+   
+   
+   
 }
 
 //TODO? Can one piece of art be in more than one auction at the same time?
