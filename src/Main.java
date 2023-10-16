@@ -58,6 +58,7 @@ public class Main {
     	Scanner in = new Scanner(System.in);
     	AuctionHouse aH = load();
     	String cmd = in.next().toUpperCase();
+        
     	while(cmd.equalsIgnoreCase(QUIT)) {
     		switch(cmd) {
     		case QUIT -> quit();
@@ -73,9 +74,9 @@ public class Main {
     		case BID -> bid(in,aH);
     		case CLOSE_AUCTION -> closeAuction(in,aH);
     		case LIST_AUCTION_WORKS -> listAuctionWorks(in,aH);
+            case LIST_ARTIST_WORK -> listArtistWorks(in, aH);
     		case LIST_BIDS_WORK -> listBidsWork(in,aH);
     		case LIST_WORKS_BY_VALUE -> listWorksByValue(in,aH);
-    		
     		
     		}
     		System.out.println();
@@ -293,7 +294,6 @@ public class Main {
    }
    
    private static AuctionHouse load() {
-		// TODO Auto-generated method stub
    		AuctionHouse auctionHouse = new AuctionHouseClass();
 		
    		try {
@@ -310,7 +310,6 @@ public class Main {
 	}
    
    private static void save(AuctionHouse aH) {
-		// TODO Auto-generated method stub
 		try {
 			ObjectOutputStream file = new ObjectOutputStream(new FileOutputStream(DATA_FILE));
 			file.writeObject(aH);
@@ -329,6 +328,6 @@ public class Main {
    
    
 }
-//Im here
+
 //TODO? Can one piece of art be in more than one auction at the same time?
 //TODO: Review and finish comments on interfaces

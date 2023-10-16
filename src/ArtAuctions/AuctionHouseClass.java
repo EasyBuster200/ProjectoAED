@@ -25,13 +25,12 @@ public class AuctionHouseClass implements AuctionHouse {
 
 	@Override
 	public void addUser(String login, String name, int age, String email)
-			
-			throws userUnderAgeException, loginAlredyRegisteredException { 
+			throws userUnderAgeException, loginAlredyRegisteredException {
 		
 			if (age < LEGAL_AGE)
 				throw new userUnderAgeException();
 
-			else if (getUser(login) != null)//users.find
+			else if (getUser(login) != null)
 				throw new loginAlredyRegisteredException();
 
 			else
@@ -92,10 +91,8 @@ public class AuctionHouseClass implements AuctionHouse {
 
 		if (user == null)
 			throw new loginNotRegisteredException();
-		
-		//e se retornassemos uma string com a informacao?
 
-		return (Collector) user; //TODO? Idk if this is a good way to do this
+		return (Collector) user;
 	}
 
 	@Override
@@ -132,54 +129,126 @@ public class AuctionHouseClass implements AuctionHouse {
 	@Override
 	public void addWorkAuction(String auctionId, String workId, int minSellValue)
 			throws auctionIdNotRegisteredException, workIdNotRegisteredException {
-		// TODO Auto-generated method stub
+				
+			Auction auction = getAuction(auctionId);
+
+			if(auction == null)
+				throw new auctionIdNotRegisteredException();
+
+			ArtWork artWork = getWork(workId);
+
+			if (artWork == null)
+				throw new workIdNotRegisteredException();
+
+			artWork.setMinimumBidValue(minSellValue);
+			auction.addWorkAuction(artWork); 	
 		
 	}
 
 	@Override
-	public void bid(String auctionId, String workId, String login, int value) throws valueUnderMinimumException,
-			auctionIdNotRegisteredException, loginNotRegisteredException, workIdNotRegisteredException {
-		// TODO Auto-generated method stub
+	public void bid(String auctionId, String workId, String login, int bidValue) 
+		throws valueUnderMinimumException, auctionIdNotRegisteredException, loginNotRegisteredException, workIdNotRegisteredException {
+			
+		User user = getUser(login);
+	
+		if (user == null)
+			throw new loginNotRegisteredException();
+
+		Auction auction = getAuction(auctionId);
+
+		if (auction == null)
+			throw new auctionIdNotRegisteredException();
+
+		ArtWork work = getWork(workId);
+
+		if (work == null)
+			throw new workIdNotRegisteredException();
+
+		if (bidValue < work.minimumBidValue())
+			throw new valueUnderMinimumException();
+
+		auction.addBid(new BidClass(bidValue, user));
 		
 	}
 
 	@Override
 	public Iterator<ArtWork> closeAuction(String auctionId) throws auctionIdNotRegisteredException {
-		// TODO Auto-generated method stub
-		return null;
+		Auction auction = getAuction(auctionId);
+
+		if(auction == null)
+			throw new auctionIdNotRegisteredException();
+
+		Iterator<ArtWork> it = auction.worksIterator();
+		auctions.remove(auction);
+
+		return it;
 	}
 
 	@Override
 	public Iterator<ArtWork> listAuctionWorks(String auctionId)
 			throws auctionIdNotRegisteredException, noWorksAuctionException {
-		// TODO Auto-generated method stub
-		return null;
+		
+			Auction auction = getAuction(auctionId);
+
+			if(auction == null)
+				throw new auctionIdNotRegisteredException();
+
+			else if (auction.hasNoWorks())
+				throw new noWorksAuctionException();
+
+			return auction.worksIterator();
 	}
 
 	@Override
 	public Iterator<ArtWork> listArtistWorks(String login)
 			throws loginNotRegisteredException, notAnArtistException, hasNoWorksException {
-		// TODO Auto-generated method stub
-		return null;
+		
+			User user = getUser(login);
+
+			if (user == null)
+				throw new loginNotRegisteredException();
+
+			else if (!(user instanceof Artist))
+				throw new notAnArtistException();
+			
+			Artist artist = (Artist) user;
+
+			if (!artist.hasWorks())
+				throw new hasNoWorksException();
+
+			return artist.worksIterator();
 	}
 
 	@Override
 	public Iterator<Bid> listBidsWork(String auctionId, String workId)
 			throws auctionIdNotRegisteredException, workNotInAuctionException, workHasNoBidsException {
-		// TODO Auto-generated method stub
-		return null;
+			//TODO? We coudld use a reverse queueInList to save all the bids made on an art work, this way we could return a copy of that reversed list and dequeu each bid in order?
+			//Which may be faster than calling .iterator on w doubleLinkedList
+
+			Auction auction = getAuction(auctionId);
+
+			if (auction == null)
+				throw new auctionIdNotRegisteredException();
+
+			ArtWork work = auction.getWork(workId); 
+
+			if (work == null)
+				throw new workNotInAuctionException();
+
+			else if (!work.hasBids())
+				throw new workHasNoBidsException();
+
+			return work.bidsIterator();
+			
 	}
 
 	@Override
 	public Iterator<ArtWork> listWorksByValue() throws noSoldWorkdsException {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	private User getUser(String login) {
 		Iterator<User> it = users.iterator();
-		
-	
 
 		while(it.hasNext()) {
 			User current = it.next();
