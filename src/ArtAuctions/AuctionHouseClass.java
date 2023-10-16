@@ -155,7 +155,7 @@ public class AuctionHouseClass implements AuctionHouse {
 		if (auction == null)
 			throw new auctionIdNotRegisteredException();
 
-		User user = getUworkIdser(login);
+		User user = getUser(login);
 
 		if (user == null)
 			throw new loginNotRegisteredException();
