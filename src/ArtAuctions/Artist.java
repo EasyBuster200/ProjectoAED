@@ -1,5 +1,7 @@
 package ArtAuctions;
 
+import dataStructures.Iterator;
+
 public interface Artist extends User {
 	
 	/**
@@ -13,4 +15,14 @@ public interface Artist extends User {
 	 * @param work - new art work created
 	 */
 	void addNewArtWork(ArtWork work);
+
+	/**
+	 * @return
+	 */
+	boolean hasWorks();
+
+	/**
+	 * @return
+	 */
+	Iterator<ArtWork> worksIterator();
 }

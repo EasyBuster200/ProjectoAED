@@ -1,8 +1,6 @@
 package ArtAuctions;
 
-import java.io.Serializable;
-
-public class Collector implements User, Serializable {
+public class Collector implements User {
 
 	protected String login,name,email;
 	protected int age;
@@ -12,7 +10,6 @@ public class Collector implements User, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	public Collector(String login, String name, int age,String email) {
-		// TODO Auto-generated constructor stub
 		this.login = login;
 		this.name = name;
 		this.age = age;
@@ -21,26 +18,28 @@ public class Collector implements User, Serializable {
 
 	@Override
 	public String login() {
-		// TODO Auto-generated method stub
 		return this.login;
 	}
 
 	@Override
 	public String name() {
-		// TODO Auto-generated method stub
 		return this.name;
 	}
 
 	@Override
 	public int age() {
-		// TODO Auto-generated method stub
 		return this.age;
 	}
 
 	@Override
 	public String email() {
-		// TODO Auto-generated method stub
 		return this.email;
+	}
+
+	@Override
+	public void addBoughtWork(ArtWork work) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'addBoughtWork'");
 	}
 
 }

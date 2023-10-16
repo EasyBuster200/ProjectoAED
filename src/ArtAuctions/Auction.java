@@ -24,12 +24,20 @@ public interface Auction extends Serializable {
 	 */
 	void addBid(Bid bid);
 
+	/**
+	 * @return
+	 */
+	boolean hasNoWorks();
+
     /**
      * @return
      */
     Iterator<ArtWork> worksIterator();
-	
-	
-	
-	
+
+	/**
+	 * @param workId
+	 * @return
+	 */
+	ArtWork getWork(String workId);
+
 }

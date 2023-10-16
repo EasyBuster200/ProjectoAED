@@ -233,3 +233,6 @@ public class Main {
         }
    }
 }
+
+//TODO? Can one piece of art be in more than one auction at the same time?
+//TODO: Review and finish comments on interfaces

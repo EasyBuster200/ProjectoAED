@@ -2,6 +2,8 @@ package ArtAuctions;
 
 import java.io.Serializable;
 
+import dataStructures.Iterator;
+
 /**
  * @author lipyc
  *
@@ -50,7 +52,6 @@ public interface ArtWork  extends Serializable {
 	 */
 	String authorName();
 	
-	
 	/**
 	 * Returns a boolean value representing if the artwork has been sold or not before.
 	 * @return <code>true</code> if the art work has been sold before 
@@ -75,4 +76,26 @@ public interface ArtWork  extends Serializable {
 	 * @return highest value the piece was sold for 
 	 */
 	int highestSoldValue();
+
+	/**
+	 * Return an integer with the minimum value for a bid place on the art work
+	 * @return minimum auction value for the piece
+	 */
+	int minimumBidValue();
+
+	/**
+	 * Sets the highest value the work has been sold for in auction
+	 * @param new highest value the art work was sold for 
+	 */
+	void setHighestSoldValue(int newHighestSoldValue);
+
+	/**
+	 * Sets the minimum bid value for the art work 
+	 * @param newMinimumBidValue - new minimum value for a bid
+	 */
+	void setMinimumBidValue(int newMinimumBidValue);
+
+	boolean hasBids();
+
+    Iterator<Bid> bidsIterator();
 }

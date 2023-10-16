@@ -1,5 +1,7 @@
 package ArtAuctions;
 
+import dataStructures.Iterator;
+
 public class ArtistClass extends Collector implements Artist {
 	
 	protected String artisticName;
@@ -19,6 +21,24 @@ public class ArtistClass extends Collector implements Artist {
 	public String artisticName() {
 		// TODO Auto-generated method stub
 		return this.artisticName ;
+	}
+
+	@Override
+	public void addNewArtWork(ArtWork work) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'addNewArtWork'");
+	}
+
+	@Override
+	public boolean hasWorks() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'hasWorks'");
+	}
+
+	@Override
+	public Iterator<ArtWork> worksIterator() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'worksIterator'");
 	}
 
 }

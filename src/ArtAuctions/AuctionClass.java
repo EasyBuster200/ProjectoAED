@@ -1,5 +1,7 @@
 package ArtAuctions;
 
+import dataStructures.Iterator;
+
 public class AuctionClass implements Auction {
 
 	protected String auctionId;
@@ -28,9 +30,27 @@ public class AuctionClass implements Auction {
 	}
 
 	@Override
-	public void addBid(Bid bid, ArtWork artWork) {
+	public void addBid(Bid bid) {
 		// TODO Auto-generated method stub
-		
+		throw new UnsupportedOperationException("Unimplemented method 'addBid'");
+	}
+
+	@Override
+	public boolean hasNoWorks() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'hasNoWorks'");
+	}
+
+	@Override
+	public Iterator<ArtWork> worksIterator() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'worksIterator'");
+	}
+
+	@Override
+	public ArtWork getWork(String workId) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'getWork'");
 	}
 
 }
