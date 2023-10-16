@@ -148,7 +148,24 @@ public class AuctionHouseClass implements AuctionHouse {
 	public void bid(String auctionId, String workId, String login, int value) 
 		throws valueUnderMinimumException, auctionIdNotRegisteredException, loginNotRegisteredException, workIdNotRegisteredException {
 		
-		
+		//TODO: Check for value under minimum
+
+		Auction auction = getAuction(auctionId);
+
+		if (auction == null)
+			throw new auctionIdNotRegisteredException();
+
+		User user = getUworkIdser(login);
+
+		if (user == null)
+			throw new loginNotRegisteredException();
+
+		ArtWork work = getWork(workId);
+
+		if(work == null)
+			throw new workIdNotRegisteredException();
+
+		auction.addBid(new BidClass(value, user));
 		
 	}
 

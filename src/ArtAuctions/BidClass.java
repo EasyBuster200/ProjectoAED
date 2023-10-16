@@ -7,8 +7,12 @@ public class BidClass implements Bid {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public BidClass() {
-		// TODO Auto-generated constructor stub
+	private int bidValue;
+	private  User bidder;
+
+	public BidClass(int value, User bidder) {
+		this.bidValue = value;
+		this.bidder = bidder;
 	}
 
 	@Override

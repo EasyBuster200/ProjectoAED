@@ -21,9 +21,8 @@ public interface Auction extends Serializable {
 	/**
 	 * Adds a bid to the given ark work.
 	 * @param bid - the bid to be added.
-	 * @param artWork - the art work that will the bid.
 	 */
-	void addBid(Bid bid,ArtWork artWork);
+	void addBid(Bid bid);
 
     /**
      * @return
