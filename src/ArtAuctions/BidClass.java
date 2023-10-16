@@ -17,20 +17,17 @@ public class BidClass implements Bid {
 
 	@Override
 	public int bidValue() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'bidValue'");
+		return bidValue;
 	}
 
 	@Override
 	public String biddersName() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'biddersName'");
+		return bidder.name();
 	}
 
 	@Override
 	public String biddersLogin() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'biddersLogin'");
+		return bidder.login();
 	}
 
 }

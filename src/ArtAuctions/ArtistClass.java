@@ -3,8 +3,13 @@ package ArtAuctions;
 import dataStructures.Iterator;
 
 public class ArtistClass extends Collector implements Artist {
+
+	private static final int DEFAULT_SIZE = 50;
 	
-	protected String artisticName;
+	private String artisticName;
+	private ArtWork[] artWorks;
+	private int size;
+
 
 	/**
 	 * 
@@ -12,27 +17,25 @@ public class ArtistClass extends Collector implements Artist {
 	private static final long serialVersionUID = 1L;
 
 	public ArtistClass(String login, String name, int age,String email,String artisticName) {		
-		// TODO Auto-generated constructor stub
-		super(login,name,age,email);
+		super(login, name, age, email);
 		this.artisticName = artisticName;
+		this.artWorks = new ArtWork[DEFAULT_SIZE];
+		this.size = 0;
 	}
 
 	@Override
 	public String artisticName() {
-		// TODO Auto-generated method stub
 		return this.artisticName ;
 	}
 
 	@Override
 	public void addNewArtWork(ArtWork work) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'addNewArtWork'");
+		artWorks[size++] = work;
 	}
 
 	@Override
 	public boolean hasWorks() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'hasWorks'");
+		return size != 0;
 	}
 
 	@Override
@@ -40,5 +43,7 @@ public class ArtistClass extends Collector implements Artist {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Unimplemented method 'worksIterator'");
 	}
+
+	//TODO: add isFull and grow methods for the array, or even change it from being an array
 
 }

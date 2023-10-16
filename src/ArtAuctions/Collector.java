@@ -2,8 +2,10 @@ package ArtAuctions;
 
 public class Collector implements User {
 
-	protected String login,name,email;
+	protected String login, name, email;
 	protected int age;
+	
+
 	/**
 	 * 
 	 */
