@@ -92,7 +92,7 @@ public class AuctionHouseClass implements AuctionHouse {
 		if (user == null)
 			throw new loginNotRegisteredException();
 
-		return (Collector) user; //TODO? Idk if this is a good way to do this
+		return (Collector) user;
 	}
 
 	@Override
