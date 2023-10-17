@@ -13,23 +13,23 @@ import ArtAuctions.Artist;
 import dataStructures.Iterator;
 
 public class Main {
-    private static final String USER_REGISTERED = "Registo de utilizador executado.";
-    private static final String ARTIST_REGISTERED = "Registo de artista executado.";
-    private static final String USER_REMOVED = "Remocao de utilizador executada";
-    private static final String WORK_REGISTERED = "Registo de obra executado.";
-    private static final String INFO_USER_BODY = "%s %s %d %s\n";
-    private static final String INFO_ARTIST_BODY = "%s %s %s %d %s\n";
-    private static final String INFO_WORK_BODY = "%s %s %d %d %s %s\n";
-    private static final String AUCTION_REGISTERED = "Registo de leilao executado";
-    private static final String WORK_ADDED_AUCTION = "Obra adicionada leilao.";
-    private static final String BID_PLACED = "Proposta aceite.";
-    private static final String AUCTION_CLOSED = "Leilao encerrado.";
-    private static final String AUCTION_CLOSED_BODY_SOLD = "%s %s %s %s %d\n";
-    private static final String AUCTION_CLOSE_BODY_NOT_SOLD = "%s %s sem propostas de venda.";
-    private static final String LIST_AUCTION_WORKS_BODY = "%s %s %d %d %s %s\n";
-    private static final String LIST_ARTIST_WORKS_BODY = "%s %s %d %d\n";
-    private static final String LIST_BIDS_BODY = "%s %s %d\n";
-    private static final String LIST_WORKS_VALUE_BODY = "%s %s %d %d %s %s\n";
+    private static final String USER_REGISTERED = "\nRegisto de utilizador executado.";
+    private static final String ARTIST_REGISTERED = "\nRegisto de artista executado.";
+    private static final String USER_REMOVED = "\nRemocao de utilizador executada";
+    private static final String WORK_REGISTERED = "\nRegisto de obra executado.";
+    private static final String INFO_USER_BODY = "\n%s %s %d %s\n";
+    private static final String INFO_ARTIST_BODY = "\n%s %s %s %d %s\n";
+    private static final String INFO_WORK_BODY = "\n%s %s %d %d %s %s\n";
+    private static final String AUCTION_REGISTERED = "\nRegisto de leilao executado";
+    private static final String WORK_ADDED_AUCTION = "\nObra adicionada leilao.";
+    private static final String BID_PLACED = "\nProposta aceite.";
+    private static final String AUCTION_CLOSED = "\nLeilao encerrado.";
+    private static final String AUCTION_CLOSED_BODY_SOLD = "\n%s %s %s %s %d\n";
+    private static final String AUCTION_CLOSE_BODY_NOT_SOLD = "\n%s %s sem propostas de venda.";
+    private static final String LIST_AUCTION_WORKS_BODY = "\n%s %s %d %d %s %s\n";
+    private static final String LIST_ARTIST_WORKS_BODY = "\n%s %s %d %d\n";
+    private static final String LIST_BIDS_BODY = "\n%s %s %d\n";
+    private static final String LIST_WORKS_VALUE_BODY = "\n%s %s %d %d %s %s\n";
     private static final String QUIT_MSG = "Obrigado. Ate a proxima.";
     
   
