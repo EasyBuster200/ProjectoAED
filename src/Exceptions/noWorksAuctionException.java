@@ -5,7 +5,7 @@ public class noWorksAuctionException extends Exception{
 	private static final long serialVersionUID = 1L;
 
 	public noWorksAuctionException() {
-        super("Leilao sem obras.");
+        super("\nLeilao sem obras.");
     }
 
 }

@@ -80,7 +80,7 @@ public class Main {
     		}
 
     		System.out.println();
-    		cmd = in.next().toUpperCase();
+    		cmd = in.next().toLowerCase();
     	}
     	save(aH);
     }
