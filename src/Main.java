@@ -33,21 +33,21 @@ public class Main {
     private static final String QUIT_MSG = "Obrigado. Ate a proxima.";
     
   
-    private static final String ADD_USER = "addUser";
-    private static final String ADD_ARTIST = "addArtist";
-    private static final String REMOVE_USER = "removeUser";
-    private static final String ADD_WORK = "addWork";
-    private static final String INFO_USER = "infoUser";
-    private static final String INFO_ARTIST = "infoArtist";
-    private static final String INFO_WORK = "infoWork";
-    private static final String CREATE_AUCTION = "createAuction";
-    private static final String ADD_WORK_AUCTION = "addWorkAuction";
+    private static final String ADD_USER = "adduser";
+    private static final String ADD_ARTIST = "addartist";
+    private static final String REMOVE_USER = "removeuser";
+    private static final String ADD_WORK = "addwork";
+    private static final String INFO_USER = "infouser";
+    private static final String INFO_ARTIST = "infoartist";
+    private static final String INFO_WORK = "infowork";
+    private static final String CREATE_AUCTION = "createauction";
+    private static final String ADD_WORK_AUCTION = "addworkauction";
     private static final String BID = "bid";
-    private static final String CLOSE_AUCTION = "closeAuction";
-    private static final String LIST_AUCTION_WORKS = "listAuctionWorks";
-    private static final String LIST_ARTIST_WORK = "listArtistWorks";
-    private static final String LIST_BIDS_WORK = "listBidsWork";
-    private static final String LIST_WORKS_BY_VALUE = "listWorksByValue";
+    private static final String CLOSE_AUCTION = "closeauction";
+    private static final String LIST_AUCTION_WORKS = "listauctionworks";
+    private static final String LIST_ARTIST_WORK = "listartistworks";
+    private static final String LIST_BIDS_WORK = "listbidswork";
+    private static final String LIST_WORKS_BY_VALUE = "listworksbyvalue";
     private static final String QUIT = "quit";
     
 
@@ -57,28 +57,28 @@ public class Main {
     	
     	Scanner in = new Scanner(System.in);
     	AuctionHouse aH = load();
-    	String cmd = in.next().toUpperCase();
-        
-    	while(cmd.equalsIgnoreCase(QUIT)) {
+    	String cmd = in.next().toLowerCase();
+
+    	while(!cmd.equalsIgnoreCase(QUIT)) {
     		switch(cmd) {
-    		case QUIT -> quit();
-    		case ADD_USER -> addUser(in,aH);
-    		case ADD_ARTIST -> addArtist(in,aH);
-    		case REMOVE_USER -> removeUser(in,aH);
-    		case ADD_WORK -> addWork(in,aH);
-    		case INFO_USER -> infoUser(in,aH);
-    		case INFO_ARTIST -> infoArtist(in,aH);
-    		case INFO_WORK -> infoWork(in,aH);
-    		case CREATE_AUCTION -> createAuction(in,aH);
-    		case ADD_WORK_AUCTION -> addWorkToAuction(in,aH);
-    		case BID -> bid(in,aH);
-    		case CLOSE_AUCTION -> closeAuction(in,aH);
-    		case LIST_AUCTION_WORKS -> listAuctionWorks(in,aH);
-            case LIST_ARTIST_WORK -> listArtistWorks(in, aH);
-    		case LIST_BIDS_WORK -> listBidsWork(in,aH);
-    		case LIST_WORKS_BY_VALUE -> listWorksByValue(in,aH);
-    		
+    		    case QUIT -> quit();
+    		    case ADD_USER -> addUser(in,aH);
+    		    case ADD_ARTIST -> addArtist(in,aH);
+    		    case REMOVE_USER -> removeUser(in,aH);
+    		    case ADD_WORK -> addWork(in,aH);
+    		    case INFO_USER -> infoUser(in,aH);
+    		    case INFO_ARTIST -> infoArtist(in,aH);
+    		    case INFO_WORK -> infoWork(in,aH);
+    		    case CREATE_AUCTION -> createAuction(in,aH);
+    		    case ADD_WORK_AUCTION -> addWorkToAuction(in,aH);
+    		    case BID -> bid(in,aH);
+    		    case CLOSE_AUCTION -> closeAuction(in,aH);
+    		    case LIST_AUCTION_WORKS -> listAuctionWorks(in,aH);
+                case LIST_ARTIST_WORK -> listArtistWorks(in, aH);
+    		    case LIST_BIDS_WORK -> listBidsWork(in,aH);
+    		    case LIST_WORKS_BY_VALUE -> listWorksByValue(in,aH);
     		}
+
     		System.out.println();
     		cmd = in.next().toUpperCase();
     	}
@@ -299,6 +299,7 @@ public class Main {
    		try {
 			ObjectInputStream file = new ObjectInputStream(new FileInputStream(DATA_FILE));
 			auctionHouse = (AuctionHouse) file.readObject();
+            file.close();
 			return auctionHouse;
    		}catch(IOException e) {
    			System.out.println("input out put exception");
