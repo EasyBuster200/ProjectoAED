@@ -59,7 +59,7 @@ public class Main {
     	AuctionHouse aH = load();
     	String cmd = in.next().toLowerCase();
 
-    	while(!cmd.equalsIgnoreCase(QUIT)) {
+        while(!cmd.equalsIgnoreCase(QUIT)) {
     		switch(cmd) {
     		    case QUIT -> quit();
     		    case ADD_USER -> addUser(in,aH);
@@ -298,7 +298,7 @@ public class Main {
 		
    		try {
 			ObjectInputStream file = new ObjectInputStream(new FileInputStream(DATA_FILE));
-			auctionHouse = (AuctionHouse) file.readObject();
+			auctionHouse = (AuctionHouseClass) file.readObject();
             file.close();
 			return auctionHouse;
    		}catch(IOException e) {
@@ -329,6 +329,6 @@ public class Main {
    
    
 }
-
+//TODO: The save method is saving the AuctionHouseClass object, but its not saving anything inside it?
 //TODO? Can one piece of art be in more than one auction at the same time?
 //TODO: Review and finish comments on interfaces
