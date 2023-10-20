@@ -2,6 +2,7 @@ package ArtAuctions;
 
 import java.io.Serializable;
 
+import Exceptions.workHasNoBidsException;
 import dataStructures.Iterator;
 
 /**
@@ -95,7 +96,5 @@ public interface ArtWork  extends Serializable {
 	 */
 	void setMinimumBidValue(int newMinimumBidValue);
 
-	boolean hasBids();
-
-    Iterator<Bid> bidsIterator();
+    Iterator<Bid> bidsIterator() throws workHasNoBidsException;
 }

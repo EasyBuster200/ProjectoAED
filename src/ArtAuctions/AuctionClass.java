@@ -13,13 +13,11 @@ public class AuctionClass implements Auction {
 	private static final long serialVersionUID = 1L;
 
 	public AuctionClass(String auctionId) {
-		// TODO Auto-generated constructor stub
 		this.auctionId = auctionId;
 	}
 
 	@Override
 	public String auctionId() {
-		// TODO Auto-generated method stub
 		return this.auctionId;
 	}
 

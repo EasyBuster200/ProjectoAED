@@ -1,10 +1,13 @@
 package ArtAuctions;
 
+import dataStructures.DoubleList;
+import dataStructures.List;
+
 public class Collector implements User {
 
-	protected String login, name, email;
-	protected int age;
-	
+	private String login, name, email;
+	private int age;
+	private List<ArtWork> ownedWorks;
 
 	/**
 	 * 
@@ -16,6 +19,7 @@ public class Collector implements User {
 		this.name = name;
 		this.age = age;
 		this.email = email;
+		this.ownedWorks = new DoubleList<>();
 	}
 
 	@Override
@@ -40,8 +44,7 @@ public class Collector implements User {
 
 	@Override
 	public void addBoughtWork(ArtWork work) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'addBoughtWork'");
+		ownedWorks.addLast(work);
 	}
 
 }

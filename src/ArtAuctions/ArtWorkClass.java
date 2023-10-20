@@ -1,6 +1,9 @@
 package ArtAuctions;
 
+import Exceptions.workHasNoBidsException;
+import dataStructures.DoubleList;
 import dataStructures.Iterator;
+import dataStructures.List;
 
 public class ArtWorkClass implements ArtWork {
 
@@ -14,6 +17,7 @@ public class ArtWorkClass implements ArtWork {
 	private boolean beenSold;
 	private Artist author;
 	private User buyer;
+	private List<Bid> bids;
 	
 	public ArtWorkClass(String workId, String name, int year, Artist author) {
 		this.workId = workId;
@@ -24,6 +28,7 @@ public class ArtWorkClass implements ArtWork {
 		this.minimumBidValue = 0;
 		this.highestSoldValue = 0;
 		this.beenSold = false;
+		this.bids = new DoubleList<>();
 	}
 
 	@Override
@@ -97,15 +102,11 @@ public class ArtWorkClass implements ArtWork {
 	}
 
 	@Override
-	public boolean hasBids() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'hasBids'");
-	}
+	public Iterator<Bid> bidsIterator() throws workHasNoBidsException {
+		if (bids.isEmpty())
+			throw new workHasNoBidsException();
 
-	@Override
-	public Iterator<Bid> bidsIterator() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'bidsIterator'");
+		return bids.iterator();
 	}
 
 }

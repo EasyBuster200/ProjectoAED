@@ -356,7 +356,6 @@ public class DoubleList<E> implements List<E>
      */
     protected void removeLastNode( )
     {
-    	//TODO: Left as an exercise.
     	tail = tail.getPrevious();
     	if(tail==null) {
     		head = null;
@@ -389,7 +388,6 @@ public class DoubleList<E> implements List<E>
     	node.getPrevious().setNext(node.getNext());
     	node.getNext().setPrevious(node.getPrevious());
     	this.remove(node.getElement());
-    	//TODO: Left as an exercise.
 
     }
 
@@ -407,7 +405,6 @@ public class DoubleList<E> implements List<E>
             return this.removeLast();
         else 
         {
-        	//TODO: Left as an exercise.
         	element = this.get(position);
         	this.remove(this.get(position));
      
@@ -431,7 +428,7 @@ public class DoubleList<E> implements List<E>
     	if(!(this.find(element)==(notFound))) {
     		node = this.getNode(this.find(element));
     	}
-    	//TODO: Left as an exercise.
+
     	return node;
     }
 
@@ -462,7 +459,6 @@ public class DoubleList<E> implements List<E>
      */
     public void append( DoubleList<E> list )
     {
-        //TODO: Left as an exercise.
     	//case 1 - list "this" is empty
     	if(this.isEmpty()) {
     		this.head = list.head;

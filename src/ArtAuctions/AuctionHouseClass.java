@@ -222,9 +222,7 @@ public class AuctionHouseClass implements AuctionHouse {
 	@Override
 	public Iterator<Bid> listBidsWork(String auctionId, String workId)
 			throws auctionIdNotRegisteredException, workNotInAuctionException, workHasNoBidsException {
-			//TODO? We coudld use a reverse queueInList to save all the bids made on an art work, this way we could return a copy of that reversed list and dequeu each bid in order?
-			//Which may be faster than calling .iterator on w doubleLinkedList
-
+	
 			Auction auction = getAuction(auctionId);
 
 			if (auction == null)
@@ -234,9 +232,6 @@ public class AuctionHouseClass implements AuctionHouse {
 
 			if (work == null)
 				throw new workNotInAuctionException();
-
-			else if (!work.hasBids())
-				throw new workHasNoBidsException();
 
 			return work.bidsIterator();
 			

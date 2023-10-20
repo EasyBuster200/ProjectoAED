@@ -41,6 +41,7 @@ public class ArtistClass extends Collector implements Artist {
 	@Override
 	public Iterator<ArtWork> worksIterator() {
 		// TODO Auto-generated method stub
+		//Maybe make an array iterator, to iterate the artworks
 		throw new UnsupportedOperationException("Unimplemented method 'worksIterator'");
 	}
 
