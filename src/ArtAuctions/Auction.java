@@ -17,7 +17,7 @@ public interface Auction extends Serializable {
 	 * Adds a new work to the auction
 	 * @param artwork - the art work to be added.
 	 */
-	void addWorkAuction(ArtWork artwork);
+	void addWorkAuction(ArtWork artwork, int minimumValue);
 	
 	/**
 	 * Adds a bid to the given ark work.
@@ -41,5 +41,9 @@ public interface Auction extends Serializable {
 	 * @return
 	 */
 	ArtWork getWork(String workId);
+
+	Iterator<Bid> getWorkBids(ArtWork work);
+
+    int getMinimumBidValue(ArtWork work);
 
 }

@@ -79,22 +79,9 @@ public interface ArtWork  extends Serializable {
 	int highestSoldValue();
 
 	/**
-	 * Return an integer with the minimum value for a bid place on the art work
-	 * @return minimum auction value for the piece
-	 */
-	int minimumBidValue();
-
-	/**
 	 * Sets the highest value the work has been sold for in auction
 	 * @param new highest value the art work was sold for 
 	 */
 	void setHighestSoldValue(int newHighestSoldValue);
 
-	/**
-	 * Sets the minimum bid value for the art work 
-	 * @param newMinimumBidValue - new minimum value for a bid
-	 */
-	void setMinimumBidValue(int newMinimumBidValue);
-
-    Iterator<Bid> bidsIterator() throws workHasNoBidsException;
 }

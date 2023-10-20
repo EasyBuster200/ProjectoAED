@@ -140,8 +140,7 @@ public class AuctionHouseClass implements AuctionHouse {
 			if (artWork == null)
 				throw new workIdNotRegisteredException();
 
-			artWork.setMinimumBidValue(minSellValue);
-			auction.addWorkAuction(artWork); 	
+			auction.addWorkAuction(artWork, minSellValue); 	
 		
 	}
 
@@ -164,8 +163,7 @@ public class AuctionHouseClass implements AuctionHouse {
 		if (work == null)
 			throw new workIdNotRegisteredException();
 
-		if (bidValue < work.minimumBidValue())
-			throw new valueUnderMinimumException();
+		if (bidValue < auction.getMinimumBidValue(work))
 
 		auction.addBid(new BidClass(bidValue, user));
 		
@@ -233,7 +231,7 @@ public class AuctionHouseClass implements AuctionHouse {
 			if (work == null)
 				throw new workNotInAuctionException();
 
-			return work.bidsIterator();
+			return auction.getWorkBids(work);
 			
 	}
 
