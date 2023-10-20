@@ -1,10 +1,13 @@
 package ArtAuctions;
 
+import dataStructures.DoubleList;
 import dataStructures.Iterator;
+import dataStructures.List;
 
 public class AuctionClass implements Auction {
 
-	protected String auctionId;
+	private String auctionId;
+	private List<ArtWork> works;
 	//TODO? Maybe have an array with the art works in the auction, easier to access each art work individually, and easier to get the iterators 
 	
 	/**
@@ -14,6 +17,7 @@ public class AuctionClass implements Auction {
 
 	public AuctionClass(String auctionId) {
 		this.auctionId = auctionId;
+		this.works = new DoubleList<>();
 	}
 
 	@Override
@@ -23,8 +27,7 @@ public class AuctionClass implements Auction {
 
 	@Override
 	public void addWorkAuction(ArtWork artwork) {
-		// TODO Auto-generated method stub
-		
+		works.addLast(artwork);
 	}
 
 	@Override
@@ -35,20 +38,26 @@ public class AuctionClass implements Auction {
 
 	@Override
 	public boolean hasNoWorks() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'hasNoWorks'");
+		return works.isEmpty();
 	}
 
 	@Override
 	public Iterator<ArtWork> worksIterator() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'worksIterator'");
+		return works.iterator();
 	}
 
 	@Override
 	public ArtWork getWork(String workId) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'getWork'");
+		Iterator<ArtWork> it = works.iterator();
+
+		while(it.hasNext()) {
+			ArtWork current = it.next();
+
+			if(current.workId().equalsIgnoreCase(workId))
+				return current;
+		}
+
+		return null;
 	}
 
 }

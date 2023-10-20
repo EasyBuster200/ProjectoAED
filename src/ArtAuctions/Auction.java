@@ -2,6 +2,7 @@ package ArtAuctions;
 
 import java.io.Serializable;
 
+import Exceptions.noWorksAuctionException;
 import dataStructures.Iterator;
 
 public interface Auction extends Serializable {
@@ -31,6 +32,7 @@ public interface Auction extends Serializable {
 
     /**
      * @return
+     * @throws noWorksAuctionException
      */
     Iterator<ArtWork> worksIterator();
 
