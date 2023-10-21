@@ -6,31 +6,32 @@ public interface User extends Serializable {
 
 	/**
 	 * Returns the login of the user.
-	 * @return login.
+	 * @return user login.
 	 */
 	String login();
 	
 	/**
 	 * Return the name of the user.
-	 * @return name.
+	 * @return user name.
 	 */
 	String name();
 	
 	/**
 	 * Return the age of the user.
-	 * @return
+	 * @return user age 
 	 */
 	int age();
 	
 	/**
 	 * Return the email of the user.
-	 * @return email.
+	 * @return user email.
 	 */
 	String email();
 
 	/**
 	 * Adds the given art work to the users collection of bought artWorks
-	 * @param work - work to be added
+	 * @param work work to be added
+	 * @pre work is not already in the users collection
 	 */
 	void addBoughtWork(ArtWork work);
 	

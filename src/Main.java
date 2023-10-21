@@ -322,9 +322,8 @@ public class Main {
 		}
 	}
    
-   private static Object listWorksByValue(Scanner in, AuctionHouse aH) {
+   private static void listWorksByValue(Scanner in, AuctionHouse aH) {
 		// TODO Auto-generated method stub
-		return null;
 	}
    
    
@@ -332,5 +331,4 @@ public class Main {
 }
 
 //TODO: The save method is saving the AuctionHouseClass object, but its not saving anything inside it?
-//TODO: Have a sub class of an auction, for just a specific artwork
 //TODO: Review and finish comments on interfaces

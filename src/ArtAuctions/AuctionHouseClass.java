@@ -53,6 +53,7 @@ public class AuctionHouseClass implements AuctionHouse {
 
 	@Override
 	public void removeUser(String login) throws loginNotRegisteredException {
+		//TODO: We have to check for the user having works in auction and/or being an artist and having works
 		User user = getUser(login);
 
 		if(user == null)
@@ -165,12 +166,13 @@ public class AuctionHouseClass implements AuctionHouse {
 
 		if (bidValue < auction.getMinimumBidValue(work))
 
-		auction.addBid(new BidClass(bidValue, user));
+		auction.addBid(new BidClass(bidValue, user), work);
 		
 	}
 
 	@Override
 	public Iterator<ArtWork> closeAuction(String auctionId) throws auctionIdNotRegisteredException {
+		//TODO: We have to make sure once an auction is closed, the works are sold to the highest bidder
 		Auction auction = getAuction(auctionId);
 
 		if(auction == null)

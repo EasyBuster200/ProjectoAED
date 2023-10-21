@@ -33,9 +33,9 @@ public class AuctionClass implements Auction {
 	}
 
 	@Override
-	public void addBid(Bid bid) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'addBid'");
+	public void addBid(Bid bid, ArtWork work) {
+		WorkAuction individualAuction = getAuction(work);
+		individualAuction.addBid(bid);
 	}
 
 	@Override
@@ -79,18 +79,22 @@ public class AuctionClass implements Auction {
 
 	@Override
 	public int getMinimumBidValue(ArtWork work) {
-		//TODO: have a simple method that returns the individual auction given a work
-		return 0;
+		WorkAuction individualAuction = getAuction(work);
+		return individualAuction.minimumBidValue();
+	}
 
-		/**
-		 * while(it.hasNext()) {
+	private WorkAuction getAuction(ArtWork work) {
+		Iterator<WorkAuction> it = individualAuctions.iterator();
+
+		while (it.hasNext()) {
 			WorkAuction current = it.next();
 			ArtWork currentWork = current.getWork();
 
-			if(currentWork.workId().equalsIgnoreCase(work.workId()))
-				return current.bidsIterator();
+			if (currentWork.workId().equals(work.workId()))
+				return current;
 		}
-		 */
+
+		return null;
 	}
 
 }

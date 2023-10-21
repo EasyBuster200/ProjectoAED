@@ -1,7 +1,6 @@
 package ArtAuctions;
 
 import java.io.Serializable;
-
 import Exceptions.noWorksAuctionException;
 import dataStructures.Iterator;
 
@@ -23,7 +22,7 @@ public interface Auction extends Serializable {
 	 * Adds a bid to the given ark work.
 	 * @param bid - the bid to be added.
 	 */
-	void addBid(Bid bid);
+	void addBid(Bid bid, ArtWork work);
 
 	/**
 	 * @return

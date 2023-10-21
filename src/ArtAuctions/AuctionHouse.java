@@ -136,30 +136,32 @@ public interface AuctionHouse extends Serializable {
 	        throws auctionIdNotRegisteredException, noWorksAuctionException;
 
 	    /**
-		 * 
-	     * @param login
-	     * @return
-	     * @throws loginNotRegisteredException
-	     * @throws notAnArtistException
-	     * @throws hasNoWorksException
+		 * Return an iterator with the works of a given artist
+	     * @param login login of the artist
+	     * @return iterator with the artists works
+	     * @throws loginNotRegisteredException if there is no user registered with the given login
+	     * @throws notAnArtistException if the login is not registered to an artist
+	     * @throws hasNoWorksException if the artist has no works 
 	     */
 	    Iterator<ArtWork> listArtistWorks(String login)
 	        throws loginNotRegisteredException, notAnArtistException, hasNoWorksException;
 
 	    /**
-	     * @param auctionId
-	     * @param workId
-	     * @return
-	     * @throws auctionIdNotRegisteredException
-	     * @throws workNotInAuctionException
-	     * @throws workHasNoBidsException
+		 * Lists the bids of a work with the given workId, in an auction with the given auctionId
+	     * @param auctionId id of the auction where the work is being auctioned
+	     * @param workId id of the work of which the bids are going to be listed
+	     * @return iterator with the bids of the work with the given id
+	     * @throws auctionIdNotRegisteredException if there are no auctions with the given id registered
+	     * @throws workNotInAuctionException if there is no work with the given id in the auction
+	     * @throws workHasNoBidsException if there haven't been any bids placed on the work with the given id
 	     */
 	    Iterator<Bid> listBidsWork(String auctionId, String workId)
 	        throws auctionIdNotRegisteredException, workNotInAuctionException, workHasNoBidsException;
 
 	    /**
-	     * @return
-	     * @throws noSoldWorkdsException
+		 * Return an Iterator with the sold works, ordered by the value they were sold
+	     * @return iterator of all registered works, ordered by their value
+	     * @throws noSoldWorkdsException if no works has been sold
 	     */
 	    Iterator<ArtWork> listWorksByValue()
 	        throws noSoldWorkdsException;
