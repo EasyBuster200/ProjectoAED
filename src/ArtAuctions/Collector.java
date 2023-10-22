@@ -47,4 +47,10 @@ public class Collector implements User {
 		ownedWorks.addLast(work);
 	}
 
+	@Override
+	public void addBid(Bid bid) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'addBid'");
+	}
+
 }

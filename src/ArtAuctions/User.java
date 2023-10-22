@@ -34,5 +34,7 @@ public interface User extends Serializable {
 	 * @pre work is not already in the users collection
 	 */
 	void addBoughtWork(ArtWork work);
+
+	void addBid(Bid bid);
 	
 }

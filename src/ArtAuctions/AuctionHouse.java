@@ -39,7 +39,7 @@ public interface AuctionHouse extends Serializable {
 	     * @throws loginNotRegisteredException when the login is not registered in the auction house
 	     */
 	    void removeUser(String login)
-	        throws loginNotRegisteredException;
+	        throws loginNotRegisteredException, userHasBidsException, artistHasWorksInAuction;
 
 	    /**
 	     * Registers a new art work in the auction house 

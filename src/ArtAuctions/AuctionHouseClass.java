@@ -52,15 +52,20 @@ public class AuctionHouseClass implements AuctionHouse {
 	}
 
 	@Override
-	public void removeUser(String login) throws loginNotRegisteredException {
+	public void removeUser(String login) throws loginNotRegisteredException, userHasBidsException, artistHasWorksInAuction {
 		//TODO: We have to check for the user having works in auction and/or being an artist and having works
 		User user = getUser(login);
 
 		if(user == null)
 			throw new loginNotRegisteredException();
 
-		else
-			users.remove(user);
+		//TODO? When an artist is removed, do we also remove any works from that artist that have been sold?
+		//TODO? What about normal collectors, what happens to the artWorks they have bought?
+
+		if (user instanceof Artist)
+			removeArtistPaintings((Artist) user);
+
+		users.remove(user);
 	}
 
 	@Override
@@ -278,6 +283,21 @@ public class AuctionHouseClass implements AuctionHouse {
 		}
 
 		return null;
+	}
+
+	private void removeArtistPaintings(Artist artist) {
+		Iterator<ArtWork> it = artist.worksIterator();
+
+		while (it.hasNext())
+			artWorks.remove(it.next());
+
+		//If we aren't meant to remove artWorks which have been sold the method would look something like 
+		/* while (it.hasNext()) {
+			ArtWork current = it.next();
+
+			if(!current.beenSold())
+				artWorks.remove(current);
+		} */
 	}
 
 }
