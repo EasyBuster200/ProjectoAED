@@ -8,10 +8,8 @@ public class Collector implements User {
 	private String login, name, email;
 	private int age;
 	private List<ArtWork> ownedWorks;
+	private List<Bid> bids;
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	public Collector(String login, String name, int age,String email) {
@@ -20,6 +18,7 @@ public class Collector implements User {
 		this.age = age;
 		this.email = email;
 		this.ownedWorks = new DoubleList<>();
+		this.bids = new DoubleList<>();
 	}
 
 	@Override
@@ -49,8 +48,12 @@ public class Collector implements User {
 
 	@Override
 	public void addBid(Bid bid) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'addBid'");
+		bids.addLast(bid);
+	}
+
+	@Override
+	public boolean hasBids() {
+		return !bids.isEmpty();
 	}
 
 }

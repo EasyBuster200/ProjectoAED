@@ -36,5 +36,7 @@ public interface User extends Serializable {
 	void addBoughtWork(ArtWork work);
 
 	void addBid(Bid bid);
+
+	boolean hasBids();
 	
 }

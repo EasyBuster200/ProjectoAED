@@ -25,4 +25,9 @@ public interface Artist extends User {
 	 * @return
 	 */
 	Iterator<ArtWork> worksIterator();
+
+	boolean hasWorksInAuction();
+
+	void workAddedToAuction();
+
 }
