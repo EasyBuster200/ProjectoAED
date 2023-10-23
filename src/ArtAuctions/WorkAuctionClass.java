@@ -9,16 +9,24 @@ public class WorkAuctionClass implements WorkAuction {
     private ArtWork work;
     private int minimumValue;
     private List<Bid> bids;
-    //TODO: Maybe save the highest bidder, updating when needed. This might make it easier to sell an artwork once the auction is closed
+    private Bid highestBid;
     
     public WorkAuctionClass(ArtWork work, int minimumValue) {
         this.work = work;
         this.minimumValue = minimumValue;
         this.bids = new DoubleList<>();
+        this.highestBid = null;
     }
 
     @Override
     public void addBid(Bid bid) {
+
+        if (highestBid == null)
+            highestBid = bid;
+
+        else if (highestBid.bidValue() < bid.bidValue())
+            highestBid = bid;
+
         bids.addLast(bid);
     }
 

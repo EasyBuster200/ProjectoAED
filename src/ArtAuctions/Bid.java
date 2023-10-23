@@ -21,4 +21,5 @@ public interface Bid extends Serializable {
      * @return login for the bidder
      */
     String biddersLogin();
+
 }
