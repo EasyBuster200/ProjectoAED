@@ -9,6 +9,7 @@ public class WorkAuctionClass implements WorkAuction {
     private ArtWork work;
     private int minimumValue;
     private List<Bid> bids;
+    //TODO: Maybe save the highest bidder, updating when needed. This might make it easier to sell an artwork once the auction is closed
     
     public WorkAuctionClass(ArtWork work, int minimumValue) {
         this.work = work;

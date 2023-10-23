@@ -9,6 +9,7 @@ public class AuctionClass implements Auction {
 	private String auctionId;
 	private List<WorkAuction> individualAuctions;
 	private List<ArtWork> auctionWorks;
+	//TODO: Maybe save the highest bidder, updating when needed. This might make it easier to sell an artwork once the auction is closed
 	
 	/**
 	 * 
@@ -96,5 +97,7 @@ public class AuctionClass implements Auction {
 
 		return null;
 	}
+
+	//TODO: Add a close auction, which will sell all the paintings 
 
 }
