@@ -30,7 +30,7 @@ public class Main {
     private static final String LIST_ARTIST_WORKS_BODY = "\n%s %s %d %d\n";
     private static final String LIST_BIDS_BODY = "\n%s %s %d\n";
     private static final String LIST_WORKS_VALUE_BODY = "\n%s %s %d %d %s %s\n";
-    private static final String QUIT_MSG = "Obrigado. Ate a proxima.";
+    private static final String QUIT_MSG = "\nObrigado. Ate a proxima.\n";
     
   
     private static final String ADD_USER = "adduser";
@@ -89,6 +89,8 @@ public class Main {
 	private static void addUser(Scanner in, AuctionHouse sys) {
         try {
              String login = in.next().strip();
+             
+             
              String name = in.nextLine().strip();
              int age = in.nextInt();
              String email = in.nextLine().strip();
@@ -312,6 +314,7 @@ public class Main {
    
    private static void save(AuctionHouse aH) {
 		try {
+			System.out.println("here");
 			ObjectOutputStream file = new ObjectOutputStream(new FileOutputStream(DATA_FILE));
 			file.writeObject(aH);
 			file.flush();
