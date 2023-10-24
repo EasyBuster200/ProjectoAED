@@ -52,14 +52,33 @@ public class AuctionHouseClass implements AuctionHouse {
 	}
 
 	@Override
-	public void removeUser(String login) throws loginNotRegisteredException {
+	public void removeUser(String login) throws loginNotRegisteredException, userHasBidsException, artistHasWorksInAuction {
+		//TODO: We have to check for the user having bids and/or being an artist and having works
 		User user = getUser(login);
 
 		if(user == null)
 			throw new loginNotRegisteredException();
 
-		else
+		else if (user.hasBids())
+			throw new userHasBidsException();
+
+		else if (user instanceof Artist) {
+			Artist artist = (Artist) user;
+
+			if (artist.hasWorksInAuction())
+				throw new artistHasWorksInAuction();
+
+			removeArtistPaintings(artist);
+			users.remove(artist);
+		}
+
+		else 
 			users.remove(user);
+
+		
+		//TODO? When an artist is removed, do we also remove any works from that artist that have been sold?
+		//TODO? What about normal collectors, what happens to the artWorks they have bought?
+
 	}
 
 	@Override
@@ -130,6 +149,7 @@ public class AuctionHouseClass implements AuctionHouse {
 	public void addWorkAuction(String auctionId, String workId, int minSellValue)
 			throws auctionIdNotRegisteredException, workIdNotRegisteredException {
 				
+			//TODO: Add a hasWorksInAuction boolean var, which we will set to true once an artists work is added to an auction 
 			Auction auction = getAuction(auctionId);
 
 			if(auction == null)
@@ -140,8 +160,7 @@ public class AuctionHouseClass implements AuctionHouse {
 			if (artWork == null)
 				throw new workIdNotRegisteredException();
 
-			artWork.setMinimumBidValue(minSellValue);
-			auction.addWorkAuction(artWork); 	
+			auction.addWorkAuction(artWork, minSellValue); 	
 		
 	}
 
@@ -164,15 +183,15 @@ public class AuctionHouseClass implements AuctionHouse {
 		if (work == null)
 			throw new workIdNotRegisteredException();
 
-		if (bidValue < work.minimumBidValue())
-			throw new valueUnderMinimumException();
+		if (bidValue < auction.getMinimumBidValue(work))
 
-		auction.addBid(new BidClass(bidValue, user));
+		auction.addBid(new BidClass(bidValue, user), work);
 		
 	}
 
 	@Override
 	public Iterator<ArtWork> closeAuction(String auctionId) throws auctionIdNotRegisteredException {
+		//TODO: We have to make sure once an auction is closed, the works are sold to the highest bidder
 		Auction auction = getAuction(auctionId);
 
 		if(auction == null)
@@ -233,7 +252,7 @@ public class AuctionHouseClass implements AuctionHouse {
 			if (work == null)
 				throw new workNotInAuctionException();
 
-			return work.bidsIterator();
+			return auction.getWorkBids(work);
 			
 	}
 
@@ -278,6 +297,21 @@ public class AuctionHouseClass implements AuctionHouse {
 		}
 
 		return null;
+	}
+
+	private void removeArtistPaintings(Artist artist) {
+		Iterator<ArtWork> it = artist.worksIterator();
+
+		while (it.hasNext())
+			artWorks.remove(it.next());
+
+		//If we aren't meant to remove artWorks which have been sold the method would look something like 
+		/* while (it.hasNext()) {
+			ArtWork current = it.next();
+
+			if(!current.beenSold())
+				artWorks.remove(current);
+		} */
 	}
 
 }

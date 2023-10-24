@@ -61,7 +61,6 @@ public class Main {
 
         while(!cmd.equalsIgnoreCase(QUIT)) {
     		switch(cmd) {
-    		    case QUIT -> quit();
     		    case ADD_USER -> addUser(in,aH);
     		    case ADD_ARTIST -> addArtist(in,aH);
     		    case REMOVE_USER -> removeUser(in,aH);
@@ -82,6 +81,8 @@ public class Main {
     		System.out.println();
     		cmd = in.next().toLowerCase();
     	}
+        in.close();
+        quit();
     	save(aH);
     }
 
@@ -324,14 +325,12 @@ public class Main {
 		}
 	}
    
-   private static Object listWorksByValue(Scanner in, AuctionHouse aH) {
+   private static void listWorksByValue(Scanner in, AuctionHouse aH) {
 		// TODO Auto-generated method stub
-		return null;
 	}
    
    
    
 }
 //TODO: The save method is saving the AuctionHouseClass object, but its not saving anything inside it?
-//TODO? Can one piece of art be in more than one auction at the same time?
 //TODO: Review and finish comments on interfaces

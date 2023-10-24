@@ -1,15 +1,15 @@
 package ArtAuctions;
 
+import dataStructures.DoubleList;
 import dataStructures.Iterator;
+import dataStructures.List;
 
 public class ArtistClass extends Collector implements Artist {
-
-	private static final int DEFAULT_SIZE = 50;
 	
 	private String artisticName;
-	private ArtWork[] artWorks;
+	private List<ArtWork> artWorks;
 	private int size;
-
+	private boolean hasWorksInAuction;
 
 	/**
 	 * 
@@ -19,8 +19,9 @@ public class ArtistClass extends Collector implements Artist {
 	public ArtistClass(String login, String name, int age,String email,String artisticName) {		
 		super(login, name, age, email);
 		this.artisticName = artisticName;
-		this.artWorks = new ArtWork[DEFAULT_SIZE];
+		this.artWorks = new DoubleList<>();
 		this.size = 0;
+		this.hasWorksInAuction = false;
 	}
 
 	@Override
@@ -30,7 +31,7 @@ public class ArtistClass extends Collector implements Artist {
 
 	@Override
 	public void addNewArtWork(ArtWork work) {
-		artWorks[size++] = work;
+		artWorks.addLast(work);
 	}
 
 	@Override
@@ -40,11 +41,17 @@ public class ArtistClass extends Collector implements Artist {
 
 	@Override
 	public Iterator<ArtWork> worksIterator() {
-		// TODO Auto-generated method stub
-		//Maybe make an array iterator, to iterate the artworks
-		throw new UnsupportedOperationException("Unimplemented method 'worksIterator'");
+		return artWorks.iterator();
 	}
 
-	//TODO: add isFull and grow methods for the array, or even change it from being an array
+	@Override
+	public boolean hasWorksInAuction() {
+		return hasWorksInAuction;
+	}
+
+	@Override
+	public void workAddedToAuction() {
+		hasWorksInAuction = true;
+	}
 
 }

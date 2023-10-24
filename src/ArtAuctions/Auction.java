@@ -1,7 +1,6 @@
 package ArtAuctions;
 
 import java.io.Serializable;
-
 import Exceptions.noWorksAuctionException;
 import dataStructures.Iterator;
 
@@ -17,13 +16,13 @@ public interface Auction extends Serializable {
 	 * Adds a new work to the auction
 	 * @param artwork - the art work to be added.
 	 */
-	void addWorkAuction(ArtWork artwork);
+	void addWorkAuction(ArtWork artwork, int minimumValue);
 	
 	/**
 	 * Adds a bid to the given ark work.
 	 * @param bid - the bid to be added.
 	 */
-	void addBid(Bid bid);
+	void addBid(Bid bid, ArtWork work);
 
 	/**
 	 * @return
@@ -41,5 +40,9 @@ public interface Auction extends Serializable {
 	 * @return
 	 */
 	ArtWork getWork(String workId);
+
+	Iterator<Bid> getWorkBids(ArtWork work);
+
+    int getMinimumBidValue(ArtWork work);
 
 }

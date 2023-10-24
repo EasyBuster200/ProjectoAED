@@ -2,54 +2,47 @@ package ArtAuctions;
 
 import java.io.Serializable;
 
-import Exceptions.workHasNoBidsException;
-import dataStructures.Iterator;
-
-/**
- * @author lipyc
- *
- */
 public interface ArtWork  extends Serializable {
 	
 	/**
 	 * Return the id of the art work.
-	 * @return workId.
+	 * @return work Id.
 	 */
 	String workId();
 	
 	/**
 	 * Return the name of the art work:
-	 * @return name.
+	 * @return work name.
 	 */
 	String name();
 
 	/**
 	 * Return the year of the creation of the art work.
-	 * @return year.
+	 * @return year created.
 	 */
 	int year();
 	
 	/**
 	 * Returns the last auction price of the art work.
-	 * @return lastAuctionPrice.
+	 * @return last price the piece was auctioned for
 	 */
 	int lastAuctionPrice();
 	
 	/**
 	 * Sets the new auction price of the art work.
-	 * @param auctionPrice
+	 * @param auctionPrice the lattest value the piece was bid for.
 	 */
 	void newAuctionPrice(int auctionPrice);
 	
 	/**
 	 * Returns the login of the author of the art work.
-	 * @return autorLogin.
+	 * @return author login.
 	 */
 	String authorLogin();
 	
 	/**
 	 * Returns the name of the author of the art work.
-	 * @return - author name
+	 * @return author name
 	 */
 	String authorName();
 	
@@ -62,7 +55,7 @@ public interface ArtWork  extends Serializable {
 	
 	/**
 	 * Returns a String with buyers login.
-	 * @return buyerLogin.
+	 * @return buyer login.
 	 */
 	String buyerLogin();
 	
@@ -79,22 +72,9 @@ public interface ArtWork  extends Serializable {
 	int highestSoldValue();
 
 	/**
-	 * Return an integer with the minimum value for a bid place on the art work
-	 * @return minimum auction value for the piece
-	 */
-	int minimumBidValue();
-
-	/**
 	 * Sets the highest value the work has been sold for in auction
-	 * @param new highest value the art work was sold for 
+	 * @param newHighestValue > highestSoldValue() 
 	 */
 	void setHighestSoldValue(int newHighestSoldValue);
 
-	/**
-	 * Sets the minimum bid value for the art work 
-	 * @param newMinimumBidValue - new minimum value for a bid
-	 */
-	void setMinimumBidValue(int newMinimumBidValue);
-
-    Iterator<Bid> bidsIterator() throws workHasNoBidsException;
 }
