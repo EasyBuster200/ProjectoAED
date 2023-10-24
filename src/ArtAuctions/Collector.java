@@ -7,8 +7,8 @@ public class Collector implements User {
 
 	private String login, name, email;
 	private int age;
-	private List<ArtWork> ownedWorks;
 	private List<Bid> bids;
+	//TODO: There's gotta be a better way to know if a given user has open bids
 
 	private static final long serialVersionUID = 1L;
 
@@ -17,7 +17,6 @@ public class Collector implements User {
 		this.name = name;
 		this.age = age;
 		this.email = email;
-		this.ownedWorks = new DoubleList<>();
 		this.bids = new DoubleList<>();
 	}
 
@@ -39,11 +38,6 @@ public class Collector implements User {
 	@Override
 	public String email() {
 		return this.email;
-	}
-
-	@Override
-	public void addBoughtWork(ArtWork work) {
-		ownedWorks.addLast(work);
 	}
 
 	@Override

@@ -231,7 +231,7 @@ public class Main {
                 ArtWork a = it.next();
 
                 if (a.beenSold())
-                    System.out.printf(AUCTION_CLOSED_BODY_SOLD, a.workId(), a.name(), a.buyerLogin(), a.buyerName(), a.lastAuctionPrice()); //TODO: Depends if the last auction price was the one it sold for
+                    System.out.printf(AUCTION_CLOSED_BODY_SOLD, a.workId(), a.name(), a.buyerLogin(), a.buyerName(), a.lastAuctionPrice());
 
                 else    
                     System.out.printf(AUCTION_CLOSE_BODY_NOT_SOLD, a.workId(), a.name());
@@ -330,4 +330,5 @@ public class Main {
    
 }
 //TODO: The save method is saving the AuctionHouseClass object, but its not saving anything inside it?
-//TODO: Review and finish comments on interfaces
+//TODO: Review and finish comments on 
+//TODO? When an auction is closed, if an artWork is in another auction what happens? Does it get sold twice? or to the highest bidder of both auctions? or just gets removed from any other auction? Tecnicamente acaba por n interessar, pois n temos de saber as obras q uma dada pessoa tem a qqlr instante.

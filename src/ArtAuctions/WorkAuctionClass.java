@@ -50,4 +50,12 @@ public class WorkAuctionClass implements WorkAuction {
         return minimumValue;
     }
 
+    @Override
+    public void closeAuction() {
+        if (work.highestSoldValue() < highestBid.bidValue())
+            work.setHighestSoldValue(highestBid.bidValue());
+
+        work.setLastSoldPrice(highestBid.bidValue());
+    }
+
 }

@@ -83,4 +83,9 @@ public class ArtWorkClass implements ArtWork {
 		this.highestSoldValue = newHighestSoldValue;
 	}
 
+	@Override
+	public void setLastSoldPrice(int newLastSoldPrice) {
+		this.lastAuctionPrice = newLastSoldPrice;
+	}
+
 }

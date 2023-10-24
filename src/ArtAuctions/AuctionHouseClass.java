@@ -183,7 +183,8 @@ public class AuctionHouseClass implements AuctionHouse {
 		if (work == null)
 			throw new workIdNotRegisteredException();
 
-		if (bidValue < auction.getMinimumBidValue(work))
+		if (bidValue < auction.getMinimumBidValue(work)) //TODO: Maybe I could get the WorkAuction here, from the auction and add the bid directly, cus this way we do .getAuction() twice on the AuctionClass
+			throw new valueUnderMinimumException();
 
 		auction.addBid(new BidClass(bidValue, user), work);
 		
@@ -198,8 +199,8 @@ public class AuctionHouseClass implements AuctionHouse {
 			throw new auctionIdNotRegisteredException();
 
 		Iterator<ArtWork> it = auction.worksIterator();
+		auction.closeAuction();
 		auctions.remove(auction);
-
 		return it;
 	}
 
