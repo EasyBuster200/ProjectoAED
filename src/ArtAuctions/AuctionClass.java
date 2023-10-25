@@ -83,6 +83,14 @@ public class AuctionClass implements Auction {
 		return individualAuction.minimumBidValue();
 	}
 
+	@Override
+	public void closeAuction() {
+		Iterator<WorkAuction> it = individualAuctions.iterator();
+
+		while (it.hasNext())
+			it.next().closeAuction();
+	}
+	
 	private WorkAuction getAuction(ArtWork work) {
 		Iterator<WorkAuction> it = individualAuctions.iterator();
 
@@ -96,7 +104,5 @@ public class AuctionClass implements Auction {
 
 		return null;
 	}
-
-	//TODO: Add a close auction, which will sell all the paintings 
 
 }

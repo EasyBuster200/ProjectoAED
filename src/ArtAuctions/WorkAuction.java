@@ -31,4 +31,6 @@ public interface WorkAuction extends Serializable {
      * @return
      */
     int minimumBidValue();
+
+    void closeAuction();
 }

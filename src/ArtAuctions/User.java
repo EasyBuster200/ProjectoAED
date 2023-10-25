@@ -28,13 +28,6 @@ public interface User extends Serializable {
 	 */
 	String email();
 
-	/**
-	 * Adds the given art work to the users collection of bought artWorks
-	 * @param work work to be added
-	 * @pre work is not already in the users collection
-	 */
-	void addBoughtWork(ArtWork work);
-
 	void addBid(Bid bid);
 
 	boolean hasBids();
