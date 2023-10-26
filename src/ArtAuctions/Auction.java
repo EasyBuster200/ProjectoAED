@@ -59,7 +59,6 @@ public interface Auction extends Serializable {
      */
     int getMinimumBidValue(ArtWork work);
 
-    
 	/**
 	 *Closes this auction 
 	 */

@@ -321,7 +321,7 @@ public class Main {
 			file.flush();
 			file.close();
 		}catch(IOException e) {
-			System.out.println("input output exception");
+			//System.out.println("input output exception");
 		}
 	}
    
@@ -335,3 +335,4 @@ public class Main {
 //TODO: The save method is saving the AuctionHouseClass object, but its not saving anything inside it?
 //TODO: Review and finish comments on 
 //TODO? When an auction is closed, if an artWork is in another auction what happens? Does it get sold twice? or to the highest bidder of both auctions? or just gets removed from any other auction? Tecnicamente acaba por n interessar, pois n temos de saber as obras q uma dada pessoa tem a qqlr instante.
+//TODO! When running the third add in the first test something is going wrong, literally nothing happens
