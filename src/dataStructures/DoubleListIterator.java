@@ -94,7 +94,6 @@ class DoubleListIterator<E> implements TwoWayIterator<E>
         return element;
     }
 
-
     @Override
     public E previous( ) throws NoSuchElementException
     {

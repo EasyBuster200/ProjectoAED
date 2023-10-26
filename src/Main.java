@@ -57,10 +57,12 @@ public class Main {
     	
     	Scanner in = new Scanner(System.in);
     	AuctionHouse aH = load();
-    	String cmd = in.next().toLowerCase();
+    	String cmd;
 
-        while(!cmd.equalsIgnoreCase(QUIT)) {
-    		switch(cmd) {
+        do {
+    		cmd = in.next().toLowerCase();
+    		
+            switch(cmd) {
     		    case ADD_USER -> addUser(in,aH);
     		    case ADD_ARTIST -> addArtist(in,aH);
     		    case REMOVE_USER -> removeUser(in,aH);
@@ -79,19 +81,18 @@ public class Main {
     		}
 
     		System.out.println();
-    		cmd = in.next().toLowerCase();
-    	}
-        in.close();
-        quit();
+
+    	} while(!cmd.equals(QUIT)) 
+
     	save(aH);
+        quit();
+        in.close();
     }
 
 
 	private static void addUser(Scanner in, AuctionHouse sys) {
         try {
              String login = in.next().strip();
-             
-             
              String name = in.nextLine().strip();
              int age = in.nextInt();
              String email = in.nextLine().strip();

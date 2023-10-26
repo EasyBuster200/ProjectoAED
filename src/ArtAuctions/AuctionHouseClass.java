@@ -256,7 +256,7 @@ public class AuctionHouseClass implements AuctionHouse {
 			return auction.getWorkBids(work);
 			
 	}
-
+	
 	@Override
 	public Iterator<ArtWork> listWorksByValue() throws noSoldWorkdsException {
 		return null;
