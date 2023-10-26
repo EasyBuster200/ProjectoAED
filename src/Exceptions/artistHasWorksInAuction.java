@@ -1,4 +1,4 @@
-package ArtAuctions;
+package Exceptions;
 
 public class artistHasWorksInAuction extends Exception {
     public artistHasWorksInAuction() {

@@ -77,6 +77,10 @@ public interface ArtWork  extends Serializable {
 	 */
 	void setHighestSoldValue(int newHighestSoldValue);
 
+	/**
+	 * Sets the last sold price of this artWork
+	 * @param newLastSoldPrice
+	 */
 	void setLastSoldPrice(int newLastSoldPrice);
 
 }

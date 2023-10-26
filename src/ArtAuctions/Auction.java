@@ -25,26 +25,44 @@ public interface Auction extends Serializable {
 	void addBid(Bid bid, ArtWork work);
 
 	/**
-	 * @return
-	 */
+     * Check if this Auction has no works 
+     * @return <code>true</code> if this Auction is empty
+     * <code>false</code> otherwise
+     */
 	boolean hasNoWorks();
 
     /**
-     * @return
+     * Returns an iterator for the works
+     * @return worksIterator
      * @throws noWorksAuctionException
      */
     Iterator<ArtWork> worksIterator();
 
 	/**
-	 * @param workId
-	 * @return
+	 * Return the artWork with the given correspondent id
+	 * @param workId - id of the work to be returned
+	 * @return artWork with the correspondent id
 	 */
 	ArtWork getWork(String workId);
 
+	/**
+	 * Returns a bid iterator of the given work
+	 * @param work with the iterator
+	 * @return the work bid iterator
+	 */
 	Iterator<Bid> getWorkBids(ArtWork work);
 
+    /**
+     * Return the minimum value of the given work
+     * @param work with minimum value
+     * @return the work minimum value
+     */
     int getMinimumBidValue(ArtWork work);
 
+    
+	/**
+	 *Closes this auction 
+	 */
 	void closeAuction();
 
 }

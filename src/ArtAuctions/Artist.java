@@ -6,7 +6,7 @@ public interface Artist extends User {
 	
 	/**
 	 * Returns the artistic name of the artist.
-	 * @return
+	 * @return the artistic name
 	 */
 	String artisticName();
 	
@@ -17,17 +17,22 @@ public interface Artist extends User {
 	void addNewArtWork(ArtWork work);
 
 	/**
-	 * @return
-	 */
+     * Check if this Artist has no works 
+     * @return <code>true</code> if this Artist has works
+     * <code>false</code> otherwise
+     */
 	boolean hasWorks();
 
 	/**
-	 * @return
+	 * Return a the artWorks iterator
+	 * @return artWork Iterator 
 	 */
 	Iterator<ArtWork> worksIterator();
 
+	
 	boolean hasWorksInAuction();
 
+	
 	void workAddedToAuction();
 
 }

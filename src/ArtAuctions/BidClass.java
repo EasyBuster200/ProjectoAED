@@ -17,17 +17,17 @@ public class BidClass implements Bid {
 
 	@Override
 	public int bidValue() {
-		return bidValue;
+		return this.bidValue;
 	}
 
 	@Override
 	public String biddersName() {
-		return bidder.name();
+		return this.bidder.name();
 	}
 
 	@Override
 	public String biddersLogin() {
-		return bidder.login();
+		return this.bidder.login();
 	}
 
 }

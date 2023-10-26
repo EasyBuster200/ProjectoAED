@@ -6,6 +6,8 @@ import dataStructures.List;
 
 public class WorkAuctionClass implements WorkAuction {
 
+    private static final long serialVersionUID = 1L;
+	
     private ArtWork work;
     private int minimumValue;
     private List<Bid> bids;
@@ -22,40 +24,40 @@ public class WorkAuctionClass implements WorkAuction {
     public void addBid(Bid bid) {
 
         if (highestBid == null)
-            highestBid = bid;
+           this.highestBid = bid;
 
         else if (highestBid.bidValue() < bid.bidValue())
-            highestBid = bid;
+            this.highestBid = bid;
 
-        bids.addLast(bid);
+       this.bids.addLast(bid);
     }
 
     @Override
     public Iterator<Bid> bidsIterator() {
-        return bids.iterator();
+        return this.bids.iterator();
     }
 
     @Override
     public boolean hasBids() {
-        return !bids.isEmpty();
+        return !this.bids.isEmpty();
     }
 
     @Override
     public ArtWork getWork() {
-        return work;
+        return this.work;
     }
 
     @Override
     public int minimumBidValue() {
-        return minimumValue;
+        return this.minimumValue;
     }
 
     @Override
     public void closeAuction() {
-        if (work.highestSoldValue() < highestBid.bidValue())
-            work.setHighestSoldValue(highestBid.bidValue());
+        if (this.work.highestSoldValue() < this.highestBid.bidValue())
+            this.work.setHighestSoldValue(this.highestBid.bidValue());
 
-        work.setLastSoldPrice(highestBid.bidValue());
+        this.work.setLastSoldPrice(this.highestBid.bidValue());
     }
 
 }

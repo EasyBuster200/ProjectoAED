@@ -75,7 +75,7 @@ public class ArtWorkClass implements ArtWork {
 
 	@Override
 	public int highestSoldValue() {
-		return highestSoldValue;
+		return this.highestSoldValue;
 	}
 
 	@Override

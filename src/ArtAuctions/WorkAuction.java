@@ -18,19 +18,28 @@ public interface WorkAuction extends Serializable {
     Iterator<Bid> bidsIterator();
 
     /**
-     * @return
+     * Check if this workAuction has any bids
+     * @return <code>true</code> if this workAuction has bids
+     * <code>false</code> otherwise
      */
     boolean hasBids();
 
     /**
-     * @return
+     * Return the work of this work auction.
+     * @return auction artWork  
      */
     ArtWork getWork();
 
     /**
+     * Returns the minimum acceptable bid value in this workAuction
      * @return
      */
     int minimumBidValue();
 
+    
+    /**
+     * Closes this workAuction and sets the last sold price
+     * of in this workAuction
+     */
     void closeAuction();
 }

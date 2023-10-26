@@ -31,27 +31,28 @@ public class ArtistClass extends Collector implements Artist {
 
 	@Override
 	public void addNewArtWork(ArtWork work) {
-		artWorks.addLast(work);
+		this.artWorks.addLast(work);
 	}
 
 	@Override
 	public boolean hasWorks() {
-		return size != 0;
+		return this.size != 0;
 	}
 
 	@Override
 	public Iterator<ArtWork> worksIterator() {
-		return artWorks.iterator();
+		return this.artWorks.iterator();
 	}
 
 	@Override
 	public boolean hasWorksInAuction() {
-		return hasWorksInAuction;
+		return this.hasWorksInAuction;
 	}
 
 	@Override
 	public void workAddedToAuction() {
-		hasWorksInAuction = true;
+		this.hasWorksInAuction = true;
 	}
+
 
 }

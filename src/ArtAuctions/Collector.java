@@ -42,12 +42,12 @@ public class Collector implements User {
 
 	@Override
 	public void addBid(Bid bid) {
-		bids.addLast(bid);
+		this.bids.addLast(bid);
 	}
 
 	@Override
 	public boolean hasBids() {
-		return !bids.isEmpty();
+		return !this.bids.isEmpty();
 	}
 
 }
