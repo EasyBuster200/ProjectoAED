@@ -82,7 +82,7 @@ public class Main {
 
     		System.out.println();
 
-    	} while(!cmd.equals(QUIT)) 
+    	} while(!cmd.equals(QUIT));
 
     	save(aH);
         quit();
