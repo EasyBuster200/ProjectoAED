@@ -271,7 +271,6 @@ public class AuctionHouseClass implements AuctionHouse {
 			if(current.login().equalsIgnoreCase(login))
 				return current;
 		}
-		//TODO: Iterator runs infinetly ???
 
 		return null;
 	}

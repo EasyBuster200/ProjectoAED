@@ -89,7 +89,7 @@ class DoubleListIterator<E> implements TwoWayIterator<E>
             throw new NoSuchElementException();
 
         E element = nextToReturn.getElement();
-        prevToReturn = nextToReturn.getPrevious();
+        prevToReturn = nextToReturn;
         nextToReturn = nextToReturn.getNext();
         return element;
     }

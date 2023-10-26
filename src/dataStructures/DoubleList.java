@@ -277,7 +277,7 @@ public class DoubleList<E> implements List<E>
     @Override
     public void addLast( E element )
     {
-    	DoubleListNode<E> newNode = new DoubleListNode<E>(element,null,tail);
+    	DoubleListNode<E> newNode = new DoubleListNode<E>(element,tail, null);
     	if(this.isEmpty())
     		head = newNode;
     	else 
