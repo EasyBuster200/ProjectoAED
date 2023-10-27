@@ -2,7 +2,7 @@ package ArtAuctions;
 
 import java.io.Serializable;
 
-public interface ArtWork  extends Serializable {
+public interface ArtWork extends Serializable {
 	
 	/**
 	 * Return the id of the art work.
