@@ -15,7 +15,7 @@ import dataStructures.Iterator;
 public class Main {
     private static final String USER_REGISTERED = "\nRegisto de utilizador executado.";
     private static final String ARTIST_REGISTERED = "\nRegisto de artista executado.";
-    private static final String USER_REMOVED = "\nRemocao de utilizador executada";
+    private static final String USER_REMOVED = "\nRemocao de utilizador executada.";
     private static final String WORK_REGISTERED = "\nRegisto de obra executado.";
     private static final String INFO_USER_BODY = "\n%s %s %d %s\n";
     private static final String INFO_ARTIST_BODY = "\n%s %s %s %d %s\n";
@@ -30,7 +30,7 @@ public class Main {
     private static final String LIST_ARTIST_WORKS_BODY = "\n%s %s %d %d\n";
     private static final String LIST_BIDS_BODY = "\n%s %s %d\n";
     private static final String LIST_WORKS_VALUE_BODY = "\n%s %s %d %d %s %s\n";
-    private static final String QUIT_MSG = "\nObrigado. Ate a proxima.\n";
+    private static final String QUIT_MSG = "Obrigado. Ate a proxima.\n";
     
   
     private static final String ADD_USER = "adduser";
@@ -316,7 +316,6 @@ public class Main {
    
    private static void save(AuctionHouse aH) {
 		try {
-			System.out.println("here");
 			ObjectOutputStream file = new ObjectOutputStream(new FileOutputStream(DATA_FILE));
 			file.writeObject(aH);
 			file.flush();
