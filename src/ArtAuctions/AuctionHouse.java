@@ -110,10 +110,11 @@ public interface AuctionHouse extends Serializable {
 	     * @throws valueUnderMinimumException when the value proposal is bellow the minimum sale value of the artwork
 	     * @throws auctionIdNotRegisteredException when the id of the auction is not registered
 	     * @throws loginNotRegisteredException when the login of the user is not registered
+	     * @throws workNotInAuctionException
 	     * @throws workIdNotRegisteredException when the id of the work is not registered 
 	     */
 	    void bid(String auctionId, String workId, String login, int value)
-	        throws valueUnderMinimumException, auctionIdNotRegisteredException, loginNotRegisteredException, workIdNotRegisteredException;
+	        throws valueUnderMinimumException, auctionIdNotRegisteredException, loginNotRegisteredException, workNotInAuctionException;
 
 	    /**
 		 * Closes an open auction, and returns an Iterator with the art works in the now closed auction

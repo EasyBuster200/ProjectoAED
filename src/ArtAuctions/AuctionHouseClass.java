@@ -166,7 +166,7 @@ public class AuctionHouseClass implements AuctionHouse {
 
 	@Override
 	public void bid(String auctionId, String workId, String login, int bidValue) 
-		throws valueUnderMinimumException, auctionIdNotRegisteredException, loginNotRegisteredException, workIdNotRegisteredException {
+		throws valueUnderMinimumException, auctionIdNotRegisteredException, loginNotRegisteredException, workNotInAuctionException {
 			
 		User user = getUser(login);
 	
@@ -181,9 +181,12 @@ public class AuctionHouseClass implements AuctionHouse {
 		ArtWork work = getWork(workId);
 
 		if (work == null)
-			throw new workIdNotRegisteredException();
+			throw new workNotInAuctionException();
 
-		if (bidValue < auction.getMinimumBidValue(work)) //TODO: Maybe I could get the WorkAuction here, from the auction and add the bid directly, cus this way we do .getAuction() twice on the AuctionClass
+		else if (auction.getWork(workId) == null)
+			throw new workNotInAuctionException();
+
+		if (bidValue < auction.getMinimumBidValue(work))
 			throw new valueUnderMinimumException();
 
 		auction.addBid(new BidClass(bidValue, user), work);
@@ -250,7 +253,7 @@ public class AuctionHouseClass implements AuctionHouse {
 
 			ArtWork work = auction.getWork(workId); 
 
-			if (work == null)
+			if (work == null)	
 				throw new workNotInAuctionException();
 
 			return auction.getWorkBids(work);

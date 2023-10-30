@@ -228,7 +228,7 @@ public class Main {
             String auctionId = in.nextLine().strip();
 
             Iterator<ArtWork> it = sys.closeAuction(auctionId);
-            System.out.println(AUCTION_CLOSED);
+            System.out.print(AUCTION_CLOSED);
 
             while (it.hasNext()) {
                 ArtWork a = it.next();
@@ -239,6 +239,8 @@ public class Main {
                 else    
                     System.out.printf(AUCTION_CLOSE_BODY_NOT_SOLD, a.workId(), a.name());
             }
+
+            System.out.println();
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -334,5 +336,5 @@ public class Main {
    
    
 }
-//TODO: The save method is saving the AuctionHouseClass object, but its not saving anything inside it?
-//TODO: Review and finish comments on 
+//TODO: Review and finish comments on all files
+//TODO: Make sure all the exceptions are capitalized
