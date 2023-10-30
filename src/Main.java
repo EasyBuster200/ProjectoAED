@@ -113,8 +113,11 @@ public class Main {
             int age = in.nextInt();
             String email = in.nextLine().strip();
 
+            if (login.equals("amberperry"))
+                System.out.print("Hello");
+
             sys.addArtist(login, name, artisticName, age, email);
-            System.out.println(ARTIST_REGISTERED);
+            System.out.println(ARTIST_REGISTERED + login);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -321,7 +324,7 @@ public class Main {
 			file.flush();
 			file.close();
 		}catch(IOException e) {
-			//System.out.println("input output exception");
+			System.out.println("input output exception");
 		}
 	}
    

@@ -11,9 +11,9 @@ public class AuctionHouseClass implements AuctionHouse {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private static DoubleList<User> users;
-	private static DoubleList<ArtWork> artWorks;
-	private static DoubleList<Auction> auctions;
+	private DoubleList<User> users;
+	private DoubleList<ArtWork> artWorks;
+	private DoubleList<Auction> auctions;
 
 	private static final int LEGAL_AGE = 18;
 
