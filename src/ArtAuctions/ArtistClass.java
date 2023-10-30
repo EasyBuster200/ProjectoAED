@@ -8,8 +8,7 @@ public class ArtistClass extends Collector implements Artist {
 	
 	private String artisticName;
 	private List<ArtWork> artWorks;
-	private int size;
-	private boolean hasWorksInAuction;
+	private int worksInAuction;
 
 	/**
 	 * 
@@ -20,8 +19,7 @@ public class ArtistClass extends Collector implements Artist {
 		super(login, name, age, email);
 		this.artisticName = artisticName;
 		this.artWorks = new DoubleList<>();
-		this.size = 0;
-		this.hasWorksInAuction = false;
+		this.worksInAuction = 0;
 	}
 
 	@Override
@@ -36,7 +34,7 @@ public class ArtistClass extends Collector implements Artist {
 
 	@Override
 	public boolean hasWorks() {
-		return this.size != 0;
+		return artWorks.size() != 0;
 	}
 
 	@Override
@@ -46,12 +44,17 @@ public class ArtistClass extends Collector implements Artist {
 
 	@Override
 	public boolean hasWorksInAuction() {
-		return this.hasWorksInAuction;
+		return this.worksInAuction != 0;
 	}
 
 	@Override
 	public void workAddedToAuction() {
-		this.hasWorksInAuction = true;
+		this.worksInAuction++;
+	}
+
+	@Override
+	public void workRemovedFromAuction() {
+		this.worksInAuction--;
 	}
 
 

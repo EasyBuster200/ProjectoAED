@@ -20,13 +20,13 @@ public class Main {
     private static final String INFO_USER_BODY = "\n%s %s %d %s\n";
     private static final String INFO_ARTIST_BODY = "\n%s %s %s %d %s\n";
     private static final String INFO_WORK_BODY = "\n%s %s %d %d %s %s\n";
-    private static final String AUCTION_REGISTERED = "\nRegisto de leilao executado";
-    private static final String WORK_ADDED_AUCTION = "\nObra adicionada leilao.";
+    private static final String AUCTION_REGISTERED = "\nRegisto de leilao executado.";
+    private static final String WORK_ADDED_AUCTION = "\nObra adicionada ao leilao.";
     private static final String BID_PLACED = "\nProposta aceite.";
     private static final String AUCTION_CLOSED = "\nLeilao encerrado.";
     private static final String AUCTION_CLOSED_BODY_SOLD = "\n%s %s %s %s %d\n";
     private static final String AUCTION_CLOSE_BODY_NOT_SOLD = "\n%s %s sem propostas de venda.";
-    private static final String LIST_AUCTION_WORKS_BODY = "\n%s %s %d %d %s %s\n";
+    private static final String LIST_AUCTION_WORKS_BODY = "\n%s %s %d %d %s %s";
     private static final String LIST_ARTIST_WORKS_BODY = "\n%s %s %d %d\n";
     private static final String LIST_BIDS_BODY = "\n%s %s %d\n";
     private static final String LIST_WORKS_VALUE_BODY = "\n%s %s %d %d %s %s\n";
@@ -113,11 +113,8 @@ public class Main {
             int age = in.nextInt();
             String email = in.nextLine().strip();
 
-            if (login.equals("amberperry"))
-                System.out.print("Hello");
-
             sys.addArtist(login, name, artisticName, age, email);
-            System.out.println(ARTIST_REGISTERED + login);
+            System.out.println(ARTIST_REGISTERED);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -140,7 +137,7 @@ public class Main {
             String workId = in.next().strip();
             String authorLogin = in.next().strip();
             int year = in.nextInt();
-            String name = in.nextLine();
+            String name = in.nextLine().strip();
 
             sys.addWork(workId, authorLogin, year, name);
             System.out.println(WORK_REGISTERED);
@@ -259,6 +256,8 @@ public class Main {
 
                 System.out.printf(LIST_AUCTION_WORKS_BODY, a.workId(), a.name(), a.year(), a.highestSoldValue(), a.authorLogin(), a.authorName());
             }
+            
+            System.out.println();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

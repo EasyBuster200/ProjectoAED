@@ -387,7 +387,7 @@ public class DoubleList<E> implements List<E>
     {
     	node.getPrevious().setNext(node.getNext());
     	node.getNext().setPrevious(node.getPrevious());
-    	this.remove(node.getElement());
+        currentSize--;
 
     }
 
@@ -425,7 +425,7 @@ public class DoubleList<E> implements List<E>
     	DoubleListNode<E> node = null;
     	int notFound = -1;
     	
-    	if(!(this.find(element)==(notFound))) {
+    	if(!(this.find(element )== (notFound))) {
     		node = this.getNode(this.find(element));
     	}
 

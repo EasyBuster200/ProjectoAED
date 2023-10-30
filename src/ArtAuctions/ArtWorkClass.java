@@ -88,4 +88,16 @@ public class ArtWorkClass implements ArtWork {
 		this.lastAuctionPrice = newLastSoldPrice;
 	}
 
+	@Override
+	public void addedToAuction() {
+		author.workAddedToAuction();
+	}
+
+	@Override
+	public void removedFromAuction() {
+		author.workRemovedFromAuction();
+	}
+
+	
+
 }

@@ -83,4 +83,8 @@ public interface ArtWork extends Serializable {
 	 */
 	void setLastSoldPrice(int newLastSoldPrice);
 
+	void addedToAuction();
+
+	void removedFromAuction();
+
 }

@@ -35,4 +35,6 @@ public interface Artist extends User {
 	
 	void workAddedToAuction();
 
+	void workRemovedFromAuction();
+
 }

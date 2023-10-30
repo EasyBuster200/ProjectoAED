@@ -268,7 +268,7 @@ public class AuctionHouseClass implements AuctionHouse {
 		while(it.hasNext()) {
 			User current = it.next();
 
-			if(current.login().equalsIgnoreCase(login))
+			if(current.login().equalsIgnoreCase(login)) 
 				return current;
 		}
 

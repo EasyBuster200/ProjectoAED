@@ -18,6 +18,7 @@ public class WorkAuctionClass implements WorkAuction {
         this.minimumValue = minimumValue;
         this.bids = new DoubleList<>();
         this.highestBid = null;
+        this.work.addedToAuction();
     }
 
     @Override
@@ -54,10 +55,14 @@ public class WorkAuctionClass implements WorkAuction {
 
     @Override
     public void closeAuction() {
-        if (this.work.highestSoldValue() < this.highestBid.bidValue())
+        if (!bids.isEmpty()) {
+            if (this.work.highestSoldValue() < this.highestBid.bidValue())
             this.work.setHighestSoldValue(this.highestBid.bidValue());
 
-        this.work.setLastSoldPrice(this.highestBid.bidValue());
+            this.work.setLastSoldPrice(this.highestBid.bidValue());
+        }
+        
+        this.work.removedFromAuction();
     }
 
 }
