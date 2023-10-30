@@ -1,5 +1,6 @@
 package ArtAuctions;
 
+import Exceptions.workHasNoBidsException;
 import dataStructures.DoubleList;
 import dataStructures.Iterator;
 import dataStructures.List;
@@ -63,15 +64,18 @@ public class AuctionClass implements Auction {
 	}
 
 	@Override
-	public Iterator<Bid> getWorkBids(ArtWork work) {
+	public Iterator<Bid> getWorkBids(ArtWork work) throws workHasNoBidsException {
 		Iterator<WorkAuction> it = individualAuctions.iterator();
 
 		while(it.hasNext()) {
 			WorkAuction current = it.next();
 			ArtWork currentWork = current.getWork();
 
-			if(currentWork.workId().equalsIgnoreCase(work.workId()))
+			if(currentWork.workId().equalsIgnoreCase(work.workId())) {
+				if (!current.hasBids())
+					throw new workHasNoBidsException();
 				return current.bidsIterator();
+			}
 		}
 
 		return null;

@@ -28,7 +28,7 @@ public class Main {
     private static final String AUCTION_CLOSE_BODY_NOT_SOLD = "\n%s %s sem propostas de venda.";
     private static final String LIST_AUCTION_WORKS_BODY = "\n%s %s %d %d %s %s";
     private static final String LIST_ARTIST_WORKS_BODY = "\n%s %s %d %d\n";
-    private static final String LIST_BIDS_BODY = "\n%s %s %d\n";
+    private static final String LIST_BIDS_BODY = "%s %s %d\n";
     private static final String LIST_WORKS_VALUE_BODY = "\n%s %s %d %d %s %s\n";
     private static final String QUIT_MSG = "Obrigado. Ate a proxima.\n";
     
@@ -284,8 +284,9 @@ public class Main {
    private static void listBidsWork(Scanner in, AuctionHouse sys) {
         try {
             String auctionId = in.next().strip();
-            String workId = in.nextLine();
+            String workId = in.nextLine().strip();
             Iterator<Bid> it = sys.listBidsWork(auctionId, workId);
+            System.out.println();
 
             while (it.hasNext()) {
                 Bid b = it.next();

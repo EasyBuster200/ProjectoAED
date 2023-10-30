@@ -2,6 +2,7 @@ package ArtAuctions;
 
 import java.io.Serializable;
 import Exceptions.noWorksAuctionException;
+import Exceptions.workHasNoBidsException;
 import dataStructures.Iterator;
 
 public interface Auction extends Serializable {
@@ -49,8 +50,9 @@ public interface Auction extends Serializable {
 	 * Returns a bid iterator of the given work
 	 * @param work with the iterator
 	 * @return the work bid iterator
+	 * @throws workHasNoBidsException
 	 */
-	Iterator<Bid> getWorkBids(ArtWork work);
+	Iterator<Bid> getWorkBids(ArtWork work) throws workHasNoBidsException;
 
     /**
      * Return the minimum value of the given work
