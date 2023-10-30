@@ -253,7 +253,7 @@ public class AuctionHouseClass implements AuctionHouse {
 
 			ArtWork work = auction.getWork(workId); 
 
-			if (work == null)	
+			if (work == null)
 				throw new workNotInAuctionException();
 
 			return auction.getWorkBids(work);
