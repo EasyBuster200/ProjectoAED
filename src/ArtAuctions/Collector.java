@@ -1,14 +1,10 @@
 package ArtAuctions;
 
-import dataStructures.DoubleList;
-import dataStructures.List;
 
 public class Collector implements User {
 
 	private String login, name, email;
-	private int age;
-	private List<Bid> bids;
-	//TODO: There's gotta be a better way to know if a given user has open bids
+	private int age, nbrBids;
 
 	private static final long serialVersionUID = 1L;
 
@@ -17,7 +13,7 @@ public class Collector implements User {
 		this.name = name;
 		this.age = age;
 		this.email = email;
-		this.bids = new DoubleList<>();
+		this.nbrBids = 0;
 	}
 
 	@Override
@@ -41,13 +37,18 @@ public class Collector implements User {
 	}
 
 	@Override
-	public void addBid(Bid bid) {
-		this.bids.addLast(bid);
+	public void addBid() {
+		this.nbrBids++;
+	}
+
+	@Override
+	public void removeBid() {
+		this.nbrBids--;
 	}
 
 	@Override
 	public boolean hasBids() {
-		return !this.bids.isEmpty();
+		return nbrBids > 0;
 	}
 
 }

@@ -27,18 +27,11 @@ public interface User extends Serializable {
 	 * @return user email.
 	 */
 	String email();
-
-	/**
-	 * Registers a bid made by the user 
-	 * @param bid - the bid to be registered
-	 */
-	void addBid(Bid bid);
-
-	/**
-     * Check if this user has any bids
-     * @return <code>true</code> if this user has bids
-     * <code>false</code> otherwise
-     */
-	boolean hasBids();
 	
+	void addBid();
+
+	void removeBid();
+
+	boolean hasBids();
+
 }

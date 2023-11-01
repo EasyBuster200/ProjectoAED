@@ -187,6 +187,7 @@ public class AuctionHouseClass implements AuctionHouse {
 			throw new valueUnderMinimumException();
 
 		auction.addBid(new BidClass(bidValue, user), work);
+		user.addBid();
 		
 	}
 
