@@ -1,11 +1,17 @@
 package ArtAuctions;
 
+/**
+ * Artwork implementation
+ * @author Lipy Cardoso - 63542
+ * @author Duarte Coelho - 65154
+ */
 public class ArtWorkClass implements ArtWork {
 
 	/**
-	 * 
+	 * Serial version UID of the Class
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	
 	private String workId,name;
 	private int year, lastAuctionPrice, highestSoldValue;
@@ -13,6 +19,13 @@ public class ArtWorkClass implements ArtWork {
 	private Artist author;
 	private User buyer;
 	
+	/**
+	 * ArtWorkClass constructor that creates a new artwork
+	 * @param workId - the work id
+	 * @param name - the work name 
+	 * @param year - the work release year 
+	 * @param author - the artwork author 
+	 */
 	public ArtWorkClass(String workId, String name, int year, Artist author) {
 		this.workId = workId;
 		this.name = name;
@@ -98,6 +111,10 @@ public class ArtWorkClass implements ArtWork {
 		author.workRemovedFromAuction();
 	}
 
+	@Override
+	public void sold(User buyer) {
+		this.buyer = buyer;
+		beenSold = true;
+	}
 	
-
 }

@@ -5,6 +5,11 @@ import Exceptions.noWorksAuctionException;
 import Exceptions.workHasNoBidsException;
 import dataStructures.Iterator;
 
+/**
+ * Auction entity 
+ * @author Lipy Cardoso - 63542
+ * @author Duarte Coelho - 65154
+ */
 public interface Auction extends Serializable {
 
 	/**
@@ -62,7 +67,7 @@ public interface Auction extends Serializable {
     int getMinimumBidValue(ArtWork work);
 
 	/**
-	 *Closes this auction 
+	 *Closes the auction 
 	 */
 	void closeAuction();
 

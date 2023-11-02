@@ -4,8 +4,16 @@ import dataStructures.DoubleList;
 import dataStructures.Iterator;
 import dataStructures.List;
 
+/**
+ * WorkAuction implementation
+ * @author Lipy Cardoso - 63542
+ * @author Duarte Coelho - 65154
+ */
 public class WorkAuctionClass implements WorkAuction {
 
+    /**
+     * Serial Version UID of the class
+     */
     private static final long serialVersionUID = 1L;
 	
     private ArtWork work;
@@ -13,6 +21,11 @@ public class WorkAuctionClass implements WorkAuction {
     private List<Bid> bids;
     private Bid highestBid;
     
+    /**
+     * WorkAuction constructor that creates a  new workAuction for a work
+     * @param work the work of the work auction
+     * @param minimumValue the minimum bid value for the auction
+     */
     public WorkAuctionClass(ArtWork work, int minimumValue) {
         this.work = work;
         this.minimumValue = minimumValue;
@@ -60,9 +73,16 @@ public class WorkAuctionClass implements WorkAuction {
             this.work.setHighestSoldValue(this.highestBid.bidValue());
 
             this.work.setLastSoldPrice(this.highestBid.bidValue());
+            this.work.sold(highestBid.bidder());
+        }
+
+        Iterator<Bid> it = bids.iterator();
+
+        while (it.hasNext()) {
+            it.next().bidClosed();
         }
         
         this.work.removedFromAuction();
     }
-
 }
+

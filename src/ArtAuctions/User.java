@@ -2,6 +2,11 @@ package ArtAuctions;
 
 import java.io.Serializable;
 
+/**
+ * User entity
+ * @author Lipy Cardoso - 63542
+ * @author Duarte Coelho - 65154
+ */
 public interface User extends Serializable {
 
 	/**
@@ -27,11 +32,22 @@ public interface User extends Serializable {
 	 * @return user email.
 	 */
 	String email();
-	
-	void addBid();
 
-	void removeBid();
-
+	/**
+     * Check if this user has any bids
+     * @return <code>true</code> if this user has bids
+     * <code>false</code> otherwise
+     */
 	boolean hasBids();
 
+	/**
+	 * Increments the number of bids a user has
+	 */
+	void addBid();
+
+	/**
+	 * Decreases the number of bids a user has
+	 */
+	void removeBid();
+	
 }

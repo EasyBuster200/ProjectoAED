@@ -12,6 +12,11 @@ import ArtAuctions.Collector;
 import ArtAuctions.Artist;
 import dataStructures.Iterator;
 
+/**
+ * Main class for the management the interpretation and the output of commands
+ * @author Lipy Cardoso - 63542
+ * @author Duarte Coelho - 65154
+ */
 public class Main {
     private static final String USER_REGISTERED = "\nRegisto de utilizador executado.";
     private static final String ARTIST_REGISTERED = "\nRegisto de artista executado.";
@@ -24,13 +29,13 @@ public class Main {
     private static final String WORK_ADDED_AUCTION = "\nObra adicionada ao leilao.";
     private static final String BID_PLACED = "\nProposta aceite.";
     private static final String AUCTION_CLOSED = "\nLeilao encerrado.";
-    private static final String AUCTION_CLOSED_BODY_SOLD = "\n%s %s %s %s %d\n";
+    private static final String AUCTION_CLOSED_BODY_SOLD = "\n%s %s %s %s %d";
     private static final String AUCTION_CLOSE_BODY_NOT_SOLD = "\n%s %s sem propostas de venda.";
     private static final String LIST_AUCTION_WORKS_BODY = "\n%s %s %d %d %s %s";
     private static final String LIST_ARTIST_WORKS_BODY = "\n%s %s %d %d\n";
     private static final String LIST_BIDS_BODY = "%s %s %d\n";
     private static final String LIST_WORKS_VALUE_BODY = "\n%s %s %d %d %s %s\n";
-    private static final String QUIT_MSG = "Obrigado. Ate a proxima.\n";
+    private static final String QUIT_MSG = "Obrigado. Ate a proxima.";
     
   
     private static final String ADD_USER = "adduser";
@@ -311,9 +316,9 @@ public class Main {
             file.close();
 			return auctionHouse;
    		}catch(IOException e) {
-   			System.out.println("input out put exception");
+   			//System.out.println("input out put exception");
    		}catch(ClassNotFoundException e) {
-   			System.out.println("class not found Exception");
+   			//System.out.println("class not found Exception");
    		}
    		
    		return auctionHouse;
@@ -326,7 +331,7 @@ public class Main {
 			file.flush();
 			file.close();
 		}catch(IOException e) {
-			System.out.println("input output exception");
+			//System.out.println("input output exception");
 		}
 	}
    
@@ -334,8 +339,4 @@ public class Main {
 		// TODO Auto-generated method stub
 	}
    
-   
-   
 }
-//TODO: Review and finish comments on all files
-//TODO: Make sure all the exceptions are capitalized

@@ -4,10 +4,15 @@ import Exceptions.*;
 import dataStructures.Iterator;
 import dataStructures.DoubleList;
 
+/**
+ * Main class for the management the interpretation and the output of commands
+ * @author Lipy Cardoso - 63542
+ * @author Duarte Coelho - 65154
+ */
 public class AuctionHouseClass implements AuctionHouse {
 
 	/**
-	 * 
+	 * SAerial Version UID of the Class
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -17,6 +22,9 @@ public class AuctionHouseClass implements AuctionHouse {
 
 	private static final int LEGAL_AGE = 18;
 
+	/**
+	 * AuctionHouseClass constructor that creates a new auctionHouse with empty list of users artWorks and auction  
+	 */
 	public AuctionHouseClass() {
 		users = new DoubleList<>();
 		artWorks = new DoubleList<>();
@@ -53,7 +61,6 @@ public class AuctionHouseClass implements AuctionHouse {
 
 	@Override
 	public void removeUser(String login) throws loginNotRegisteredException, userHasBidsException, artistHasWorksInAuction {
-		//TODO: We have to check for the user having bids and/or being an artist and having works
 		User user = getUser(login);
 
 		if(user == null)
@@ -74,10 +81,7 @@ public class AuctionHouseClass implements AuctionHouse {
 
 		else 
 			users.remove(user);
-
 		
-		//TODO? When an artist is removed, do we also remove any works from that artist that have been sold?
-		//TODO? What about normal collectors, what happens to the artWorks they have bought?
 
 	}
 
@@ -149,7 +153,6 @@ public class AuctionHouseClass implements AuctionHouse {
 	public void addWorkAuction(String auctionId, String workId, int minSellValue)
 			throws auctionIdNotRegisteredException, workIdNotRegisteredException {
 				
-			//TODO: Add a hasWorksInAuction boolean var, which we will set to true once an artists work is added to an auction 
 			Auction auction = getAuction(auctionId);
 
 			if(auction == null)
@@ -193,7 +196,6 @@ public class AuctionHouseClass implements AuctionHouse {
 
 	@Override
 	public Iterator<ArtWork> closeAuction(String auctionId) throws auctionIdNotRegisteredException {
-		//TODO: We have to make sure once an auction is closed, the works are sold to the highest bidder
 		Auction auction = getAuction(auctionId);
 
 		if(auction == null)
@@ -263,6 +265,11 @@ public class AuctionHouseClass implements AuctionHouse {
 		return null;
 	}
 
+	/**
+	 * Return the user of the given user 
+	 * @param login - the login of the user
+	 * @return the user, return NULL if the user does not exist
+	 */
 	private User getUser(String login) {
 		Iterator<User> it = users.iterator();
 
@@ -276,6 +283,12 @@ public class AuctionHouseClass implements AuctionHouse {
 		return null;
 	}
 
+	
+	/**
+	 * Return the work of the given the workId
+	 * @param workId id of the work to be searched
+	 * @return the work id, NULL if the artWork does not exist.
+	 */
 	private ArtWork getWork(String workId) {
 		Iterator<ArtWork> it = artWorks.iterator();
 
@@ -289,6 +302,11 @@ public class AuctionHouseClass implements AuctionHouse {
 		return null;
 	}
 
+	/**
+	 * Return the auction of the give auctionId
+	 * @param auctionId id of the auction to be searched
+	 * @return the auction, return NULL if the auction does not exist
+	 */
 	private Auction getAuction(String auctionId) {
 		Iterator<Auction> it = auctions.iterator();
 
@@ -301,19 +319,16 @@ public class AuctionHouseClass implements AuctionHouse {
 		return null;
 	}
 
+	/**
+	 * Removes the painting of an artist that has been removed
+	 * @param artist - the artist of the painting to be removed
+	 */
 	private void removeArtistPaintings(Artist artist) {
 		Iterator<ArtWork> it = artist.worksIterator();
 
 		while (it.hasNext())
 			artWorks.remove(it.next());
 
-		//If we aren't meant to remove artWorks which have been sold the method would look something like 
-		/* while (it.hasNext()) {
-			ArtWork current = it.next();
-
-			if(!current.beenSold())
-				artWorks.remove(current);
-		} */
 	}
 
 }

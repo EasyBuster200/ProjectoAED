@@ -2,6 +2,11 @@ package ArtAuctions;
 
 import java.io.Serializable;
 
+/**
+ * Bid Entity 
+ * @author Lipy Cardoso - 63542
+ * @author Duarte Coelho - 65154
+ */
 public interface Bid extends Serializable {
 
     /**
@@ -21,5 +26,16 @@ public interface Bid extends Serializable {
      * @return login for the bidder
      */
     String biddersLogin();
+
+    /**
+     * Return the user object of the person who placed the bid
+     * @return the user who placed the bid
+     */
+    User bidder();
+
+    /**
+     * Sets the bid to closed, and removes it from the bidder
+     */
+    void bidClosed();
 
 }

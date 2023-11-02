@@ -2,6 +2,11 @@ package ArtAuctions;
 
 import java.io.Serializable;
 
+/**
+ * The ArtWork entity 
+ * @author Lipy Cardoso - 63542
+ * @author Duarte Coelho - 65154
+ */
 public interface ArtWork extends Serializable {
 	
 	/**
@@ -83,8 +88,19 @@ public interface ArtWork extends Serializable {
 	 */
 	void setLastSoldPrice(int newLastSoldPrice);
 
+	/**
+	 *Adds one, to the number of works a user has in auction
+	 */
 	void addedToAuction();
 
+	/**
+	 *Removes one, to the number of works the artist has in auction
+	 */
 	void removedFromAuction();
 
+	/**
+	 * Defines the buyer, of the artWork, and changes the status of the work to sold
+	 * @param buyer the buyer of the artWork
+	 */
+	void sold(User buyer);
 }

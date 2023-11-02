@@ -4,7 +4,11 @@ import java.io.Serializable;
 import Exceptions.*;
 import dataStructures.Iterator;
 
-
+/**
+ *AuctionHouse entity. 
+ * @author Lipy Cardoso - 63542
+ * @author Duarte Coelho - 65154
+ */
 public interface AuctionHouse extends Serializable {
 		
 		/**

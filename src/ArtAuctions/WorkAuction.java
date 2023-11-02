@@ -3,6 +3,11 @@ package ArtAuctions;
 import java.io.Serializable;
 import dataStructures.Iterator;
 
+/**
+ * WorkAuction entity
+ * @author Lipy Cardoso - 63542
+ * @author Duarte Coelho - 65154
+ */
 public interface WorkAuction extends Serializable {
     
     /**

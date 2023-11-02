@@ -5,6 +5,11 @@ import dataStructures.DoubleList;
 import dataStructures.Iterator;
 import dataStructures.List;
 
+/**
+ * Auction implementation 
+ * @author Lipy Cardoso - 63542
+ * @author Duarte Coelho - 65154
+ */
 public class AuctionClass implements Auction {
 
 	private String auctionId;
@@ -12,10 +17,14 @@ public class AuctionClass implements Auction {
 	private List<ArtWork> auctionWorks;
 	
 	/**
-	 * 
+	 * Serial version UID of the Class
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * AuctionClass constructor that creates a new Auction
+	 * @param auctionId - the auction id
+	 */
 	public AuctionClass(String auctionId) {
 		this.auctionId = auctionId;
 		this.individualAuctions = new DoubleList<>();
@@ -95,6 +104,11 @@ public class AuctionClass implements Auction {
 			it.next().closeAuction();
 	}
 	
+	/**
+	 * Returns the workAuction of the given artWork.
+	 * @param work the work of the auction
+	 * @return the workAuction, return null if the worAuction does no exist.
+	 */
 	private WorkAuction getAuction(ArtWork work) {
 		Iterator<WorkAuction> it = individualAuctions.iterator();
 
