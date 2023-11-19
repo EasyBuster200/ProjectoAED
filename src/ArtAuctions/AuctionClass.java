@@ -27,7 +27,7 @@ public class AuctionClass implements Auction {
 	 */
 	public AuctionClass(String auctionId) {
 		this.auctionId = auctionId;
-		this.individualAuctions = new DoubleList<>();
+		this.individualAuctions = new DoubleList<>(); //TODO: I don't think these need to be changed
 		this.auctionWorks = new DoubleList<>();
 	}
 

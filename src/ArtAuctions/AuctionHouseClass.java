@@ -26,9 +26,9 @@ public class AuctionHouseClass implements AuctionHouse {
 	 * AuctionHouseClass constructor that creates a new auctionHouse with empty list of users artWorks and auction  
 	 */
 	public AuctionHouseClass() {
-		users = new DoubleList<>();
-		artWorks = new DoubleList<>();
-		auctions = new DoubleList<>();
+		users = new DoubleList<>(); //TODO: Could be a dictionary with the UsersId as Key, and the object as Value.
+		artWorks = new DoubleList<>(); //TODO: Maybe could be an orderedDoubleList, ordered by the value of each artWork.
+		auctions = new DoubleList<>(); //TODO: Could be a dictionary with the auctionId as Key, and the object as Value.
 	}
 
 	@Override

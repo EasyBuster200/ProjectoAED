@@ -29,7 +29,7 @@ public class WorkAuctionClass implements WorkAuction {
     public WorkAuctionClass(ArtWork work, int minimumValue) {
         this.work = work;
         this.minimumValue = minimumValue;
-        this.bids = new DoubleList<>();
+        this.bids = new DoubleList<>(); //TODO: Don't think we need to changed this one
         this.highestBid = null;
         this.work.addedToAuction();
     }
