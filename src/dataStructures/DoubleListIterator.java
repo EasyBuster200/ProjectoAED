@@ -1,6 +1,5 @@
 package dataStructures;
 
-import dataStructures.DoubleList.DoubleListNode;
 
 /**
  * Implementation of Two Way Iterator for DLList 
@@ -89,10 +88,11 @@ class DoubleListIterator<E> implements TwoWayIterator<E>
             throw new NoSuchElementException();
 
         E element = nextToReturn.getElement();
-        prevToReturn = nextToReturn;
+        prevToReturn = nextToReturn.getPrevious();
         nextToReturn = nextToReturn.getNext();
         return element;
     }
+
 
     @Override
     public E previous( ) throws NoSuchElementException
