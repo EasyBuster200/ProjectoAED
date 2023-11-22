@@ -2,7 +2,9 @@ package ArtAuctions;
 
 import Exceptions.*;
 import dataStructures.Iterator;
-import dataStructures.DoubleList;
+import dataStructures.OrderedDoubleList;
+import dataStructures.SepChainHashTable;
+import dataStructures.Dictionary;
 
 /**
  * Main class for the management the interpretation and the output of commands
@@ -16,9 +18,9 @@ public class AuctionHouseClass implements AuctionHouse {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private DoubleList<User> users;
-	private DoubleList<ArtWork> artWorks;
-	private DoubleList<Auction> auctions;
+	private Dictionary<String, User> users; //User Login --> User 
+	private Dictionary<String, ArtWork> artWorks; // WorkID --> Work //TODO: Ordered dictionary is ordered by the Key, we need something that can b e ordered by the last sold price
+	private Dictionary<String, Auction> auctions; // AuctionId --> Auction
 
 	private static final int LEGAL_AGE = 18;
 
@@ -26,9 +28,9 @@ public class AuctionHouseClass implements AuctionHouse {
 	 * AuctionHouseClass constructor that creates a new auctionHouse with empty list of users artWorks and auction  
 	 */
 	public AuctionHouseClass() {
-		users = new DoubleList<>(); //TODO: Could be a dictionary with the UsersId as Key, and the object as Value.
-		artWorks = new DoubleList<>(); //TODO: Maybe could be an orderedDoubleList, ordered by the value of each artWork.
-		auctions = new DoubleList<>(); //TODO: Could be a dictionary with the auctionId as Key, and the object as Value.
+		users = new SepChainHashTable<>(); 
+		artWorks = new OrderedDoubleList<>(); 
+		auctions = new SepChainHashTable<>();
 	}
 
 	@Override
@@ -38,11 +40,11 @@ public class AuctionHouseClass implements AuctionHouse {
 			if (age < LEGAL_AGE)
 				throw new userUnderAgeException();
 
-			else if (getUser(login) != null)
+			else if (users.find(login) != null)
 				throw new loginAlredyRegisteredException();
 
 			else
-				users.addLast(new Collector(login, name, age, email));
+				users.insert(login, new Collector(login, name, age, email));
 	}
 
 	@Override
@@ -52,16 +54,16 @@ public class AuctionHouseClass implements AuctionHouse {
 			if (age < LEGAL_AGE)
 				throw new userUnderAgeException();
 
-			else if (getUser(login) != null)
+			else if (users.find(login) != null)
 				throw new loginAlredyRegisteredException();
 
 			else
-				users.addLast(new ArtistClass(login, name, age, email, artisticName));
+				users.insert(login, new ArtistClass(login, name, age, email, artisticName));
 	}
 
 	@Override
 	public void removeUser(String login) throws loginNotRegisteredException, userHasBidsException, artistHasWorksInAuction {
-		User user = getUser(login);
+		User user = users.find(login);
 
 		if(user == null)
 			throw new loginNotRegisteredException();
@@ -76,11 +78,11 @@ public class AuctionHouseClass implements AuctionHouse {
 				throw new artistHasWorksInAuction();
 
 			removeArtistPaintings(artist);
-			users.remove(artist);
+			users.remove(login);
 		}
 
 		else 
-			users.remove(user);
+			users.remove(login);
 		
 
 	}
@@ -89,10 +91,10 @@ public class AuctionHouseClass implements AuctionHouse {
 	public void addWork(String workId, String authorLogin, int year, String name)
 			throws workIdAlreadyRegisteredException, loginNotRegisteredException, notAnArtistException {
 		
-			if (getWork(workId) != null)
+			if (artWorks.find(workId) != null)
 				throw new workIdAlreadyRegisteredException();
 
-			User user = getUser(authorLogin);
+			User user = users.find(authorLogin);
 
 			if(user == null)
 				throw new loginNotRegisteredException();
@@ -103,14 +105,14 @@ public class AuctionHouseClass implements AuctionHouse {
 			Artist artist = (Artist) user;
 			ArtWork work = new ArtWorkClass(workId, name, year, artist);
 
-			artWorks.addLast(work);
+			artWorks.insert(workId, work);
 			artist.addNewArtWork(work);
 			
 	}
 
 	@Override
 	public Collector infoUser(String login) throws loginNotRegisteredException {
-		User user = getUser(login);
+		User user = users.find(login);
 
 		if (user == null)
 			throw new loginNotRegisteredException();
@@ -120,7 +122,7 @@ public class AuctionHouseClass implements AuctionHouse {
 
 	@Override
 	public Artist infoArtist(String login) throws loginNotRegisteredException, notAnArtistException {
-		User user = getUser(login);
+		User user = users.find(login);
 
 		if(user == null)
 			throw new loginNotRegisteredException();
@@ -133,7 +135,7 @@ public class AuctionHouseClass implements AuctionHouse {
 
 	@Override
 	public ArtWork infoWork(String workId) throws workIdNotRegisteredException {
-		ArtWork work = getWork(workId);
+		ArtWork work = artWorks.find(workId);
 
 		if(work == null)
 			throw new workIdNotRegisteredException();
@@ -143,22 +145,22 @@ public class AuctionHouseClass implements AuctionHouse {
 
 	@Override
 	public void createAuction(String auctionId) throws auctionIdAlreadyRegisteredException {
-		if (getAuction(auctionId) != null)
+		if (auctions.find(auctionId) != null)
 			throw new auctionIdAlreadyRegisteredException();
 		
-		auctions.addLast(new AuctionClass(auctionId));
+		auctions.insert(auctionId, new AuctionClass(auctionId));
 	}
 
 	@Override
 	public void addWorkAuction(String auctionId, String workId, int minSellValue)
 			throws auctionIdNotRegisteredException, workIdNotRegisteredException {
 				
-			Auction auction = getAuction(auctionId);
+			Auction auction = auctions.find(auctionId);
 
 			if(auction == null)
 				throw new auctionIdNotRegisteredException();
 
-			ArtWork artWork = getWork(workId);
+			ArtWork artWork = artWorks.find(workId);
 
 			if (artWork == null)
 				throw new workIdNotRegisteredException();
@@ -171,12 +173,12 @@ public class AuctionHouseClass implements AuctionHouse {
 	public void bid(String auctionId, String workId, String login, int bidValue) 
 		throws valueUnderMinimumException, auctionIdNotRegisteredException, loginNotRegisteredException, workNotInAuctionException {
 			
-		User user = getUser(login);
+		User user = users.find(login);
 	
 		if (user == null)
 			throw new loginNotRegisteredException();
 
-		Auction auction = getAuction(auctionId);
+		Auction auction = auctions.find(auctionId);
 
 		if (auction == null)
 			throw new auctionIdNotRegisteredException();
@@ -196,14 +198,14 @@ public class AuctionHouseClass implements AuctionHouse {
 
 	@Override
 	public Iterator<ArtWork> closeAuction(String auctionId) throws auctionIdNotRegisteredException {
-		Auction auction = getAuction(auctionId);
+		Auction auction = auctions.find(auctionId);
 
 		if(auction == null)
 			throw new auctionIdNotRegisteredException();
 
 		Iterator<ArtWork> it = auction.worksIterator();
 		auction.closeAuction();
-		auctions.remove(auction);
+		auctions.remove(auctionId);
 		return it;
 	}
 
@@ -211,7 +213,7 @@ public class AuctionHouseClass implements AuctionHouse {
 	public Iterator<ArtWork> listAuctionWorks(String auctionId)
 			throws auctionIdNotRegisteredException, noWorksAuctionException {
 		
-			Auction auction = getAuction(auctionId);
+			Auction auction = auctions.find(auctionId);
 
 			if(auction == null)
 				throw new auctionIdNotRegisteredException();
@@ -226,7 +228,7 @@ public class AuctionHouseClass implements AuctionHouse {
 	public Iterator<ArtWork> listArtistWorks(String login)
 			throws loginNotRegisteredException, notAnArtistException, hasNoWorksException {
 		
-			User user = getUser(login);
+			User user = users.find(login);
 
 			if (user == null)
 				throw new loginNotRegisteredException();
@@ -246,7 +248,7 @@ public class AuctionHouseClass implements AuctionHouse {
 	public Iterator<Bid> listBidsWork(String auctionId, String workId)
 			throws auctionIdNotRegisteredException, workNotInAuctionException, workHasNoBidsException {
 	
-			Auction auction = getAuction(auctionId);
+			Auction auction = auctions.find(auctionId);
 
 			if (auction == null)
 				throw new auctionIdNotRegisteredException();
@@ -266,60 +268,6 @@ public class AuctionHouseClass implements AuctionHouse {
 	}
 
 	/**
-	 * Return the user of the given user 
-	 * @param login - the login of the user
-	 * @return the user, return NULL if the user does not exist
-	 */
-	private User getUser(String login) {
-		Iterator<User> it = users.iterator();
-
-		while(it.hasNext()) {
-			User current = it.next();
-
-			if(current.login().equalsIgnoreCase(login)) 
-				return current;
-		}
-
-		return null;
-	}
-
-	
-	/**
-	 * Return the work of the given the workId
-	 * @param workId id of the work to be searched
-	 * @return the work id, NULL if the artWork does not exist.
-	 */
-	private ArtWork getWork(String workId) {
-		Iterator<ArtWork> it = artWorks.iterator();
-
-		while(it.hasNext()) {
-			ArtWork current = it.next();
-
-			if(current.workId().equalsIgnoreCase(workId))
-				return current;
-		}
-
-		return null;
-	}
-
-	/**
-	 * Return the auction of the give auctionId
-	 * @param auctionId id of the auction to be searched
-	 * @return the auction, return NULL if the auction does not exist
-	 */
-	private Auction getAuction(String auctionId) {
-		Iterator<Auction> it = auctions.iterator();
-
-		while(it.hasNext()) {
-			Auction current = it.next();
-			if (current.auctionId().equalsIgnoreCase(auctionId))
-				return current;
-		}
-
-		return null;
-	}
-
-	/**
 	 * Removes the painting of an artist that has been removed
 	 * @param artist - the artist of the painting to be removed
 	 */
@@ -327,7 +275,7 @@ public class AuctionHouseClass implements AuctionHouse {
 		Iterator<ArtWork> it = artist.worksIterator();
 
 		while (it.hasNext())
-			artWorks.remove(it.next());
+			artWorks.remove(it.next().workId());
 
 	}
 
