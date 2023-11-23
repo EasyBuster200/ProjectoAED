@@ -335,12 +335,12 @@ public class Main {
 		}
 	}
    
-   private static void listWorksByValue( AuctionHouse aH) {
+   private static void listWorksByValue(AuctionHouse aH) {
 		try {
             Iterator<ArtWork> it = aH.listWorksByValue();
             while (it.hasNext()) {
                 ArtWork current = it.next();
-                //TODO: Unfinished
+                System.out.printf(LIST_WORKS_VALUE_BODY, current.workId(), current.name(), current.year(), current.highestSoldValue(), current.authorLogin(), current.authorName());
             }
 
         } catch (Exception e) {
