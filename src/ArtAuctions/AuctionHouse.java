@@ -169,4 +169,5 @@ public interface AuctionHouse extends Serializable {
 	     */
 	    Iterator<ArtWork> listWorksByValue()
 	        throws noSoldWorkdsException;
+
 }

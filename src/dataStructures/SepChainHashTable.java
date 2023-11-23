@@ -69,8 +69,7 @@ public class SepChainHashTable<K extends Comparable<K>, V>
     public V insert( K key, V value )
     {
         if ( this.isFull() )
-            //TODO: left as an exercise.
-        	//Original commented, to compile.
+            //left as an exercise.
             this.rehash();
         // Left as an exercise.
 
@@ -95,7 +94,7 @@ public class SepChainHashTable<K extends Comparable<K>, V>
     @Override
     public V remove( K key )
     {
-        //TODO: Left as an exercise.
+        //Left as an exercise.
         currentSize--;
         return table[hash(key)].remove(key);
     }
@@ -103,16 +102,16 @@ public class SepChainHashTable<K extends Comparable<K>, V>
     @Override
     public Iterator<Entry<K,V>> iterator( )
     {
-        //TODO: Left as an exercise.
+        //Left as an exercise.
         return new HashTableIterator<>(table);
         
         /*
-        *TODO: IteratorHashTable 
-        *  What do we have to keep at all times:
-        * - Hastable
-        * - Iterator of the current list 
-        * - Pos of the last itered list 
-        * 
+         *IteratorHashTable 
+         *What do we have to keep at all times:
+         * - Hastable
+         * - Iterator of the current list 
+         * - Pos of the last itered list 
+         * 
          * Methods hasNext() --> ver se o iterador da lista corrente tem next
          *          next() --> Testar se ha next
          *                      Obter next do iterador da lista 
@@ -123,7 +122,6 @@ public class SepChainHashTable<K extends Comparable<K>, V>
     
     @SuppressWarnings("unchecked")
     private void rehash() {
-        //TODO: Check if * 2 is too much, in terms of space complexity
 
         int arraySize = HashTable.nextPrime((int) (1.1 * (currentSize * 2)));
         Dictionary<K,V>[] newTable = (Dictionary<K,V>[]) new Dictionary[arraySize];

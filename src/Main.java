@@ -82,7 +82,7 @@ public class Main {
     		    case LIST_AUCTION_WORKS -> listAuctionWorks(in,aH);
                 case LIST_ARTIST_WORK -> listArtistWorks(in, aH);
     		    case LIST_BIDS_WORK -> listBidsWork(in,aH);
-    		    case LIST_WORKS_BY_VALUE -> listWorksByValue(in,aH);
+    		    case LIST_WORKS_BY_VALUE -> listWorksByValue(aH);
     		}
 
     		System.out.println();
@@ -335,9 +335,18 @@ public class Main {
 		}
 	}
    
-   private static void listWorksByValue(Scanner in, AuctionHouse aH) {
-		// TODO Auto-generated method stub
+   private static void listWorksByValue( AuctionHouse aH) {
+		try {
+            Iterator<ArtWork> it = aH.listWorksByValue();
+            while (it.hasNext()) {
+                ArtWork current = it.next();
+                //TODO: Unfinished
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 	}
-   
+
 }
 //TODO: Gotta check the @author on all files, it's missing our emails

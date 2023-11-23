@@ -42,7 +42,7 @@ public class ArtistClass extends Collector implements Artist {
 	public ArtistClass(String login, String name, int age,String email,String artisticName) {		
 		super(login, name, age, email);
 		this.artisticName = artisticName;
-		this.artWorks = new DoubleList<>(); //TODO: Maybe use a dictionary, could make removing faster.
+		this.artWorks = new DoubleList<>();
 		this.worksInAuction = 0;
 	}
 
