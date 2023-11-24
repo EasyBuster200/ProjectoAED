@@ -126,7 +126,7 @@ public class QueueInArray<E> implements Queue<E>
         array[front] = null;    // For garbage collection.
         front = this.nextIndex(front);     
         currentSize--;          
-        return element;            
+        return element;
     }                                                                
 
 

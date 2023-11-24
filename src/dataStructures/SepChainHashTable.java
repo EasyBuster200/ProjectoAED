@@ -120,29 +120,20 @@ public class SepChainHashTable<K extends Comparable<K>, V>
          */
     } 
     
-    @SuppressWarnings("unchecked")
     private void rehash() {
 
-        int arraySize = HashTable.nextPrime((int) (1.1 * (currentSize * 2)));
-        Dictionary<K,V>[] newTable = (Dictionary<K,V>[]) new Dictionary[arraySize];
-
-        for ( int i = 0; i < arraySize; i++ )
-            newTable[i] = new OrderedDoubleList<K,V>();
-        maxSize = currentSize * 2;
+        SepChainHashTable<K,V> newTable = new SepChainHashTable<>(maxSize * 2);
 
         Iterator<Entry<K,V>> it = this.iterator();
+        
         while (it.hasNext()) {
             Entry<K,V> current = it.next();
-            newTable[hash(current.getKey(), arraySize)].insert(current.getKey(), current.getValue());
-            //TODO: Shouldn't the hash call be on the newTable, since it depends on the new size?
+            newTable.insert(current.getKey(), current.getValue());
         }
-
-        table = newTable;
+        
+        maxSize = maxSize * 2;
+        this.table = newTable.table;
     }
 
-     private int hash( K key, int arraySize )
-    {
-        return Math.abs( key.hashCode() ) % arraySize;
-    }
 }
 
