@@ -350,3 +350,4 @@ public class Main {
 
 }
 //TODO: Gotta check the @author on all files, it's missing our emails
+//TODO: Run the latest test.txt file, still looking for where the program gets stuck.

@@ -19,7 +19,7 @@ public class AuctionHouseClass implements AuctionHouse {
 	private static final long serialVersionUID = 1L;
 
 	private Dictionary<String, User> users; //User Login --> User 
-	private Dictionary<String, ArtWork> artWorks; // WorkID --> Work //TODO: Ordered dictionary is ordered by the Key, we need something that can b e ordered by the last sold price
+	private Dictionary<String, ArtWork> artWorks; // WorkID --> Work //TODO: Ordered dictionary is ordered by the Key, we need something that can b e ordered by the last sold price,
 	private Dictionary<String, Auction> auctions; // AuctionId --> Auction
 
 	private static final int LEGAL_AGE = 18;

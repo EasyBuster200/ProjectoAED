@@ -133,41 +133,16 @@ public class SepChainHashTable<K extends Comparable<K>, V>
         Iterator<Entry<K,V>> it = this.iterator();
         while (it.hasNext()) {
             Entry<K,V> current = it.next();
-            newTable[this.hash(current.getKey())].insert(current.getKey(), current.getValue());
+            newTable[hash(current.getKey(), arraySize)].insert(current.getKey(), current.getValue());
+            //TODO: Shouldn't the hash call be on the newTable, since it depends on the new size?
         }
 
         table = newTable;
     }
+
+     private int hash( K key, int arraySize )
+    {
+        return Math.abs( key.hashCode() ) % arraySize;
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
