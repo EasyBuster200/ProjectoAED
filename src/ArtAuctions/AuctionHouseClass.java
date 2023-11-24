@@ -28,9 +28,9 @@ public class AuctionHouseClass implements AuctionHouse {
 	 * AuctionHouseClass constructor that creates a new auctionHouse with empty list of users artWorks and auction  
 	 */
 	public AuctionHouseClass() {
-		users = new SepChainHashTable<>(); 
+		users = new SepChainHashTable<>(1000); 
 		artWorks = new OrderedDoubleList<>(); 
-		auctions = new SepChainHashTable<>();
+		auctions = new SepChainHashTable<>(1000);
 	}
 
 	@Override

@@ -3,7 +3,7 @@ package dataStructures;
 public class HashTableIterator<K,V> implements Iterator<Entry<K,V>> {
 
     Dictionary<K,V>[] table;
-    int lastIteredList;
+    int lastIteredList, lastEmptyList;
     Iterator<Entry<K,V>> currIterator;
 
     public HashTableIterator(Dictionary<K,V>[] table) {
@@ -41,9 +41,11 @@ public class HashTableIterator<K,V> implements Iterator<Entry<K,V>> {
             if (!(table[i].isEmpty())) {
                 lastIteredList = i + 1;
                 return table[i].iterator();
-            }
+            } else 
+                lastEmptyList = i;
+        
         }
 
-        return table[table.length - 1].iterator();
+        return table[lastEmptyList].iterator(); //TODO: Not working.
     }
 }
