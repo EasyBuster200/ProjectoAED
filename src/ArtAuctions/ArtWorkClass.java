@@ -15,7 +15,6 @@ public class ArtWorkClass implements ArtWork {
 	
 	private String workId,name;
 	private int year, lastAuctionPrice, highestSoldValue;
-	private boolean beenSold;
 	private Artist author;
 	private User buyer;
 	
@@ -34,7 +33,6 @@ public class ArtWorkClass implements ArtWork {
 		this.author = author;
 		this.lastAuctionPrice = 0;
 		this.highestSoldValue = 0;
-		this.beenSold = false;
 	}
 	
 	@Override
@@ -114,7 +112,6 @@ public class ArtWorkClass implements ArtWork {
 	@Override
 	public void sold(User buyer) {
 		this.buyer = buyer;
-		beenSold = true;
 	}
 	
 }

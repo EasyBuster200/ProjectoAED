@@ -2,7 +2,6 @@ package ArtAuctions;
 
 import Exceptions.*;
 import dataStructures.Iterator;
-import dataStructures.OrderedDoubleList;
 import dataStructures.SepChainHashTable;
 import dataStructures.BinarySearchTree;
 import dataStructures.Dictionary;

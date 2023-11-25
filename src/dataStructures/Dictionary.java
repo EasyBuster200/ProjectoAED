@@ -2,8 +2,6 @@ package dataStructures;
 
 import java.io.Serializable;
 
-import ArtAuctions.ArtWork;
-
 /**
  * Dictionary Abstract Data Type 
  * Includes description of general methods to be implemented by dictionaries.
