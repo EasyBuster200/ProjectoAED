@@ -1,9 +1,12 @@
 package ArtAuctions;
 
 import Exceptions.workHasNoBidsException;
+import dataStructures.Dictionary;
 import dataStructures.DoubleList;
+import dataStructures.Entry;
 import dataStructures.Iterator;
 import dataStructures.List;
+import dataStructures.SepChainHashTable;
 
 /**
  * Auction implementation 
@@ -13,7 +16,7 @@ import dataStructures.List;
 public class AuctionClass implements Auction {
 
 	private String auctionId;
-	private List<WorkAuction> individualAuctions;
+	private Dictionary<String, WorkAuction> individualAuctions; //WorkId --> WorkAuction
 	private List<ArtWork> auctionWorks;
 	
 	/**
@@ -27,7 +30,7 @@ public class AuctionClass implements Auction {
 	 */
 	public AuctionClass(String auctionId) {
 		this.auctionId = auctionId;
-		this.individualAuctions = new DoubleList<>(); //TODO: Should we have a dictionary so its easier to get the individual auction, from a given work
+		this.individualAuctions = new SepChainHashTable<>();
 		this.auctionWorks = new DoubleList<>();
 	}
 
@@ -38,14 +41,16 @@ public class AuctionClass implements Auction {
 
 	@Override
 	public void addWorkAuction(ArtWork artwork, int minimumValue) {
-		auctionWorks.addLast(artwork);
-		individualAuctions.addLast(new WorkAuctionClass(artwork, minimumValue));
+		if (auctionWorks.find(artwork) == -1) {
+			auctionWorks.addLast(artwork);
+			individualAuctions.insert(artwork.workId(), new WorkAuctionClass(artwork, minimumValue));
+		}
+
 	}
 
 	@Override
 	public void addBid(Bid bid, ArtWork work) {
-		WorkAuction individualAuction = getAuction(work);
-		individualAuction.addBid(bid);
+		individualAuctions.find(work.workId()).addBid(bid);
 	}
 
 	@Override
@@ -74,10 +79,10 @@ public class AuctionClass implements Auction {
 
 	@Override
 	public Iterator<Bid> getWorkBids(ArtWork work) throws workHasNoBidsException {
-		Iterator<WorkAuction> it = individualAuctions.iterator();
+		Iterator<Entry<String, WorkAuction>> it = individualAuctions.iterator();
 
 		while(it.hasNext()) {
-			WorkAuction current = it.next();
+			WorkAuction current = it.next().getValue();
 			ArtWork currentWork = current.getWork();
 
 			if(currentWork.workId().equalsIgnoreCase(work.workId())) {
@@ -92,35 +97,15 @@ public class AuctionClass implements Auction {
 
 	@Override
 	public int getMinimumBidValue(ArtWork work) {
-		WorkAuction individualAuction = getAuction(work);
-		return individualAuction.minimumBidValue();
+		return individualAuctions.find(work.workId()).minimumBidValue();
 	}
 
 	@Override
 	public void closeAuction() {
-		Iterator<WorkAuction> it = individualAuctions.iterator();
+		Iterator<Entry<String, WorkAuction>> it = individualAuctions.iterator();
 
 		while (it.hasNext())
-			it.next().closeAuction();
-	}
-	
-	/**
-	 * Returns the workAuction of the given artWork.
-	 * @param work the work of the auction
-	 * @return the workAuction, return null if the worAuction does no exist.
-	 */
-	private WorkAuction getAuction(ArtWork work) {
-		Iterator<WorkAuction> it = individualAuctions.iterator();
-
-		while (it.hasNext()) {
-			WorkAuction current = it.next();
-			ArtWork currentWork = current.getWork();
-
-			if (currentWork.workId().equals(work.workId()))
-				return current;
-		}
-
-		return null;
+			it.next().getValue().closeAuction();
 	}
 
 }

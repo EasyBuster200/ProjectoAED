@@ -4,6 +4,7 @@ import Exceptions.*;
 import dataStructures.Iterator;
 import dataStructures.OrderedDoubleList;
 import dataStructures.SepChainHashTable;
+import dataStructures.BinarySearchTree;
 import dataStructures.Dictionary;
 
 /**
@@ -19,7 +20,7 @@ public class AuctionHouseClass implements AuctionHouse {
 	private static final long serialVersionUID = 1L;
 
 	private Dictionary<String, User> users; //User Login --> User 
-	private Dictionary<String, ArtWork> artWorks; // WorkID --> Work //TODO: Ordered dictionary is ordered by the Key, we need something that can b e ordered by the last sold price,
+	private Dictionary<String, ArtWork> artWorks; // WorkID --> Work
 	private Dictionary<String, Auction> auctions; // AuctionId --> Auction
 
 	private static final int LEGAL_AGE = 18;
@@ -29,7 +30,7 @@ public class AuctionHouseClass implements AuctionHouse {
 	 */
 	public AuctionHouseClass() {
 		users = new SepChainHashTable<>(1000); 
-		artWorks = new OrderedDoubleList<>(); 
+		artWorks = new BinarySearchTree<>(); //TODO: Maybe have a separate TAD with the sold auctions ordered by values, if we add the artWork to the tree upon creation then its last sold price will be 0, and it won't update once we set that value
 		auctions = new SepChainHashTable<>(1000);
 	}
 

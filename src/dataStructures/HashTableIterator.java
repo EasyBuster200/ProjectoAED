@@ -33,7 +33,7 @@ public class HashTableIterator<K,V> implements Iterator<Entry<K,V>> {
     @Override
     public void rewind() {
         lastIteredList = 0;
-        this.advance();
+        currIterator = this.advance();
     }
     
     private Iterator<Entry<K, V>> advance() {

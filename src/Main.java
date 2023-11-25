@@ -301,11 +301,24 @@ public class Main {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-   }
-   
-   private static void quit() {
+    }
+    
+    private static void listWorksByValue(AuctionHouse aH) {
+         try {
+             Iterator<ArtWork> it = aH.listWorksByValue();
+             while (it.hasNext()) {
+                 ArtWork current = it.next();
+                 System.out.printf(LIST_WORKS_VALUE_BODY, current.workId(), current.name(), current.year(), current.highestSoldValue(), current.authorLogin(), current.authorName());
+             }
+ 
+         } catch (Exception e) {
+             System.out.println(e.getMessage());
+         }
+    }
+
+    private static void quit() {
 	   System.out.println(QUIT_MSG);
-   }
+    }
    
    private static AuctionHouse load() {
    		AuctionHouse auctionHouse = new AuctionHouseClass();
@@ -335,18 +348,6 @@ public class Main {
 		}
 	}
    
-   private static void listWorksByValue(AuctionHouse aH) {
-		try {
-            Iterator<ArtWork> it = aH.listWorksByValue();
-            while (it.hasNext()) {
-                ArtWork current = it.next();
-                System.out.printf(LIST_WORKS_VALUE_BODY, current.workId(), current.name(), current.year(), current.highestSoldValue(), current.authorLogin(), current.authorName());
-            }
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-	}
 
 }
 //TODO: Gotta check the @author on all files, it's missing our emails
