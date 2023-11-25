@@ -2,6 +2,7 @@ package ArtAuctions;
 
 import java.io.Serializable;
 import Exceptions.*;
+import dataStructures.Entry;
 import dataStructures.Iterator;
 
 /**
@@ -167,7 +168,7 @@ public interface AuctionHouse extends Serializable {
 	     * @return iterator of all registered works, ordered by their value
 	     * @throws noSoldWorkdsException if no works has been sold
 	     */
-	    Iterator<ArtWork> listWorksByValue()
+	    Iterator<Entry<Integer, ArtWork>> listWorksByValue()
 	        throws noSoldWorkdsException;
 
 }

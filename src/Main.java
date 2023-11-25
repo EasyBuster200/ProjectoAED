@@ -10,6 +10,7 @@ import ArtAuctions.Bid;
 import ArtAuctions.ArtWork;
 import ArtAuctions.Collector;
 import ArtAuctions.Artist;
+import dataStructures.Entry;
 import dataStructures.Iterator;
 
 /**
@@ -34,7 +35,7 @@ public class Main {
     private static final String LIST_AUCTION_WORKS_BODY = "\n%s %s %d %d %s %s";
     private static final String LIST_ARTIST_WORKS_BODY = "\n%s %s %d %d\n";
     private static final String LIST_BIDS_BODY = "%s %s %d\n";
-    private static final String LIST_WORKS_VALUE_BODY = "\n%s %s %d %d %s %s\n";
+    private static final String LIST_WORKS_VALUE_BODY = "%s %s %d %d %s %s\n";
     private static final String QUIT_MSG = "Obrigado. Ate a proxima.";
     
   
@@ -237,8 +238,9 @@ public class Main {
 
             while (it.hasNext()) {
                 ArtWork a = it.next();
+                
 
-                if (a.beenSold())
+                if (a.getBuyer() != null)
                     System.out.printf(AUCTION_CLOSED_BODY_SOLD, a.workId(), a.name(), a.buyerLogin(), a.buyerName(), a.lastAuctionPrice());
 
                 else    
@@ -305,9 +307,9 @@ public class Main {
     
     private static void listWorksByValue(AuctionHouse aH) {
          try {
-             Iterator<ArtWork> it = aH.listWorksByValue();
+             Iterator<Entry<Integer, ArtWork>> it = aH.listWorksByValue();
              while (it.hasNext()) {
-                 ArtWork current = it.next();
+                 ArtWork current = it.next().getValue();
                  System.out.printf(LIST_WORKS_VALUE_BODY, current.workId(), current.name(), current.year(), current.highestSoldValue(), current.authorLogin(), current.authorName());
              }
  

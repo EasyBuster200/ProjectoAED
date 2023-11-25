@@ -52,13 +52,6 @@ public interface ArtWork extends Serializable {
 	String authorName();
 	
 	/**
-	 * Returns a boolean value representing if the artwork has been sold or not before.
-	 * @return <code>true</code> if the art work has been sold before 
-	 * <code>false</code>.
-	 */
-	boolean beenSold();
-	
-	/**
 	 * Returns a String with buyers login.
 	 * @return buyer login.
 	 */
@@ -103,4 +96,10 @@ public interface ArtWork extends Serializable {
 	 * @param buyer the buyer of the artWork
 	 */
 	void sold(User buyer);
+
+	/**
+	 * Returns the last User to buy the artWork at any aution
+	 * @return the latest buyer of the artWork, or null if it hasn't been sold
+	 */
+	User getBuyer();
 }

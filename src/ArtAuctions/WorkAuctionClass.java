@@ -70,11 +70,13 @@ public class WorkAuctionClass implements WorkAuction {
     public void closeAuction() {
         if (!bids.isEmpty()) {
             if (this.work.highestSoldValue() < this.highestBid.bidValue())
-            this.work.setHighestSoldValue(this.highestBid.bidValue());
+                this.work.setHighestSoldValue(this.highestBid.bidValue());
 
             this.work.setLastSoldPrice(this.highestBid.bidValue());
             this.work.sold(highestBid.bidder());
         }
+        else if (bids.isEmpty() && (this.work.getBuyer() != null))
+            this.work.sold(null);
 
         Iterator<Bid> it = bids.iterator();
 

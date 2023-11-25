@@ -6,6 +6,7 @@ import dataStructures.OrderedDoubleList;
 import dataStructures.SepChainHashTable;
 import dataStructures.BinarySearchTree;
 import dataStructures.Dictionary;
+import dataStructures.Entry;
 
 /**
  * Main class for the management the interpretation and the output of commands
@@ -22,6 +23,7 @@ public class AuctionHouseClass implements AuctionHouse {
 	private Dictionary<String, User> users; //User Login --> User 
 	private Dictionary<String, ArtWork> artWorks; // WorkID --> Work
 	private Dictionary<String, Auction> auctions; // AuctionId --> Auction
+	private Dictionary<Integer, ArtWork> soldArtworks; // Last sold value --> ArtWork
 
 	private static final int LEGAL_AGE = 18;
 
@@ -30,7 +32,8 @@ public class AuctionHouseClass implements AuctionHouse {
 	 */
 	public AuctionHouseClass() {
 		users = new SepChainHashTable<>(1000); 
-		artWorks = new BinarySearchTree<>(); //TODO: Maybe have a separate TAD with the sold auctions ordered by values, if we add the artWork to the tree upon creation then its last sold price will be 0, and it won't update once we set that value
+		artWorks = new SepChainHashTable<>(); //TODO: Maybe have a separate TAD with the sold auctions ordered by values, if we add the artWork to the tree upon creation then its last sold price will be 0, and it won't update once we set that value
+		soldArtworks = new BinarySearchTree<>();
 		auctions = new SepChainHashTable<>(1000);
 	}
 
@@ -205,7 +208,7 @@ public class AuctionHouseClass implements AuctionHouse {
 			throw new auctionIdNotRegisteredException();
 
 		Iterator<ArtWork> it = auction.worksIterator();
-		auction.closeAuction();
+		closeAuction(auction);
 		auctions.remove(auctionId);
 		return it;
 	}
@@ -264,9 +267,19 @@ public class AuctionHouseClass implements AuctionHouse {
 	}
 	
 	@Override
-	public Iterator<ArtWork> listWorksByValue() throws noSoldWorkdsException {
-		//TODO
-		return null;
+	public Iterator<Entry<Integer, ArtWork>> listWorksByValue() throws noSoldWorkdsException {
+		Iterator<Entry<String,ArtWork>> it = artWorks.iterator();
+
+		while (it.hasNext()) {
+			ArtWork current = it.next().getValue();
+			if (current.highestSoldValue() != 0)
+				soldArtworks.insert(current.highestSoldValue(), current);
+		}
+
+		if (soldArtworks.isEmpty())
+			throw new noSoldWorkdsException();
+
+		return soldArtworks.iterator();
 	}
 
 	/**
@@ -279,6 +292,21 @@ public class AuctionHouseClass implements AuctionHouse {
 		while (it.hasNext())
 			artWorks.remove(it.next().workId());
 
+	}
+
+	/**
+	 * Closes each individual auction of the given auction, while storing saved sold ArtWorks.
+	 * @param auction auction being closed 
+	 */
+	private void closeAuction(Auction auction) {
+		Iterator<Entry<String, WorkAuction>> it = auction.getIndividualAuctions();
+
+		while (it.hasNext()) {
+			WorkAuction current = it.next().getValue();
+			current.closeAuction();
+			ArtWork w = current.getWork();
+			soldArtworks.insert(w.highestSoldValue(), w);
+		}
 	}
 
 }

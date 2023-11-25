@@ -101,11 +101,8 @@ public class AuctionClass implements Auction {
 	}
 
 	@Override
-	public void closeAuction() {
-		Iterator<Entry<String, WorkAuction>> it = individualAuctions.iterator();
-
-		while (it.hasNext())
-			it.next().getValue().closeAuction();
+	public Iterator<Entry<String, WorkAuction>> getIndividualAuctions() {
+		return this.individualAuctions.iterator();
 	}
 
 }

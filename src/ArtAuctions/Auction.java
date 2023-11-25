@@ -3,6 +3,7 @@ package ArtAuctions;
 import java.io.Serializable;
 import Exceptions.noWorksAuctionException;
 import Exceptions.workHasNoBidsException;
+import dataStructures.Entry;
 import dataStructures.Iterator;
 
 /**
@@ -66,9 +67,11 @@ public interface Auction extends Serializable {
      */
     int getMinimumBidValue(ArtWork work);
 
-	/**
-	 *Closes the auction 
-	 */
-	void closeAuction();
+
+    /**
+	 * Return the Iterator of the individual Auctions 
+     * @return Iterator of Entry with the individual auctions
+     */
+    Iterator<Entry<String, WorkAuction>> getIndividualAuctions();
 
 }

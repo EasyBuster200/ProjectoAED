@@ -19,6 +19,7 @@ public class ArtWorkClass implements ArtWork {
 	private Artist author;
 	private User buyer;
 	
+	
 	/**
 	 * ArtWorkClass constructor that creates a new artwork
 	 * @param workId - the work id
@@ -35,22 +36,26 @@ public class ArtWorkClass implements ArtWork {
 		this.highestSoldValue = 0;
 		this.beenSold = false;
 	}
-
+	
 	@Override
 	public String workId() {
 		return this.workId;
 	}
-
+	
 	@Override
 	public String name() {
 		return this.name;
 	}
-
+	
 	@Override
 	public int year() {
 		return this.year;
 	}
-
+	@Override
+	public User getBuyer() {
+		return buyer;
+	}
+	
 	@Override
 	public int lastAuctionPrice() {
 		return this.lastAuctionPrice;
@@ -69,11 +74,6 @@ public class ArtWorkClass implements ArtWork {
 	@Override
 	public String authorName() {
 		return this.author.name();
-	}
-
-	@Override
-	public boolean beenSold() {
-		return this.beenSold;
 	}
 
 	@Override
