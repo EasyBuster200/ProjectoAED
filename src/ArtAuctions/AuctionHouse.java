@@ -7,8 +7,8 @@ import dataStructures.Iterator;
 
 /**
  *AuctionHouse entity. 
- * @author Lipy Cardoso - 63542
- * @author Duarte Coelho - 65154
+ * @author Lipy Cardoso (63542) ik.cardoso@campus.fct.unl.pt
+ * @author Duarte Coelho (65154) dcr.coelho@capus.fct.unl.pt
  */
 public interface AuctionHouse extends Serializable {
 		
@@ -94,7 +94,6 @@ public interface AuctionHouse extends Serializable {
 	    void createAuction(String auctionId)
 	        throws auctionIdAlreadyRegisteredException;
 
-	    
 	    /**
 	     * Adds an artwork on a auction
 	     * @param auctionId id of the auction 

@@ -4,12 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Scanner;
-import ArtAuctions.AuctionHouse;
-import ArtAuctions.AuctionHouseClass;
-import ArtAuctions.Bid;
-import ArtAuctions.ArtWork;
-import ArtAuctions.Collector;
-import ArtAuctions.Artist;
+import ArtAuctions.*;
 import dataStructures.Entry;
 import dataStructures.Iterator;
 
@@ -176,6 +171,7 @@ public class Main {
             System.out.println(e.getMessage());
         }
     }
+    
 
     private static void infoWork(Scanner in, AuctionHouse sys) {
         try {
@@ -352,5 +348,3 @@ public class Main {
    
 
 }
-//TODO: Gotta check the @author on all files, it's missing our emails
-//TODO: Run the latest test.txt file, still looking for where the program gets stuck.

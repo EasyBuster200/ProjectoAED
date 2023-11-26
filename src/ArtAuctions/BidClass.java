@@ -2,8 +2,8 @@ package ArtAuctions;
 
 /**
  * Bid implentation
- * @author Lipy Cardoso - 63542
- * @author Duarte Coelho - 65154
+ * @author Lipy Cardoso (63542) ik.cardoso@campus.fct.unl.pt
+ * @author Duarte Coelho (65154) dcr.coelho@campus.fct.unl.pt
  */
 public class BidClass implements Bid {
 
@@ -13,7 +13,7 @@ public class BidClass implements Bid {
 	private static final long serialVersionUID = 1L;
 
 	private int bidValue;
-	private  User bidder;
+	private User bidder;
 
 	/**
 	 * BidClass constructor that creates a new BidClass

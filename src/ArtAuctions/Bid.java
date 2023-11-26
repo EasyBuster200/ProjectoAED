@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 /**
  * Bid Entity 
- * @author Lipy Cardoso - 63542
- * @author Duarte Coelho - 65154
+ * @author Lipy Cardoso (63542) ik.cardoso@campus.fct.unl.pt
+ * @author Duarte Coelho (65154) dcr.coelho@campus.fct.unl.pt
  */
 public interface Bid extends Serializable {
 

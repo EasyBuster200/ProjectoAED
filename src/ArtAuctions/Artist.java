@@ -4,8 +4,8 @@ import dataStructures.Iterator;
 
 /**
  * Artist entity, a user subtype that can sell artworks in auction
- * @author Lipy Cardoso - 63542
- * @author Duarte Coelho - 65154
+ * @author Lipy Cardoso (63542) ik.cardoso@campus.fct.unl.pt
+ * @author Duarte Coelho (65154) dcr.coelho@campus.fct.unl.pt
  */
 public interface Artist extends User {
 	
@@ -43,13 +43,13 @@ public interface Artist extends User {
 
 	
 	/**
-	 * Adds one, to the number of works this.author has in auction
+	 * Increments the number of ArtWorks the Artist has in auction by one.
 	 */
 	void workAddedToAuction();
 
 	
 	/**
-	 *Removes one to the number of works this.author has in auction 
+	 * Decrements the number of ArtWorks the Artist has in auction by one.
 	 */
 	void workRemovedFromAuction();
 

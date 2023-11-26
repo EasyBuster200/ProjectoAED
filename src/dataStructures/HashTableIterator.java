@@ -46,6 +46,6 @@ public class HashTableIterator<K,V> implements Iterator<Entry<K,V>> {
         
         }
 
-        return table[lastEmptyList].iterator(); //TODO: Not working.
+        return table[lastEmptyList].iterator();
     }
 }

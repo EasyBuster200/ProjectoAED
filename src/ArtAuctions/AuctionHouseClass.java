@@ -9,13 +9,13 @@ import dataStructures.Entry;
 
 /**
  * Main class for the management the interpretation and the output of commands
- * @author Lipy Cardoso - 63542
- * @author Duarte Coelho - 65154
+ * @author Lipy Cardoso (63542) ik.cardoso@campus.fct.unl.pt
+ * @author Duarte Coelho (65154) dcr.coelho@campus.fct.unl.pt
  */
 public class AuctionHouseClass implements AuctionHouse {
 
 	/**
-	 * SAerial Version UID of the Class
+	 * Serial Version UID of the Class
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -31,7 +31,7 @@ public class AuctionHouseClass implements AuctionHouse {
 	 */
 	public AuctionHouseClass() {
 		users = new SepChainHashTable<>(1000); 
-		artWorks = new SepChainHashTable<>(); //TODO: Maybe have a separate TAD with the sold auctions ordered by values, if we add the artWork to the tree upon creation then its last sold price will be 0, and it won't update once we set that value
+		artWorks = new SepChainHashTable<>();
 		soldArtworks = new BinarySearchTree<>();
 		auctions = new SepChainHashTable<>(1000);
 	}
@@ -48,6 +48,7 @@ public class AuctionHouseClass implements AuctionHouse {
 
 			else
 				users.insert(login, new Collector(login, name, age, email));
+
 	}
 
 	@Override
@@ -65,7 +66,9 @@ public class AuctionHouseClass implements AuctionHouse {
 	}
 
 	@Override
-	public void removeUser(String login) throws loginNotRegisteredException, userHasBidsException, artistHasWorksInAuction {
+	public void removeUser(String login) 
+		throws loginNotRegisteredException, userHasBidsException, artistHasWorksInAuction {
+
 		User user = users.find(login);
 
 		if(user == null)
@@ -87,7 +90,6 @@ public class AuctionHouseClass implements AuctionHouse {
 		else 
 			users.remove(login);
 		
-
 	}
 
 	@Override
@@ -282,7 +284,7 @@ public class AuctionHouseClass implements AuctionHouse {
 	}
 
 	/**
-	 * Removes the painting of an artist that has been removed
+	 * Removes the paintings of an artist that has been removed
 	 * @param artist - the artist of the painting to be removed
 	 */
 	private void removeArtistPaintings(Artist artist) {

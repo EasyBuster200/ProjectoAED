@@ -6,23 +6,23 @@ import dataStructures.List;
 
 /**
  * Artist implementation
- * @author Lipy Cardoso - 63542
- * @author Duarte Coelho - 65154
+ * @author Lipy Cardoso (63542) ik.cardoso@campus.fct.unl.pt
+ * @author Duarte Coelho (65154)
  */
 public class ArtistClass extends Collector implements Artist {
 	
 	/**
-	 * The Artist artistic name.
+	 * The Artists artistic name.
 	 */
 	private String artisticName;
 	
 	/**
-	 * The artist art works
+	 * The Artists art works
 	 */
 	private List<ArtWork> artWorks;
 	
 	/**
-	 * The amount of work the Artist has in auction
+	 * The amount of ArtWorks the Artist has in auction
 	 */
 	private int worksInAuction;
 
@@ -32,7 +32,7 @@ public class ArtistClass extends Collector implements Artist {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Artist constructor that creates a new artist with the given dat
+	 * Artist constructor that creates a new artist with the given data
 	 * @param login - artist login
 	 * @param name - artist name
 	 * @param age - artist age

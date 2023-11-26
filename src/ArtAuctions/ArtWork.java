@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 /**
  * The ArtWork entity 
- * @author Lipy Cardoso - 63542
- * @author Duarte Coelho - 65154
+ * @author Lipy Cardoso (63542) ik.cardoso@campus.fct.unl.pt
+ * @author Duarte Coelho (65154) dcr.coelho@campus.fct.unl.pt
  */
 public interface ArtWork extends Serializable {
 	
@@ -71,7 +71,8 @@ public interface ArtWork extends Serializable {
 
 	/**
 	 * Sets the highest value the work has been sold for in auction
-	 * @param newHighestValue > highestSoldValue() 
+	 * @pre newHighestValue > highestSoldValue() 
+	 * @param newHighestSoldValue the new highest value the ArtWork has been sold for 
 	 */
 	void setHighestSoldValue(int newHighestSoldValue);
 
@@ -82,12 +83,12 @@ public interface ArtWork extends Serializable {
 	void setLastSoldPrice(int newLastSoldPrice);
 
 	/**
-	 *Adds one, to the number of works a user has in auction
+	 * Increments the number of ArtWorks the Author has in auction by one
 	 */
 	void addedToAuction();
 
 	/**
-	 *Removes one, to the number of works the artist has in auction
+	 * Decrements the number of ArtWorks the Author has in action by one
 	 */
 	void removedFromAuction();
 
