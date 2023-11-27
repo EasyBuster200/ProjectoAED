@@ -304,6 +304,7 @@ public class Main {
     private static void listWorksByValue(AuctionHouse aH) {
          try {
              Iterator<Entry<Integer, ArtWork>> it = aH.listWorksByValue();
+             System.out.println();
              while (it.hasNext()) {
                  ArtWork current = it.next().getValue();
                  System.out.printf(LIST_WORKS_VALUE_BODY, current.workId(), current.name(), current.year(), current.highestSoldValue(), current.authorLogin(), current.authorName());

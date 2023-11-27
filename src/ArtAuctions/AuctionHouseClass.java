@@ -3,9 +3,10 @@ package ArtAuctions;
 import Exceptions.*;
 import dataStructures.Iterator;
 import dataStructures.SepChainHashTable;
-import dataStructures.BinarySearchTree;
+import dataStructures.BSTWithComparator;
 import dataStructures.Dictionary;
 import dataStructures.Entry;
+import dataStructures.InvertIntegerCompare;
 
 /**
  * Main class for the management the interpretation and the output of commands
@@ -31,8 +32,8 @@ public class AuctionHouseClass implements AuctionHouse {
 	 */
 	public AuctionHouseClass() {
 		users = new SepChainHashTable<>(1000); 
-		artWorks = new SepChainHashTable<>();
-		soldArtworks = new BinarySearchTree<>();
+		artWorks = new SepChainHashTable<>(1000);
+		soldArtworks = new BSTWithComparator<>(new InvertIntegerCompare());
 		auctions = new SepChainHashTable<>(1000);
 	}
 
@@ -269,13 +270,13 @@ public class AuctionHouseClass implements AuctionHouse {
 	
 	@Override
 	public Iterator<Entry<Integer, ArtWork>> listWorksByValue() throws noSoldWorkdsException {
-		Iterator<Entry<String,ArtWork>> it = artWorks.iterator();
+		//Iterator<Entry<String,ArtWork>> it = artWorks.iterator();
 
-		while (it.hasNext()) {
+		/* while (it.hasNext()) {
 			ArtWork current = it.next().getValue();
 			if (current.highestSoldValue() != 0)
 				soldArtworks.insert(current.highestSoldValue(), current);
-		}
+		} */
 
 		if (soldArtworks.isEmpty())
 			throw new noSoldWorkdsException();
