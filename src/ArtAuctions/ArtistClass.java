@@ -8,7 +8,7 @@ import dataStructures.OrderedDoubleList;
 /**
  * Artist implementation
  * @author Lipy Cardoso (63542) ik.cardoso@campus.fct.unl.pt
- * @author Duarte Coelho (65154)
+ * @author Duarte Coelho (65154) dcr.coelho@campus.fct.unl.pt
  */
 public class ArtistClass extends Collector implements Artist {
 	

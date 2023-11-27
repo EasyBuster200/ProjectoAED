@@ -5,7 +5,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Scanner;
 import ArtAuctions.*;
-import dataStructures.Entry;
 import dataStructures.Iterator;
 
 /**
@@ -171,7 +170,6 @@ public class Main {
             System.out.println(e.getMessage());
         }
     }
-    
 
     private static void infoWork(Scanner in, AuctionHouse sys) {
         try {
@@ -229,7 +227,7 @@ public class Main {
         try {
             String auctionId = in.nextLine().strip();
 
-            Iterator<ArtWork> it = sys.closeAuction(auctionId);
+            Iterator<ArtWorkReadOnly> it = sys.closeAuction(auctionId);
             System.out.print(AUCTION_CLOSED);
 
             while (it.hasNext()) {
@@ -253,7 +251,7 @@ public class Main {
         try {
             String auctionId = in.nextLine().strip();
 
-            Iterator<ArtWork> it = sys.listAuctionWorks(auctionId);
+            Iterator<ArtWorkReadOnly> it = sys.listAuctionWorks(auctionId);
 
             while(it.hasNext()) {
                 ArtWorkReadOnly a = it.next();
@@ -271,12 +269,12 @@ public class Main {
         try {
             String login = in.nextLine().strip();
 
-            Iterator<Entry<String, ArtWork>> it = sys.listArtistWorks(login);
+            Iterator<ArtWorkReadOnly> it = sys.listArtistWorks(login);
             
             System.out.println();
 
             while (it.hasNext()) {
-                ArtWorkReadOnly a = it.next().getValue();
+                ArtWorkReadOnly a = it.next();
 
                 System.out.printf(LIST_ARTIST_WORKS_BODY, a.workId(), a.name(), a.year(), a.highestSoldValue());
             }
@@ -286,11 +284,11 @@ public class Main {
         }
     }
 
-   private static void listBidsWork(Scanner in, AuctionHouse sys) {
+    private static void listBidsWork(Scanner in, AuctionHouse sys) {
         try {
             String auctionId = in.next().strip();
             String workId = in.nextLine().strip();
-            Iterator<Bid> it = sys.listBidsWork(auctionId, workId);
+            Iterator<BidReadOnly> it = sys.listBidsWork(auctionId, workId);
             System.out.println();
 
             while (it.hasNext()) {
@@ -305,10 +303,10 @@ public class Main {
     
     private static void listWorksByValue(AuctionHouse aH) {
          try {
-             Iterator<Entry<Integer, ArtWork>> it = aH.listWorksByValue();
+             Iterator<ArtWorkReadOnly> it = aH.listWorksByValue();
              System.out.println();
              while (it.hasNext()) {
-                 ArtWorkReadOnly current = it.next().getValue();
+                 ArtWorkReadOnly current = it.next();
                  System.out.printf(LIST_WORKS_VALUE_BODY, current.workId(), current.name(), current.year(), current.highestSoldValue(), current.authorLogin(), current.authorName());
              }
  
@@ -321,7 +319,7 @@ public class Main {
 	   System.out.println(QUIT_MSG);
     }
    
-   private static AuctionHouse load() {
+    private static AuctionHouse load() {
    		AuctionHouse auctionHouse = new AuctionHouseClass();
 		
    		try {
@@ -338,7 +336,7 @@ public class Main {
    		return auctionHouse;
 	}
    
-   private static void save(AuctionHouse aH) {
+    private static void save(AuctionHouse aH) {
 		try {
 			ObjectOutputStream file = new ObjectOutputStream(new FileOutputStream(DATA_FILE));
 			file.writeObject(aH);
@@ -352,5 +350,4 @@ public class Main {
 
 }
 
-//TODO: Check variable definitions 
-//TODO: Need to change return types to return the ReadOnly types 
+//TODO: Add all specific error messages and exception catches.

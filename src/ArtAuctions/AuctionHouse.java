@@ -64,7 +64,7 @@ public interface AuctionHouse extends Serializable {
 	     * @return the user information
 	     * @throws loginNotRegisteredException when the given user is not registered
 	     */
-	    Collector infoUser(String login)
+	    UserReadOnly infoUser(String login)
 	        throws loginNotRegisteredException;
 
 	    /**
@@ -74,7 +74,7 @@ public interface AuctionHouse extends Serializable {
 	     * @throws loginNotRegisteredException when the given artist is not registered 
 	     * @throws notAnArtistException when the given user is not an artist
 	     */
-	    Artist infoArtist(String login)
+	    ArtistReadOnly infoArtist(String login)
 	        throws loginNotRegisteredException, notAnArtistException;
 
 	    /**l
@@ -83,7 +83,7 @@ public interface AuctionHouse extends Serializable {
 	     * @return the information about the work
 	     * @throws workIdNotRegisteredException when the work is not registered
 	     */
-	    ArtWork infoWork(String workId)
+	    ArtWorkReadOnly infoWork(String workId)
 	        throws workIdNotRegisteredException;
 
 	    /**
@@ -126,7 +126,7 @@ public interface AuctionHouse extends Serializable {
 	     * @return iterator with art works, in the closed auction
 	     * @throws auctionIdNotRegisteredException when the id of the auction is not registered 
 	     */
-	    Iterator<ArtWork> closeAuction(String auctionId)
+	    Iterator<ArtWorkReadOnly> closeAuction(String auctionId)
 	        throws auctionIdNotRegisteredException;
 
 	    /**
@@ -136,7 +136,7 @@ public interface AuctionHouse extends Serializable {
 	     * @throws auctionIdNotRegisteredException if the given auction id is not registered
 	     * @throws noWorksAuctionException if the given auction id exists but has no works added
 	     */
-	    Iterator<ArtWork> listAuctionWorks(String auctionId)
+	    Iterator<ArtWorkReadOnly> listAuctionWorks(String auctionId)
 	        throws auctionIdNotRegisteredException, noWorksAuctionException;
 
 	    /**
@@ -147,7 +147,7 @@ public interface AuctionHouse extends Serializable {
 	     * @throws notAnArtistException if the login is not registered to an artist
 	     * @throws hasNoWorksException if the artist has no works 
 	     */
-	    Iterator<Entry<String, ArtWork>> listArtistWorks(String login)
+	    Iterator<ArtWorkReadOnly> listArtistWorks(String login)
 	        throws loginNotRegisteredException, notAnArtistException, hasNoWorksException;
 
 	    /**
@@ -159,7 +159,7 @@ public interface AuctionHouse extends Serializable {
 	     * @throws workNotInAuctionException if there is no work with the given id in the auction
 	     * @throws workHasNoBidsException if there haven't been any bids placed on the work with the given id
 	     */
-	    Iterator<Bid> listBidsWork(String auctionId, String workId)
+	    Iterator<BidReadOnly> listBidsWork(String auctionId, String workId)
 	        throws auctionIdNotRegisteredException, workNotInAuctionException, workHasNoBidsException;
 
 	    /**
@@ -167,7 +167,7 @@ public interface AuctionHouse extends Serializable {
 	     * @return iterator of all registered works, ordered by their value
 	     * @throws noSoldWorkdsException if no works has been sold
 	     */
-	    Iterator<Entry<Integer, ArtWork>> listWorksByValue()
+	    Iterator<ArtWorkReadOnly> listWorksByValue()
 	        throws noSoldWorkdsException;
 
 }
