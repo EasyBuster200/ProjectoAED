@@ -2,11 +2,10 @@ package ArtAuctions;
 
 import Exceptions.*;
 import dataStructures.Iterator;
+import dataStructures.OrderedDoubleList;
 import dataStructures.SepChainHashTable;
-import dataStructures.BSTWithComparator;
 import dataStructures.Dictionary;
 import dataStructures.Entry;
-import dataStructures.InvertIntegerCompare;
 
 /**
  * Main class for the management the interpretation and the output of commands
@@ -33,7 +32,6 @@ public class AuctionHouseClass implements AuctionHouse {
 	public AuctionHouseClass() {
 		users = new SepChainHashTable<>(1000); 
 		artWorks = new SepChainHashTable<>(1000);
-		soldArtworks = new BSTWithComparator<>(new InvertIntegerCompare());
 		auctions = new SepChainHashTable<>(1000);
 	}
 
@@ -231,7 +229,7 @@ public class AuctionHouseClass implements AuctionHouse {
 	}
 
 	@Override
-	public Iterator<ArtWork> listArtistWorks(String login)
+	public Iterator<Entry<String, ArtWork>> listArtistWorks(String login)
 			throws loginNotRegisteredException, notAnArtistException, hasNoWorksException {
 		
 			User user = users.find(login);
@@ -270,13 +268,14 @@ public class AuctionHouseClass implements AuctionHouse {
 	
 	@Override
 	public Iterator<Entry<Integer, ArtWork>> listWorksByValue() throws noSoldWorkdsException {
-		//Iterator<Entry<String,ArtWork>> it = artWorks.iterator();
+		soldArtworks = new OrderedDoubleList<>(); //TODO: Still not working, waiting on teachers response 
+		Iterator<Entry<String,ArtWork>> it = artWorks.iterator();
 
-		/* while (it.hasNext()) {
+		while (it.hasNext()) {
 			ArtWork current = it.next().getValue();
 			if (current.highestSoldValue() != 0)
 				soldArtworks.insert(current.highestSoldValue(), current);
-		} */
+		}
 
 		if (soldArtworks.isEmpty())
 			throw new noSoldWorkdsException();
@@ -289,10 +288,10 @@ public class AuctionHouseClass implements AuctionHouse {
 	 * @param artist - the artist of the painting to be removed
 	 */
 	private void removeArtistPaintings(Artist artist) {
-		Iterator<ArtWork> it = artist.worksIterator();
+		Iterator<Entry<String, ArtWork>> it = artist.worksIterator();
 
 		while (it.hasNext())
-			artWorks.remove(it.next().workId());
+			artWorks.remove(it.next().getValue().workId());
 
 	}
 
@@ -306,8 +305,6 @@ public class AuctionHouseClass implements AuctionHouse {
 		while (it.hasNext()) {
 			WorkAuction current = it.next().getValue();
 			current.closeAuction();
-			ArtWork w = current.getWork();
-			soldArtworks.insert(w.highestSoldValue(), w);
 		}
 	}
 

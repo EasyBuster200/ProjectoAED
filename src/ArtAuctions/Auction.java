@@ -11,13 +11,7 @@ import dataStructures.Iterator;
  * @author Lipy Cardoso (63542) ik.cardoso@campus.fct.unl.pt
  * @author Duarte Coelho (65154) dcr.coelho@campus.fct.unl.pt
  */
-public interface Auction extends Serializable {
-
-	/**
-	 * Returns the id of the auction.
-	 * @return auction Id.
-	 */
-	String auctionId();
+public interface Auction extends AuctionReadOnly, Serializable {
 	
 	/**
 	 * Adds a new work to the auction
@@ -46,27 +40,12 @@ public interface Auction extends Serializable {
     Iterator<ArtWork> worksIterator();
 
 	/**
-	 * Return the artWork with the given correspondent id
-	 * @param workId - id of the work to be returned
-	 * @return artWork with the correspondent id
-	 */
-	ArtWork getWork(String workId);
-
-	/**
 	 * Returns a bid iterator of the given work
 	 * @param work with the iterator
 	 * @return the work bid iterator
 	 * @throws workHasNoBidsException
 	 */
 	Iterator<Bid> getWorkBids(ArtWork work) throws workHasNoBidsException;
-
-    /**
-     * Return the minimum value of the given work
-     * @param work with minimum value
-     * @return the work minimum value
-     */
-    int getMinimumBidValue(ArtWork work);
-
 
     /**
 	 * Return the Iterator of the individual Auctions 

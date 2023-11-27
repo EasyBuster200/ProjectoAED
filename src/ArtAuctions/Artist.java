@@ -1,5 +1,6 @@
 package ArtAuctions;
 
+import dataStructures.Entry;
 import dataStructures.Iterator;
 
 /**
@@ -7,13 +8,7 @@ import dataStructures.Iterator;
  * @author Lipy Cardoso (63542) ik.cardoso@campus.fct.unl.pt
  * @author Duarte Coelho (65154) dcr.coelho@campus.fct.unl.pt
  */
-public interface Artist extends User {
-	
-	/**
-	 * Returns the artistic name of the artist.
-	 * @return the artistic name
-	 */
-	String artisticName();
+public interface Artist extends ArtistReadOnly {
 	
 	/**
 	 * Adds a new art work created by the artist
@@ -32,7 +27,7 @@ public interface Artist extends User {
 	 * Return a the artWorks iterator
 	 * @return artWork Iterator 
 	 */
-	Iterator<ArtWork> worksIterator();
+	Iterator<Entry<String, ArtWork>> worksIterator();
 
 	/**
      * Check if this Artist has works in auction.

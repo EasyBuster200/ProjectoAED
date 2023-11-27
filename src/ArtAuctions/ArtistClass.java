@@ -1,8 +1,9 @@
 package ArtAuctions;
 
-import dataStructures.DoubleList;
+import dataStructures.Dictionary;
+import dataStructures.Entry;
 import dataStructures.Iterator;
-import dataStructures.List;
+import dataStructures.OrderedDoubleList;
 
 /**
  * Artist implementation
@@ -19,7 +20,7 @@ public class ArtistClass extends Collector implements Artist {
 	/**
 	 * The Artists art works
 	 */
-	private List<ArtWork> artWorks;
+	private Dictionary<String, ArtWork> artWorks;
 	
 	/**
 	 * The amount of ArtWorks the Artist has in auction
@@ -42,7 +43,7 @@ public class ArtistClass extends Collector implements Artist {
 	public ArtistClass(String login, String name, int age,String email,String artisticName) {		
 		super(login, name, age, email);
 		this.artisticName = artisticName;
-		this.artWorks = new DoubleList<>();
+		this.artWorks = new OrderedDoubleList<>();
 		this.worksInAuction = 0;
 	}
 
@@ -53,7 +54,7 @@ public class ArtistClass extends Collector implements Artist {
 
 	@Override
 	public void addNewArtWork(ArtWork work) {
-		this.artWorks.addLast(work);
+		this.artWorks.insert(work.name(), work);
 	}
 
 	@Override
@@ -62,7 +63,7 @@ public class ArtistClass extends Collector implements Artist {
 	}
 
 	@Override
-	public Iterator<ArtWork> worksIterator() {
+	public Iterator<Entry<String, ArtWork>> worksIterator() {
 		return this.artWorks.iterator();
 	}
 

@@ -147,7 +147,7 @@ public interface AuctionHouse extends Serializable {
 	     * @throws notAnArtistException if the login is not registered to an artist
 	     * @throws hasNoWorksException if the artist has no works 
 	     */
-	    Iterator<ArtWork> listArtistWorks(String login)
+	    Iterator<Entry<String, ArtWork>> listArtistWorks(String login)
 	        throws loginNotRegisteredException, notAnArtistException, hasNoWorksException;
 
 	    /**

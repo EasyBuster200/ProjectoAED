@@ -28,7 +28,7 @@ public class Main {
     private static final String AUCTION_CLOSED_BODY_SOLD = "\n%s %s %s %s %d";
     private static final String AUCTION_CLOSE_BODY_NOT_SOLD = "\n%s %s sem propostas de venda.";
     private static final String LIST_AUCTION_WORKS_BODY = "\n%s %s %d %d %s %s";
-    private static final String LIST_ARTIST_WORKS_BODY = "\n%s %s %d %d\n";
+    private static final String LIST_ARTIST_WORKS_BODY = "%s %s %d %d\n";
     private static final String LIST_BIDS_BODY = "%s %s %d\n";
     private static final String LIST_WORKS_VALUE_BODY = "%s %s %d %d %s %s\n";
     private static final String QUIT_MSG = "Obrigado. Ate a proxima.";
@@ -152,7 +152,7 @@ public class Main {
         try {
             String login = in.next().strip();
 
-            Collector c = sys.infoUser(login);
+            UserReadOnly c = sys.infoUser(login);
             System.out.printf(INFO_USER_BODY, c.login(), c.name(), c.age(), c.email());
 
         } catch (Exception e) {
@@ -164,7 +164,7 @@ public class Main {
         try {
             String login = in.next().strip();
 
-            Artist a = sys.infoArtist(login);
+            ArtistReadOnly a = sys.infoArtist(login);
             System.out.printf(INFO_ARTIST_BODY, a.login(), a.name(), a.artisticName(), a.age(), a.email());
 
         } catch (Exception e) {
@@ -177,7 +177,7 @@ public class Main {
         try {
             String workId = in.next().strip();
 
-            ArtWork w =  sys.infoWork(workId);
+            ArtWorkReadOnly w =  sys.infoWork(workId);
             System.out.printf(INFO_WORK_BODY, w.workId(), w.name(), w.year(), w.lastAuctionPrice(), w.authorLogin(), w.authorName());
 
         } catch (Exception e) {
@@ -233,8 +233,7 @@ public class Main {
             System.out.print(AUCTION_CLOSED);
 
             while (it.hasNext()) {
-                ArtWork a = it.next();
-                
+                ArtWorkReadOnly a = it.next();
 
                 if (a.getBuyer() != null)
                     System.out.printf(AUCTION_CLOSED_BODY_SOLD, a.workId(), a.name(), a.buyerLogin(), a.buyerName(), a.lastAuctionPrice());
@@ -257,7 +256,7 @@ public class Main {
             Iterator<ArtWork> it = sys.listAuctionWorks(auctionId);
 
             while(it.hasNext()) {
-                ArtWork a = it.next();
+                ArtWorkReadOnly a = it.next();
 
                 System.out.printf(LIST_AUCTION_WORKS_BODY, a.workId(), a.name(), a.year(), a.highestSoldValue(), a.authorLogin(), a.authorName());
             }
@@ -272,13 +271,16 @@ public class Main {
         try {
             String login = in.nextLine().strip();
 
-            Iterator<ArtWork> it = sys.listArtistWorks(login);
+            Iterator<Entry<String, ArtWork>> it = sys.listArtistWorks(login);
+            
+            System.out.println();
 
             while (it.hasNext()) {
-                ArtWork a = it.next();
+                ArtWorkReadOnly a = it.next().getValue();
 
                 System.out.printf(LIST_ARTIST_WORKS_BODY, a.workId(), a.name(), a.year(), a.highestSoldValue());
             }
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -292,7 +294,7 @@ public class Main {
             System.out.println();
 
             while (it.hasNext()) {
-                Bid b = it.next();
+                BidReadOnly b = it.next();
                 System.out.printf(LIST_BIDS_BODY, b.biddersLogin(), b.biddersName(), b.bidValue());
             }
             
@@ -306,7 +308,7 @@ public class Main {
              Iterator<Entry<Integer, ArtWork>> it = aH.listWorksByValue();
              System.out.println();
              while (it.hasNext()) {
-                 ArtWork current = it.next().getValue();
+                 ArtWorkReadOnly current = it.next().getValue();
                  System.out.printf(LIST_WORKS_VALUE_BODY, current.workId(), current.name(), current.year(), current.highestSoldValue(), current.authorLogin(), current.authorName());
              }
  
@@ -349,3 +351,6 @@ public class Main {
    
 
 }
+
+//TODO: Check variable definitions 
+//TODO: Need to change return types to return the ReadOnly types 
