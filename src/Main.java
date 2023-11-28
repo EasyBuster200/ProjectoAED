@@ -412,3 +412,6 @@ public class Main {
    
 
 }
+//TODO: Gotta make sure that the OrderedDoubleListClass is private, and not in use anywhere outside the HashTable. 
+
+//TODO: Follow up with the teacher on my email, or emmail Toninho
