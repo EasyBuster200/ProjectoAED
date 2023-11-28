@@ -1,9 +1,9 @@
 package ArtAuctions;
 
-import dataStructures.Dictionary;
+import dataStructures.BinarySearchTree;
 import dataStructures.Entry;
 import dataStructures.Iterator;
-import dataStructures.OrderedDoubleList;
+import dataStructures.OrderedDictionary;
 
 /**
  * Artist implementation
@@ -20,7 +20,7 @@ public class ArtistClass extends Collector implements Artist {
 	/**
 	 * The Artists art works
 	 */
-	private Dictionary<String, ArtWork> artWorks;
+	private OrderedDictionary<String, ArtWork> artWorks;
 	
 	/**
 	 * The amount of ArtWorks the Artist has in auction
@@ -43,7 +43,7 @@ public class ArtistClass extends Collector implements Artist {
 	public ArtistClass(String login, String name, int age,String email,String artisticName) {		
 		super(login, name, age, email);
 		this.artisticName = artisticName;
-		this.artWorks = new OrderedDoubleList<>();
+		this.artWorks = new BinarySearchTree<>();
 		this.worksInAuction = 0;
 	}
 

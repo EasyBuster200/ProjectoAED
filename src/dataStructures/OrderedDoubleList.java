@@ -8,7 +8,7 @@ package dataStructures;
  * @param <K, V> Generics - K extends Comparable
  * 
  */
-public class OrderedDoubleList<K extends Comparable<K>, V> 
+class OrderedDoubleList<K extends Comparable<K>, V> 
 	implements OrderedDictionary<K , V> {
 
     /**

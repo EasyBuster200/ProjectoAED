@@ -220,7 +220,7 @@ public class Main {
             String workId = in.next().strip();
 
             ArtWorkReadOnly w =  sys.infoWork(workId);
-            System.out.printf(INFO_WORK_BODY, w.workId(), w.name(), w.year(), w.lastAuctionPrice(), w.authorLogin(), w.authorName());
+            System.out.printf(INFO_WORK_BODY, w.workId(), w.name(), w.year(), w.highestSoldValue(), w.authorLogin(), w.authorName());
 
         } catch (workIdNotRegisteredException e) {
             System.out.println(WORK_ID_UNREGISTERED);

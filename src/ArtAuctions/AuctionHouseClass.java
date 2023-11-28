@@ -2,9 +2,9 @@ package ArtAuctions;
 
 import Exceptions.*;
 import dataStructures.Iterator;
-import dataStructures.OrderedDoubleList;
 import dataStructures.SepChainHashTable;
 import dataStructures.TypeConversionIterator;
+import dataStructures.BinarySearchTree;
 import dataStructures.Dictionary;
 import dataStructures.Entry;
 import dataStructures.EntryIterator;
@@ -270,7 +270,7 @@ public class AuctionHouseClass implements AuctionHouse {
 	
 	@Override
 	public Iterator<ArtWorkReadOnly> listWorksByValue() throws noSoldWorkdsException {
-		soldArtworks = new OrderedDoubleList<>(); //TODO: Still not working, waiting on teachers response 
+		soldArtworks = new BinarySearchTree<>(); //TODO: Still not working, waiting on teachers response 
 		//? Try to use a HashTable, I think they allow for equal keys
 		Iterator<Entry<String,ArtWork>> it = artWorks.iterator();
 
