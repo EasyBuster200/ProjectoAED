@@ -39,7 +39,6 @@ public class WorkAuctionClass implements WorkAuction {
 
         if (highestBid == null)
            this.highestBid = bid;
-
         else if (highestBid.bidValue() < bid.bidValue())
             this.highestBid = bid;
 

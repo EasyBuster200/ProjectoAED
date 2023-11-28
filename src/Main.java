@@ -5,6 +5,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Scanner;
 import ArtAuctions.*;
+import Exceptions.*;
 import dataStructures.Iterator;
 
 /**
@@ -13,6 +14,10 @@ import dataStructures.Iterator;
  * @author Duarte Coelho - 65154
  */
 public class Main {
+
+    /**
+     * Successful output messages
+     */
     private static final String USER_REGISTERED = "\nRegisto de utilizador executado.";
     private static final String ARTIST_REGISTERED = "\nRegisto de artista executado.";
     private static final String USER_REMOVED = "\nRemocao de utilizador executada.";
@@ -32,7 +37,29 @@ public class Main {
     private static final String LIST_WORKS_VALUE_BODY = "%s %s %d %d %s %s\n";
     private static final String QUIT_MSG = "Obrigado. Ate a proxima.";
     
-  
+    /**
+     * Error messages
+     */
+    private static final String UNDER_AGE = "\nIdade inferior a 18 anos.";
+    private static final String ALREADY_REGISTERED = "\nUtilizador existente.";
+    private static final String NOT_REGISTERED = "\nUtilizador inexistente.";
+    private static final String HAS_OPEN_BIDS = "\nUtilizador com propostas submetidas.";
+    private static final String WORKS_IN_AUCTION = "\nArtista com obras em leilao.";
+    private static final String WORK_ID_UNAVAILABLE = "\nObra existente.";
+    private static final String NOT_AN_ARTIST = "\nArtista inexistente.";
+    private static final String WORK_ID_UNREGISTERED = "\nObra inexistente.";
+    private static final String AUCTION_ID_UNAVAILABLE = "\nLeilao existente.";
+    private static final String AUCTION_ID_UNREGISTERED = "\nLeilao inexistente.";
+    private static final String WORK_NOT_IN_AUCTION = "\nObra inexistente no leilao.";
+    private static final String VALUE_UNDER_MINIMUM = "\nValor proposto abaixo do valor minimo.";
+    private static final String AUCTION_HAS_NO_WORKS = "\nLeilao sem obras.";
+    private static final String ARTIST_HAS_NO_WORKS = "\nArtista sem obras.";
+    private static final String NO_SOLD_WORKS = "\nNao existem obras ja vendidas em leilao.";
+    private static final String WORK_HAS_NO_BIDS = "\nObra sem propostas.";
+
+    /**
+     * Commands
+     */
     private static final String ADD_USER = "adduser";
     private static final String ADD_ARTIST = "addartist";
     private static final String REMOVE_USER = "removeuser";
@@ -50,7 +77,9 @@ public class Main {
     private static final String LIST_WORKS_BY_VALUE = "listworksbyvalue";
     private static final String QUIT = "quit";
     
-
+    /**
+     * String for the name of the file, where all the data will be stored.
+     */
     private static final String DATA_FILE = "storedAuctionHouse.dat";
     
     public static void main(String[] args) throws Exception {
@@ -100,8 +129,10 @@ public class Main {
              sys.addUser(login, name, age, email);
              System.out.println(USER_REGISTERED);
 
-        } catch(Exception e) {
-            System.out.println(e.getMessage());
+        } catch(userUnderAgeException e) {
+            System.out.println(UNDER_AGE);
+        } catch (loginAlredyRegisteredException e) {
+            System.out.println(ALREADY_REGISTERED);
         }
     }
 
@@ -116,8 +147,10 @@ public class Main {
             sys.addArtist(login, name, artisticName, age, email);
             System.out.println(ARTIST_REGISTERED);
 
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (userUnderAgeException e) {
+            System.out.println(UNDER_AGE);
+        } catch(loginAlredyRegisteredException e) {
+            System.out.println(ALREADY_REGISTERED);
         }
     }
 
@@ -127,8 +160,13 @@ public class Main {
             
             sys.removeUser(login);
             System.out.println(USER_REMOVED);
-        } catch (Exception e) {
-           System.out.println(e.getMessage());
+
+        } catch (loginNotRegisteredException e) {
+           System.out.println(NOT_REGISTERED);
+        } catch(userHasBidsException e) {
+            System.out.println(HAS_OPEN_BIDS);
+        } catch(artistHasWorksInAuction e) {
+            System.out.println(WORKS_IN_AUCTION);
         }
     }
 
@@ -142,8 +180,12 @@ public class Main {
             sys.addWork(workId, authorLogin, year, name);
             System.out.println(WORK_REGISTERED);
 
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (workIdAlreadyRegisteredException e) {
+            System.out.println(WORK_ID_UNAVAILABLE);
+        } catch (loginNotRegisteredException e) {
+            System.out.println(NOT_REGISTERED);
+        } catch (notAnArtistException e) {
+            System.out.println(NOT_AN_ARTIST);
         }
     }
 
@@ -154,8 +196,8 @@ public class Main {
             UserReadOnly c = sys.infoUser(login);
             System.out.printf(INFO_USER_BODY, c.login(), c.name(), c.age(), c.email());
 
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (loginNotRegisteredException e) {
+            System.out.println(NOT_REGISTERED);
         }
     }
 
@@ -166,8 +208,10 @@ public class Main {
             ArtistReadOnly a = sys.infoArtist(login);
             System.out.printf(INFO_ARTIST_BODY, a.login(), a.name(), a.artisticName(), a.age(), a.email());
 
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (loginNotRegisteredException e) {
+            System.out.println(NOT_REGISTERED);
+        } catch (notAnArtistException e) {
+            System.out.println(NOT_AN_ARTIST);
         }
     }
 
@@ -178,8 +222,8 @@ public class Main {
             ArtWorkReadOnly w =  sys.infoWork(workId);
             System.out.printf(INFO_WORK_BODY, w.workId(), w.name(), w.year(), w.lastAuctionPrice(), w.authorLogin(), w.authorName());
 
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (workIdNotRegisteredException e) {
+            System.out.println(WORK_ID_UNREGISTERED);
         }
     }
 
@@ -190,8 +234,8 @@ public class Main {
             sys.createAuction(auctionId);
             System.out.println(AUCTION_REGISTERED);
 
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (auctionIdAlreadyRegisteredException e) {
+            System.out.println(AUCTION_ID_UNAVAILABLE);
         }
     }
 
@@ -204,8 +248,10 @@ public class Main {
             sys.addWorkAuction(auctionId, workId, minimumValue);
             System.out.println(WORK_ADDED_AUCTION);
             
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (auctionIdNotRegisteredException e) {
+            System.out.println(AUCTION_ID_UNREGISTERED);
+        } catch (workIdNotRegisteredException e) {
+            System.out.println(WORK_ID_UNREGISTERED);
         }
     }
 
@@ -218,8 +264,15 @@ public class Main {
 
             sys.bid(auctionId, workId, login, valor);
             System.out.println(BID_PLACED);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+
+        } catch (valueUnderMinimumException e) {
+            System.out.println(VALUE_UNDER_MINIMUM);
+        } catch (auctionIdNotRegisteredException e) {
+            System.out.println(AUCTION_ID_UNREGISTERED);
+        } catch (loginNotRegisteredException e) {
+            System.out.println(NOT_REGISTERED);
+        } catch (workNotInAuctionException e ) {
+            System.out.println(WORK_NOT_IN_AUCTION);
         }
     }
 
@@ -242,8 +295,8 @@ public class Main {
 
             System.out.println();
 
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (auctionIdNotRegisteredException e) {
+            System.out.println(AUCTION_ID_UNREGISTERED);
         }
     }
 
@@ -260,8 +313,10 @@ public class Main {
             }
             
             System.out.println();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (auctionIdNotRegisteredException e) {
+            System.out.println(AUCTION_ID_UNREGISTERED);
+        } catch (noWorksAuctionException e) {
+            System.out.println(AUCTION_HAS_NO_WORKS);
         }
     }
 
@@ -279,8 +334,12 @@ public class Main {
                 System.out.printf(LIST_ARTIST_WORKS_BODY, a.workId(), a.name(), a.year(), a.highestSoldValue());
             }
 
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (loginNotRegisteredException e) {
+            System.out.println(NOT_REGISTERED);
+        } catch (notAnArtistException e) {
+            System.out.println(NOT_AN_ARTIST);
+        } catch (hasNoWorksException e) {
+            System.out.println(ARTIST_HAS_NO_WORKS);
         }
     }
 
@@ -296,8 +355,12 @@ public class Main {
                 System.out.printf(LIST_BIDS_BODY, b.biddersLogin(), b.biddersName(), b.bidValue());
             }
             
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (auctionIdNotRegisteredException e) {
+            System.out.println(AUCTION_ID_UNREGISTERED);
+        } catch (workNotInAuctionException e) {
+            System.out.println(WORK_NOT_IN_AUCTION);
+        } catch (workHasNoBidsException e) {
+            System.out.println(WORK_HAS_NO_BIDS);
         }
     }
     
@@ -310,8 +373,8 @@ public class Main {
                  System.out.printf(LIST_WORKS_VALUE_BODY, current.workId(), current.name(), current.year(), current.highestSoldValue(), current.authorLogin(), current.authorName());
              }
  
-         } catch (Exception e) {
-             System.out.println(e.getMessage());
+         } catch (noSoldWorkdsException e) {
+            System.out.println(NO_SOLD_WORKS);
          }
     }
 
@@ -349,5 +412,3 @@ public class Main {
    
 
 }
-
-//TODO: Add all specific error messages and exception catches.

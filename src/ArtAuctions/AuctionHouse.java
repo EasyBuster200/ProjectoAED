@@ -2,7 +2,6 @@ package ArtAuctions;
 
 import java.io.Serializable;
 import Exceptions.*;
-import dataStructures.Entry;
 import dataStructures.Iterator;
 
 /**
@@ -114,8 +113,7 @@ public interface AuctionHouse extends Serializable {
 	     * @throws valueUnderMinimumException when the value proposal is bellow the minimum sale value of the artwork
 	     * @throws auctionIdNotRegisteredException when the id of the auction is not registered
 	     * @throws loginNotRegisteredException when the login of the user is not registered
-	     * @throws workNotInAuctionException
-	     * @throws workIdNotRegisteredException when the id of the work is not registered 
+	     * @throws workNotInAuctionException when the id of the work is not registered in the auction
 	     */
 	    void bid(String auctionId, String workId, String login, int value)
 	        throws valueUnderMinimumException, auctionIdNotRegisteredException, loginNotRegisteredException, workNotInAuctionException;
