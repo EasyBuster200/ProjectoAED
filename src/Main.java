@@ -367,10 +367,15 @@ public class Main {
     private static void listWorksByValue(AuctionHouse aH) {
          try {
              Iterator<ArtWorkReadOnly> it = aH.listWorksByValue();
+             boolean beenSold = true;
              System.out.println();
-             while (it.hasNext()) {
-                 ArtWorkReadOnly current = it.next();
-                 System.out.printf(LIST_WORKS_VALUE_BODY, current.workId(), current.name(), current.year(), current.highestSoldValue(), current.authorLogin(), current.authorName());
+             while (it.hasNext() && beenSold) {
+                ArtWorkReadOnly current = it.next();
+                 
+                if (current.highestSoldValue() == 0)
+                    beenSold = false; //Since the it is ordered, once the first artWork with value of 0 is found all the others after will also be at 0.
+                else 
+                    System.out.printf(LIST_WORKS_VALUE_BODY, current.workId(), current.name(), current.year(), current.highestSoldValue(), current.authorLogin(), current.authorName());
              }
  
          } catch (noSoldWorkdsException e) {

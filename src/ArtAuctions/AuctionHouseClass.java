@@ -306,21 +306,16 @@ public class AuctionHouseClass implements AuctionHouse {
 
 		while (it.hasNext()) {
 			WorkAuction current = it.next().getValue();
-			if (current.hasBids()) {
-				ArtWork currentWork = current.getWork();
+			
+			ArtWork currentWork = current.getWork();
 
-				if (soldArtworks.find(currentWork) != null)
-					soldArtworks.remove(currentWork);
+			if (current.hasBids() && soldArtworks.find(currentWork) != null)
+				soldArtworks.remove(currentWork);
 
-				current.closeAuction();
+			current.closeAuction();
 
-				soldArtworks.insert(currentWork, currentWork);
-
-			}
+			soldArtworks.insert(currentWork, currentWork);
 		}
 	}
 
 }
-
-//TODO: Make all tads use the ReadOnly types, and do type casting where needed
-
