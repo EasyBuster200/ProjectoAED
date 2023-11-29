@@ -17,7 +17,7 @@ public class AuctionClass implements Auction {
 
 	private String auctionId;
 	private Dictionary<String, WorkAuction> individualAuctions; //WorkId --> WorkAuction
-	private List<ArtWork> auctionWorks;
+	private List<ArtWorkReadOnly> auctionWorks;
 	
 	/**
 	 * Serial version UID of the Class
@@ -59,16 +59,16 @@ public class AuctionClass implements Auction {
 	}
 
 	@Override
-	public Iterator<ArtWork> worksIterator() {
+	public Iterator<ArtWorkReadOnly> worksIterator() {
 		return auctionWorks.iterator();
 	}
 
 	@Override
 	public ArtWork getWork(String workId) {
-		Iterator<ArtWork> it = auctionWorks.iterator();
+		Iterator<ArtWorkReadOnly> it = auctionWorks.iterator();
 
 		while (it.hasNext()) {
-			ArtWork current = it.next();
+			ArtWork current = (ArtWork) it.next();
 
 			if (current.workId().equalsIgnoreCase(workId))
 				return current;
@@ -78,7 +78,7 @@ public class AuctionClass implements Auction {
 	}
 
 	@Override
-	public Iterator<Bid> getWorkBids(ArtWork work) throws workHasNoBidsException {
+	public Iterator<BidReadOnly> getWorkBids(ArtWork work) throws workHasNoBidsException {
 		Iterator<Entry<String, WorkAuction>> it = individualAuctions.iterator();
 
 		while(it.hasNext()) {

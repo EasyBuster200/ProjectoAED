@@ -37,7 +37,7 @@ public interface Auction extends AuctionReadOnly, Serializable {
      * @return worksIterator
      * @throws noWorksAuctionException
      */
-    Iterator<ArtWork> worksIterator();
+    Iterator<ArtWorkReadOnly> worksIterator();
 
 	/**
 	 * Returns a bid iterator of the given work
@@ -45,7 +45,7 @@ public interface Auction extends AuctionReadOnly, Serializable {
 	 * @return the work bid iterator
 	 * @throws workHasNoBidsException
 	 */
-	Iterator<Bid> getWorkBids(ArtWork work) throws workHasNoBidsException;
+	Iterator<BidReadOnly> getWorkBids(ArtWork work) throws workHasNoBidsException;
 
     /**
 	 * Return the Iterator of the individual Auctions 

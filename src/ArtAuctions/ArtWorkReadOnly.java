@@ -1,6 +1,8 @@
 package ArtAuctions;
 
-public interface ArtWorkReadOnly  {
+import java.io.Serializable;
+
+public interface ArtWorkReadOnly extends Serializable, Comparable<ArtWork> {
     
     /**
 	 * Return the id of the art work.

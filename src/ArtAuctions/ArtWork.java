@@ -1,13 +1,11 @@
 package ArtAuctions;
 
-import java.io.Serializable;
-
 /**
  * The ArtWork entity 
  * @author Lipy Cardoso (63542) ik.cardoso@campus.fct.unl.pt
  * @author Duarte Coelho (65154) dcr.coelho@campus.fct.unl.pt
  */
-public interface ArtWork extends ArtWorkReadOnly, Serializable {
+public interface ArtWork extends ArtWorkReadOnly {
 	
 	/**
 	 * Sets the new auction price of the art work.

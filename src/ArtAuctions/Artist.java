@@ -1,6 +1,5 @@
 package ArtAuctions;
 
-import dataStructures.Entry;
 import dataStructures.Iterator;
 
 /**
@@ -27,7 +26,7 @@ public interface Artist extends ArtistReadOnly {
 	 * Return a the artWorks iterator
 	 * @return artWork Iterator 
 	 */
-	Iterator<Entry<String, ArtWork>> worksIterator();
+	Iterator<ArtWorkReadOnly> worksIterator();
 
 	/**
      * Check if this Artist has works in auction.

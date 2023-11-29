@@ -20,7 +20,7 @@ public interface WorkAuction extends Serializable {
      * Return an Iterator with all the registered bids
      * @return Iterator with the registered bids
      */
-    Iterator<Bid> bidsIterator();
+    Iterator<BidReadOnly> bidsIterator();
 
     /**
      * Check if this workAuction has any bids

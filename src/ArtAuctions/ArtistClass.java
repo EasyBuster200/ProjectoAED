@@ -1,7 +1,7 @@
 package ArtAuctions;
 
 import dataStructures.BinarySearchTree;
-import dataStructures.Entry;
+import dataStructures.EntryIterator;
 import dataStructures.Iterator;
 import dataStructures.OrderedDictionary;
 
@@ -20,7 +20,7 @@ public class ArtistClass extends Collector implements Artist {
 	/**
 	 * The Artists art works
 	 */
-	private OrderedDictionary<String, ArtWork> artWorks;
+	private OrderedDictionary<String, ArtWorkReadOnly> artWorks;
 	
 	/**
 	 * The amount of ArtWorks the Artist has in auction
@@ -63,8 +63,8 @@ public class ArtistClass extends Collector implements Artist {
 	}
 
 	@Override
-	public Iterator<Entry<String, ArtWork>> worksIterator() {
-		return this.artWorks.iterator();
+	public Iterator<ArtWorkReadOnly> worksIterator() {
+		return new EntryIterator<String, ArtWorkReadOnly>(this.artWorks.iterator());
 	}
 
 	@Override

@@ -114,5 +114,16 @@ public class ArtWorkClass implements ArtWork {
 	public void sold(User buyer) {
 		this.buyer = buyer;
 	}
+
+	@Override
+	public int compareTo(ArtWork work) {
+		int comp = work.highestSoldValue() - this.highestSoldValue();
+        
+        if (comp == 0) 
+			return this.name().compareTo(work.name());
+
+        return comp;
+    
+	}
 	
 }

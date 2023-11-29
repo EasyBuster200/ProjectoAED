@@ -18,7 +18,7 @@ public class WorkAuctionClass implements WorkAuction {
 	
     private ArtWork work;
     private int minimumValue;
-    private List<Bid> bids;
+    private List<BidReadOnly> bids;
     private Bid highestBid;
     
     /**
@@ -46,7 +46,7 @@ public class WorkAuctionClass implements WorkAuction {
     }
 
     @Override
-    public Iterator<Bid> bidsIterator() {
+    public Iterator<BidReadOnly> bidsIterator() {
         return this.bids.iterator();
     }
 
@@ -73,14 +73,14 @@ public class WorkAuctionClass implements WorkAuction {
 
             this.work.setLastSoldPrice(this.highestBid.bidValue());
             this.work.sold(highestBid.bidder());
-        }
-        else if (bids.isEmpty() && (this.work.getBuyer() != null))
+
+        }else if (bids.isEmpty() && (this.work.getBuyer() != null))
             this.work.sold(null);
 
-        Iterator<Bid> it = bids.iterator();
+        Iterator<BidReadOnly> it = bids.iterator();
 
         while (it.hasNext()) {
-            it.next().bidClosed();
+            ((Bid) it.next()).bidClosed();
         }
         
         this.work.removedFromAuction();

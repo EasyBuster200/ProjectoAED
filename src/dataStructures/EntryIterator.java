@@ -2,6 +2,7 @@ package dataStructures;
 
 /**
  * Auxilary Class, that recieves an Iterator of Entry<K,V> and transforms into an iterator of V
+ * This class recieves Iterators of Entry type objects, and only returns the value of the Entry, for eaiser Iteration.
  * @author Lipy Cardoso (63542) ik.cardoso@campus.fct.unl.pt
  * @author Duarte Coelho (65154) dcr.coelho@campus.fct.unl.pt 
  */
