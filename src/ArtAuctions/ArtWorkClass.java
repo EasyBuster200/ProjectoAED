@@ -12,12 +12,40 @@ public class ArtWorkClass implements ArtWork {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	
-	private String workId, name;
-	private int year, lastAuctionPrice, highestSoldValue;
+	/**
+	 * Unique Id of the work
+	 */
+	private String workId;
+
+	/**
+	 * Name of the ArtWork
+	 */
+	private String name;
+
+	/**
+	 * The year of creation of the ArtWork
+	 */
+	private int year;
+
+	/**
+	 * The last price the ArtWork was sold for in auction
+	 */
+	private int lastAuctionPrice;
+
+	/**
+	 * The highest price the ArtWork has ever been sold for in auction
+	 */
+	private int highestSoldValue;
+
+	/**
+	 * The Artist that made the ArtWork
+	 */
 	private Artist author;
+
+	/**
+	 * The last User to buy the ArtWork
+	 */
 	private User buyer;
-	
 	
 	/**
 	 * ArtWorkClass constructor that creates a new artwork
@@ -115,6 +143,12 @@ public class ArtWorkClass implements ArtWork {
 		this.buyer = buyer;
 	}
 
+	/** 
+	 * Compares the artwork, with another given artwork return an integer represing greater than, smaller than, and equal
+	 * @param work other work to compare to
+	 * @return 0 if both works have the same price and name, 
+	 * > 0 if this.work > work and < 0 if this.work < work.
+	 */
 	@Override
 	public int compareTo(ArtWork work) {
 		int comp = work.highestSoldValue() - this.highestSoldValue();

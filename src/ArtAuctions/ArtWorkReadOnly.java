@@ -2,6 +2,11 @@ package ArtAuctions;
 
 import java.io.Serializable;
 
+/**
+ * Interface representing a read-only view of ArtWork objects
+ * @author Lipy Cardoso (63542) ik.cardoso@campus.fct.unl.pt
+ * @author Duarte Coelho (65154) dcr.coelho@campus.fct.unl.pt
+ */
 public interface ArtWorkReadOnly extends Serializable, Comparable<ArtWork> {
     
     /**

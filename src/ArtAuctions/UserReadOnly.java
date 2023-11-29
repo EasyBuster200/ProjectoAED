@@ -1,5 +1,8 @@
 package ArtAuctions;
 
+/**
+ * Interface representing a read-only view of the User objects
+ */
 public interface UserReadOnly {
     
     /**

@@ -373,7 +373,7 @@ public class Main {
                 ArtWorkReadOnly current = it.next();
                  
                 if (current.highestSoldValue() == 0)
-                    beenSold = false; //Since the it is ordered, once the first artWork with value of 0 is found all the others after will also be at 0.
+                    beenSold = false; //Since the iterator is ordered, once the first artWork with value of 0 is found all the others after will also be at 0.
                 else 
                     System.out.printf(LIST_WORKS_VALUE_BODY, current.workId(), current.name(), current.year(), current.highestSoldValue(), current.authorLogin(), current.authorName());
              }
@@ -417,4 +417,3 @@ public class Main {
    
 
 }
-//TODO: Follow up with the teacher on my email, or emmail Toninho

@@ -16,9 +16,24 @@ public class WorkAuctionClass implements WorkAuction {
      */
     private static final long serialVersionUID = 1L;
 	
+    /**
+     * Work in the individual Acution
+     */
     private ArtWork work;
+
+    /**
+     * Minimum Bid value
+     */
     private int minimumValue;
+    
+    /**
+     * List of the Bid s placed on the ArtWork
+     */
     private List<BidReadOnly> bids;
+
+    /**
+     * The current highest Bid
+     */
     private Bid highestBid;
     
     /**
@@ -69,21 +84,21 @@ public class WorkAuctionClass implements WorkAuction {
     public void closeAuction() {
         if (!bids.isEmpty()) {
             if (this.work.highestSoldValue() < this.highestBid.bidValue())
-                this.work.setHighestSoldValue(this.highestBid.bidValue());
+                this.work.setHighestSoldValue(this.highestBid.bidValue()); //If the current highest bid has a value higher than the highest sold value of the work, then update the value
 
-            this.work.setLastSoldPrice(this.highestBid.bidValue());
-            this.work.sold(highestBid.bidder());
+            this.work.setLastSoldPrice(this.highestBid.bidValue()); //Setting the last sold price, even if its not the new highest sold price
+            this.work.sold(highestBid.bidder()); //Setting the new buyer of the ArtWork
         }
         else if (bids.isEmpty() && (this.work.getBuyer() != null))
-            this.work.sold(null);
+            this.work.sold(null); //If the ArtWork had already been sold to a different User, and that user wasn't updated then set it to null
 
         Iterator<BidReadOnly> it = bids.iterator();
 
         while (it.hasNext()) {
-            ((Bid) it.next()).bidClosed();
+            ((Bid) it.next()).bidClosed(); //Closing all the Bid s
         }
         
-        this.work.removedFromAuction();
+        this.work.removedFromAuction(); 
     }
 }
 

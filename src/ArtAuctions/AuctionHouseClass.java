@@ -21,11 +21,34 @@ public class AuctionHouseClass implements AuctionHouse {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private Dictionary<String, UserReadOnly> users; //User Login --> User 
-	private Dictionary<String, ArtWorkReadOnly> artWorks; // WorkID --> Work
-	private Dictionary<String, AuctionReadOnly> auctions; // AuctionId --> Auction
-	private OrderedDictionary<ArtWork, ArtWorkReadOnly> soldArtworks; //TODO: Change --> Last sold value --> ArtWork
+	/**
+	 * Dictionary linking a User unique login to their object
+	 * User login --> User
+	 */
+	private Dictionary<String, UserReadOnly> users;
 
+	/**
+	 * Dictionary linking a Work unique ID to its object 
+	 * WorkID --> ArtWork
+	 */
+	private Dictionary<String, ArtWorkReadOnly> artWorks;
+
+	/**
+	 * Dictionary linking an Auction unique ID to its object 
+	 * Auction ID --> Auction
+	 */
+	private Dictionary<String, AuctionReadOnly> auctions;
+
+	/**
+	 * OrderedDictionary linking an ArtWork to its ReadOnly object
+	 * Order: descending order of highest sold price, and in cases where the prices are the same in alphabetical order of the name
+	 * ArtWork --> ArtWorkReadOnly
+	 */
+	private OrderedDictionary<ArtWork, ArtWorkReadOnly> soldArtworks;
+
+	/**
+	 * Minimum required age for a user to be allowed to register himself/herself
+	 */
 	private static final int LEGAL_AGE = 18;
 
 	/**
@@ -281,7 +304,7 @@ public class AuctionHouseClass implements AuctionHouse {
 	}
 
 	/**
-	 * Removes the paintings of an artist that has been removed
+	 * Removes the paintings of an artist to be removed, from the program
 	 * @param artist - the artist of the painting to be removed
 	 */
 	private void removeArtistPaintings(Artist artist) {
@@ -298,8 +321,8 @@ public class AuctionHouseClass implements AuctionHouse {
 	}
 
 	/**
-	 * Closes each individual auction of the given auction, while storing saved sold ArtWorks.
-	 * @param auction auction being closed 
+	 * Closes each individual auction of the given auction, while saving sold ArtWorks.
+	 * @param auction auction to be closed 
 	 */
 	private void closeAuction(Auction auction) {
 		Iterator<Entry<String, WorkAuction>> it = auction.getIndividualAuctions();

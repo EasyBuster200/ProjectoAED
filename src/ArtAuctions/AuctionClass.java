@@ -15,8 +15,20 @@ import dataStructures.SepChainHashTable;
  */
 public class AuctionClass implements Auction {
 
+	/**
+	 * ID of the auction 
+	 */
 	private String auctionId;
-	private Dictionary<String, WorkAuction> individualAuctions; //WorkId --> WorkAuction
+
+	/**
+	 * Dictionary linking the ID of a work to its Individual Auction
+	 * WorkID --> WorkAuction
+	 */
+	private Dictionary<String, WorkAuction> individualAuctions;
+
+	/**
+	 * List of the ArtWorks in the auction
+	 */
 	private List<ArtWorkReadOnly> auctionWorks;
 	
 	/**

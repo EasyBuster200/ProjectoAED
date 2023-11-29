@@ -12,7 +12,14 @@ public class BidClass implements Bid {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Bidded value
+	 */
 	private int bidValue;
+
+	/**
+	 * The user that placed the Bid
+	 */
 	private User bidder;
 
 	/**

@@ -5,7 +5,7 @@ import Exceptions.*;
 import dataStructures.Iterator;
 
 /**
- *AuctionHouse entity. 
+ * AuctionHouse interface, declaring all its methods and their intended implementation. 
  * @author Lipy Cardoso (63542) ik.cardoso@campus.fct.unl.pt
  * @author Duarte Coelho (65154) dcr.coelho@capus.fct.unl.pt
  */

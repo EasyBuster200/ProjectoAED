@@ -4,7 +4,7 @@ import java.io.Serializable;
 import dataStructures.Iterator;
 
 /**
- * WorkAuction entity
+ * Interface of WorkAuction objects, responsible for managing the individual auctions of each work in an Auction
  * @author Lipy Cardoso (63542) ik.cardoso@campus.fct.unl.pt
  * @author Duarte Coelho (65154) dcr.coelho@gmail.campus.fct.unl.pt
  */
@@ -41,7 +41,6 @@ public interface WorkAuction extends Serializable {
      */
     int minimumBidValue();
 
-    
     /**
      * Closes this workAuction and sets the last sold price
      * of in this workAuction

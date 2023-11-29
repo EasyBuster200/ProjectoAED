@@ -17,12 +17,12 @@ public interface User extends Serializable, UserReadOnly {
 	boolean hasBids();
 
 	/**
-	 * Increments the number of bids a user has
+	 * Increments the number of open bids the User has
 	 */
 	void addBid();
 
 	/**
-	 * Decreases the number of bids a user has
+	 * Decreases the number of  open bids the User has
 	 */
 	void removeBid();
 	

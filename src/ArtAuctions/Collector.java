@@ -7,8 +7,30 @@ package ArtAuctions;
  */
 public class Collector implements User {
 
-	private String login, name, email;
-	private int age, nbrBids;
+	/**
+	 * The unique login of the User
+	 */
+	private String login;
+
+	/**
+	 * The name of the User 
+	 */
+	private String name;
+
+	/**
+	 * The email of the User 
+	 */
+	private String email;
+
+	/**
+	 * The age of the User
+	 */
+	private int age;
+
+	/**
+	 * The number of bids the User currently has open
+	 */
+	private int nbrBids;
 
 	/**
 	 * Serial version UID of the Class
