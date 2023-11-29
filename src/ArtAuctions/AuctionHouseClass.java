@@ -4,10 +4,11 @@ import Exceptions.*;
 import dataStructures.Iterator;
 import dataStructures.SepChainHashTable;
 import dataStructures.TypeConversionIterator;
-import dataStructures.BinarySearchTree;
+import dataStructures.BSTWithComparator;
 import dataStructures.Dictionary;
 import dataStructures.Entry;
 import dataStructures.EntryIterator;
+import dataStructures.InvertedIntegerComparator;
 
 /**
  * Main class for the management the interpretation and the output of commands
@@ -84,7 +85,9 @@ public class AuctionHouseClass implements AuctionHouse {
 			if (artist.hasWorksInAuction())
 				throw new artistHasWorksInAuction();
 
-			removeArtistPaintings(artist);
+			if (artist.hasWorks())
+				removeArtistPaintings(artist);
+
 			users.remove(login);
 		}
 
@@ -270,7 +273,7 @@ public class AuctionHouseClass implements AuctionHouse {
 	
 	@Override
 	public Iterator<ArtWorkReadOnly> listWorksByValue() throws noSoldWorkdsException {
-		soldArtworks = new BinarySearchTree<>(); //TODO: Still not working, waiting on teachers response 
+		soldArtworks = new BSTWithComparator<>(new InvertedIntegerComparator()); //TODO: Still not working, waiting on teachers response 
 		//? Try to use a HashTable, I think they allow for equal keys
 		Iterator<Entry<String,ArtWork>> it = artWorks.iterator();
 

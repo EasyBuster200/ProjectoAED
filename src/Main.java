@@ -10,8 +10,8 @@ import dataStructures.Iterator;
 
 /**
  * Main class for the management the interpretation and the output of commands
- * @author Lipy Cardoso - 63542
- * @author Duarte Coelho - 65154
+ * @author Lipy Cardoso (63542) ik.cardoso@campus.fct.unl.pt
+ * @author Duarte Coelho (65154) dcr.coelho@campus.fct.unl.pt
  */
 public class Main {
 
@@ -412,6 +412,4 @@ public class Main {
    
 
 }
-//TODO: Gotta make sure that the OrderedDoubleListClass is private, and not in use anywhere outside the HashTable. 
-
 //TODO: Follow up with the teacher on my email, or emmail Toninho
